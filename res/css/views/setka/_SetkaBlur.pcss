@@ -1,0 +1,83 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/**
+ * One place that decides how glass surfaces blur. The "blur" slider in appearance settings sets
+ * --setka-blur-strength and data-setka-blur; every floating surface listed here follows it, so the
+ * slider no longer affects only a few panels. Surfaces that sit on top of live video (call header,
+ * control bar) are intentionally not blurred: they would be repainted every frame.
+ */
+
+html[data-setka-client="true"][data-setka-blur="on"]
+    :is(
+        .mx_ContextualMenu,
+        [role="menu"],
+        .mx_SetkaUserMenu_container,
+        .mx_BaseCard,
+        .mx_Dialog,
+        .mx_Toast_toast,
+        .mx_AppTileMenuBar,
+        .mx_Tooltip,
+        .mx_RoomHeader,
+        .mx_MessageComposer_wrapper,
+        .mx_SetkaCallMini,
+        .mx_SetkaCall_menu,
+        .mx_SetkaCallLobby_preview,
+        .mx_SetkaCallTile,
+        .mx_RoomView_setkaCall .mx_MainSplit
+    ) {
+    backdrop-filter: blur(var(--setka-blur-strength)) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(var(--setka-blur-strength)) saturate(120%) !important;
+}
+
+html[data-setka-client="true"]:not([data-setka-blur="on"])
+    :is(
+        .mx_ContextualMenu,
+        [role="menu"],
+        .mx_SetkaUserMenu_container,
+        .mx_BaseCard,
+        .mx_Dialog,
+        .mx_Toast_toast,
+        .mx_AppTileMenuBar,
+        .mx_Tooltip,
+        .mx_RoomHeader,
+        .mx_MessageComposer_wrapper,
+        .mx_SetkaCallMini,
+        .mx_SetkaCall_menu,
+        .mx_RoomView_setkaCall .mx_MainSplit
+    ) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Legacy menus were painted with a solid fill ("old black design"): use the glass surface instead. */
+html[data-setka-client="true"] .mx_ContextualMenu {
+    background: var(--setka-surface, rgb(30 30 38 / 82%)) !important;
+}
+
+/* Floating call surfaces share the same glass material. */
+html[data-setka-client="true"] .mx_SetkaCallMini,
+html[data-setka-client="true"] .mx_SetkaCall_menu {
+    background: var(--setka-surface, rgb(22 14 48 / 82%)) !important;
+}
+
+/* Full-screen call: same blurred wallpaper as the rest of the app (only this element is on screen). */
+.mx_SetkaCall:fullscreen {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: rgb(14 8 34);
+}
+
+.mx_SetkaCall:fullscreen::before {
+    content: "";
+    position: absolute;
+    inset: -60px;
+    z-index: -1;
+    background-image: var(--setka-wallpaper-image, none);
+    background-size: cover;
+    background-position: center;
+    filter: blur(max(var(--setka-blur-strength, 10px), 24px)) brightness(0.65);
+}

@@ -1,0 +1,29 @@
+/*
+Copyright 2024 New Vector Ltd.
+
+SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+Please see LICENSE files in the repository root for full details.
+*/
+
+@keyframes spin {
+  from {
+    transform: rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.icon {
+  color: var(--cpd-color-icon-secondary);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: 1s linear spin infinite;
+  }
+}

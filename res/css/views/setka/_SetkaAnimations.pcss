@@ -1,0 +1,138 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Interactive press / hover motion */
+@media (hover) {
+    html[data-setka-client="true"] .mx_AccessibleButton,
+    html[data-setka-client="true"] button:not(:disabled),
+    html[data-setka-client="true"] [role="menuitem"],
+    html[data-setka-client="true"] .mx_RoomTile,
+    html[data-setka-client="true"] .mx_SpaceButton,
+    html[data-setka-client="true"] .mx_SetkaSpaceNavButton {
+        transition:
+            transform 140ms cubic-bezier(0.22, 1, 0.36, 1),
+            background 140ms ease,
+            color 140ms ease,
+            box-shadow 140ms ease,
+            opacity 140ms ease;
+    }
+
+    html[data-setka-client="true"] .mx_AccessibleButton:active,
+    html[data-setka-client="true"] button:not(:disabled):active,
+    html[data-setka-client="true"] .mx_RoomTile:active,
+    html[data-setka-client="true"] .mx_SpaceButton:active {
+        transform: scale(0.97);
+    }
+}
+
+html[data-setka-client="true"] [role="menu"][data-state="open"] {
+    animation: mx_SetkaMenuPop 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-setka-client="true"] [role="menu"][data-state="closed"] {
+    animation: mx_SetkaMenuOut 140ms ease forwards;
+}
+
+@keyframes mx_SetkaMenuOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(4px) scale(0.98);
+    }
+}
+
+/* Main UI zoom-in after hello splash */
+html.mx_SetkaAppEntering[data-setka-client="true"] .mx_MatrixChat_wrapper {
+    animation: mx_SetkaAppEnter 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center center;
+    will-change: transform, opacity;
+}
+
+@keyframes mx_SetkaAppEnter {
+    from {
+        opacity: 0.2;
+        transform: scale(0.93);
+        filter: blur(3px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Right panel / overlay dismiss */
+html[data-setka-client="true"] .mx_RightPanel_closing,
+html[data-setka-client="true"] .mx_ContextualMenu.mx_ContextualMenu_closing {
+    animation: mx_SetkaPanelOut 200ms ease forwards;
+}
+
+@keyframes mx_SetkaPanelOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(12px);
+    }
+}
+
+@keyframes mx_SetkaMenuPop {
+    from {
+        opacity: 0;
+        transform: translateY(6px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Separator toggle — readable on glass */
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator::after {
+    border-color: rgb(255 255 255 / 92%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_MatrixChat .mx_Separator::after {
+    border-color: rgb(28 20 48 / 82%);
+}
+
+/* PiP close button on glass */
+html[data-setka-client="true"] [data-testid="widget-pip-container"] {
+    background: var(--setka-panel-bubble-bg) !important;
+    border: var(--setka-panel-bubble-border) !important;
+    box-shadow: var(--setka-panel-bubble-shadow);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: rgb(255 255 255 / 94%);
+}
+
+html[data-setka-client="true"] [data-testid="widget-pip-container"] [data-testid="widget-pip-close-button"] {
+    background: rgb(0 0 0 / 28%) !important;
+    color: rgb(255 255 255 / 92%) !important;
+}
+
+html[data-setka-client="true"] [data-testid="widget-pip-container"] [data-testid="widget-pip-close-button"]:hover {
+    background: rgb(220 38 38 / 72%) !important;
+}
+
+/* Reduce theme flash: paint stable base before wallpaper loads */
+html[data-setka-client="true"] {
+    background-color: rgb(18 12 36);
+    color-scheme: dark;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] {
+    background-color: rgb(244 240 252);
+    color-scheme: light;
+}

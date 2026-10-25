@@ -1,0 +1,44 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* White icons on glass surfaces */
+html[data-setka-client="true"] .mx_SpacePanel svg,
+html[data-setka-client="true"] .mx_LeftPanel_outerWrapper svg,
+html[data-setka-client="true"] .mx_RoomHeader svg,
+html[data-setka-client="true"] .mx_SetkaLeftPanel_sectionBar svg,
+html[data-setka-client="true"] .mx_SetkaContactsPanel svg,
+html[data-setka-client="true"] .mx_SetkaSpaceNavButton svg,
+html[data-setka-client="true"] .mx_RightPanel svg,
+html[data-setka-client="true"] .mx_SetkaUserMenu_container svg,
+html[data-setka-client="true"] [role="menu"] svg,
+html[data-setka-client="true"] .mx_RoomTile .mx_DecoratedRoomAvatar ~ * svg {
+    color: rgb(255 255 255 / 92%);
+    fill: currentcolor;
+}
+
+html[data-setka-client="true"] .mx_RoomTile .mx_RoomTile_title,
+html[data-setka-client="true"] .mx_RoomTile .mx_RoomTile_subtitle {
+    color: rgb(255 255 255 / 90%);
+}
+
+html[data-setka-client="true"] .mx_RoomTile .mx_RoomTile_subtitle {
+    color: rgb(255 255 255 / 68%);
+}
+
+/* Light theme: only icon tint — keep text colors from base theme */
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SpacePanel svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_LeftPanel_outerWrapper svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_RoomHeader svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaLeftPanel_sectionBar svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaContactsPanel svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaSpaceNavButton svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_RightPanel svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaUserMenu_container svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] [role="menu"] svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_MessageComposer svg,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_RoomTile svg {
+    color: rgb(48 36 72 / 78%);
+    fill: currentcolor;
+}

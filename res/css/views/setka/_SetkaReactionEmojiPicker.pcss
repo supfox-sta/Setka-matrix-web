@@ -1,0 +1,80 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaReactionEmojiPicker {
+    width: min(320px, 88vw);
+    max-height: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-2x);
+    padding: var(--cpd-space-2x);
+}
+
+.mx_SetkaReactionEmojiPicker_tabs {
+    display: flex;
+    gap: var(--cpd-space-1x);
+    overflow-x: auto;
+}
+
+.mx_SetkaReactionEmojiPicker_tab {
+    flex: 0 0 auto;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--cpd-color-bg-subtle-secondary);
+    font: var(--cpd-font-body-xs-medium);
+}
+
+.mx_SetkaReactionEmojiPicker_tab_active {
+    background: var(--cpd-color-bg-canvas-default);
+    box-shadow: inset 0 0 0 1px var(--cpd-color-border-accent);
+}
+
+.mx_SetkaReactionEmojiPicker_content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+}
+
+.mx_SetkaReactionEmojiPicker_loading {
+    display: flex;
+    justify-content: center;
+    padding: var(--cpd-space-4x);
+}
+
+.mx_SetkaReactionEmojiPicker_grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+}
+
+.mx_SetkaReactionEmojiPicker_grid_stock {
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.mx_SetkaReactionEmojiPicker_cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 8px;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.mx_SetkaReactionEmojiPicker_cell:hover {
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+.mx_SetkaReactionEmojiPicker_cell_selected {
+    background: color-mix(in srgb, var(--cpd-color-bg-accent-rest) 24%, transparent);
+    box-shadow: inset 0 0 0 1px var(--cpd-color-border-accent);
+}
+
+.mx_SetkaReactionEmojiPicker_cell img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}

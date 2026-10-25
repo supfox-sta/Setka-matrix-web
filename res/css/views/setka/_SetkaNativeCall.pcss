@@ -1,0 +1,1057 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Native Setka call UI (matrixrtc-sdk based), Discord-like. Plain DOM, restyle freely. */
+
+.mx_SetkaCall {
+    /* Glass: translucent surfaces over the Setka background, like the rest of the messenger */
+    --setka-call-tile: rgb(255 255 255 / 9%);
+    --setka-call-btn: rgb(255 255 255 / 14%);
+    --setka-call-btn-hover: rgb(255 255 255 / 26%);
+    --setka-call-green: #23a559;
+    --setka-call-red: #da373c;
+
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: #f2f3f5;
+    container-type: inline-size;
+    container-name: setkacall;
+}
+
+/* ---- adaptive: small windows / short call areas ---- */
+@container setkacall (max-width: 560px) {
+    .mx_SetkaCall_btn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .mx_SetkaCall_btn_leave {
+        width: 54px;
+    }
+
+    .mx_SetkaCall_controls {
+        gap: 8px;
+        padding: 10px 8px 12px;
+    }
+
+    .mx_SetkaCall_header {
+        padding: 8px 12px 0;
+    }
+
+    .mx_SetkaCall_name {
+        font-size: 12px;
+    }
+}
+
+@container setkacall (min-width: 1400px) {
+    .mx_SetkaCall_btn {
+        width: 56px;
+        height: 56px;
+    }
+
+    .mx_SetkaCall_btn_leave {
+        width: 76px;
+    }
+
+    .mx_SetkaCall_name {
+        font-size: 15px;
+    }
+}
+
+.mx_SetkaCall_error {
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+}
+
+.mx_SetkaCall_stage {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.mx_SetkaCall_header {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: calc(100% - 24px);
+    padding: 5px 12px;
+    border: 1px solid rgb(255 255 255 / 14%);
+    border-radius: 999px;
+    background: rgb(20 12 44 / 80%);
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.mx_SetkaCall_room {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mx_SetkaCall_dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #80848e;
+
+    &[data-live] {
+        background: var(--setka-call-green);
+    }
+}
+
+.mx_SetkaCall_count {
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--setka-call-tile);
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.mx_SetkaCall_status {
+    color: #cfd2ff;
+    font-size: 13px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+/* Participants: tiles keep a 16:9 shape; with many people the area scrolls instead of overflowing. */
+.mx_SetkaCall_grid {
+    display: flex;
+    flex: 1 1 0;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 0;
+    padding: 48px 12px 12px;
+    overflow-y: auto;
+    align-content: center;
+    justify-content: center;
+
+    /* --tw / --th are computed in JS so that all tiles fit the area at the largest 16:9 size */
+    .mx_SetkaCall_tile {
+        flex: none;
+        width: var(--tw, 320px);
+        height: var(--th, 180px);
+    }
+
+    .mx_SetkaCall_avatar {
+        width: clamp(40px, calc(var(--th, 180px) * 0.42), 140px);
+        font-size: clamp(18px, calc(var(--th, 180px) * 0.17), 56px);
+    }
+}
+
+/* Focus mode (pinned tile / single screen share): one big tile + a strip of the others, Discord style. */
+.mx_SetkaCall_focus {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* wide stage: participants go to a column on the right so the shared screen gets the full height */
+@container setkacall (min-width: 760px) {
+    .mx_SetkaCall_focus {
+        flex-direction: row;
+    }
+
+    .mx_SetkaCall_focus .mx_SetkaCall_strip {
+        flex-direction: column;
+        width: clamp(150px, 18cqw, 240px);
+        padding: 44px 12px 8px 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        justify-content: flex-start;
+    }
+
+    .mx_SetkaCall_focus .mx_SetkaCall_strip .mx_SetkaCall_tile {
+        width: 100%;
+    }
+}
+
+.mx_SetkaCall_focusMain {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 0;
+    padding: 44px 12px 8px;
+
+    .mx_SetkaCall_tile {
+        flex: none;
+        width: var(--tw, 640px);
+        height: var(--th, 360px);
+    }
+
+    .mx_SetkaCall_avatar {
+        width: clamp(40px, calc(var(--th, 360px) * 0.3), 160px);
+        font-size: clamp(18px, calc(var(--th, 360px) * 0.12), 64px);
+    }
+}
+
+.mx_SetkaCall_strip {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+    padding: 0 12px 8px;
+    overflow-x: auto;
+    justify-content: center;
+
+    .mx_SetkaCall_tile {
+        flex: none;
+        width: clamp(110px, 14vw, 180px);
+        aspect-ratio: 16 / 9;
+        cursor: pointer;
+    }
+
+    .mx_SetkaCall_avatar {
+        width: 40%;
+        min-width: 32px;
+        font-size: 18px;
+    }
+
+    .mx_SetkaCall_name {
+        left: 6px;
+        bottom: 6px;
+        padding: 1px 6px;
+        font-size: 11px;
+    }
+}
+
+.mx_SetkaCall_tile {
+    cursor: pointer;
+}
+
+.mx_SetkaCall_tile[data-focused] {
+    cursor: zoom-out;
+}
+
+/* Discord-like pill control bar */
+.mx_SetkaCall_controlsBar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+    padding: 8px 12px;
+    overflow-x: auto;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 999px;
+    background: rgb(20 12 44 / 82%);
+    box-shadow: 0 6px 22px rgb(0 0 0 / 30%);
+}
+
+.mx_SetkaCall_keyBadge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgb(218 55 60 / 85%);
+    color: #fff;
+    font-size: 12px;
+}
+
+.mx_SetkaCall_menu {
+    position: fixed;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 240px;
+    padding: 8px;
+    border-radius: 10px;
+    background: #111214;
+    color: #dbdee1;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 55%);
+    font-size: 14px;
+}
+
+.mx_SetkaCall_menuTitle {
+    padding: 4px 8px 6px;
+    overflow: hidden;
+    color: #fff;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mx_SetkaCall_menuRow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 8px;
+    padding: 6px 8px;
+
+    input[type="range"] {
+        grid-column: 1 / -1;
+        width: 100%;
+        accent-color: #5865f2;
+    }
+}
+
+.mx_SetkaCall_menuValue {
+    color: #949ba4;
+}
+
+.mx_SetkaCall_menuItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+        background: #5865f2;
+        color: #fff;
+    }
+}
+
+.mx_SetkaCall_menuSep {
+    height: 1px;
+    margin: 4px 0;
+    background: #2b2d31;
+}
+
+.mx_SetkaCallLobby {
+    align-items: center;
+    justify-content: center;
+    container-type: size;
+}
+
+.mx_SetkaCallLobby_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(6px, 1.6cqh, 14px);
+    /* the preview is 16:9 and must leave room (~150px) for the text and the Join button */
+    width: min(94cqw, calc((100cqh - 200px) * 16 / 9), 900px);
+    min-width: min(94cqw, 240px);
+}
+
+.mx_SetkaCallLobby_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.mx_SetkaCallLobby_title {
+    font-size: clamp(16px, 3cqw, 22px);
+    font-weight: 700;
+}
+
+.mx_SetkaCallLobby_sub {
+    color: #cfd2ff;
+    font-size: 13px;
+}
+
+.mx_SetkaCallLobby_switches {
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.mx_SetkaCallLobby_preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 14%);
+    border-radius: 18px;
+    background: rgb(20 12 44 / 80%);
+
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scaleX(-1);
+    }
+}
+
+.mx_SetkaCallLobby_off {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #b9bce0;
+}
+
+.mx_SetkaCallLobby_actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mx_SetkaCallLobby_join {
+    padding: 0 40px;
+    height: 48px;
+    flex: none;
+    border: 0;
+    border-radius: 24px;
+    background: #23a559;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+        background: #1a8a49;
+    }
+}
+
+.mx_SetkaCall_tile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 16px;
+    background: var(--setka-call-tile);
+    box-shadow: inset 0 0 0 3px transparent;
+    transition: box-shadow 0.12s;
+
+    &[data-speaking] {
+        box-shadow: inset 0 0 0 3px var(--setka-call-green);
+    }
+
+    /* the ring must stay visible above the video */
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        box-shadow: inherit;
+    }
+}
+
+.mx_SetkaCall_video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mx_SetkaCall_tile_screen .mx_SetkaCall_video {
+    object-fit: contain;
+    background: #000;
+}
+
+.mx_SetkaCall_avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    min-width: 64px;
+    max-width: 120px;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #5865f2;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 600;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.mx_SetkaCall_name {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: calc(100% - 20px);
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: rgb(0 0 0 / 60%);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mx_SetkaCall_mutedMark {
+    display: inline-flex;
+    color: var(--setka-call-red);
+}
+
+.mx_SetkaCall_controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 6px 12px 12px;
+}
+
+.mx_SetkaCall_tileFs {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+    border: 0;
+    border-radius: 8px;
+    background: rgb(20 12 44 / 65%);
+    color: #fff;
+    font: inherit;
+    font-size: 12px;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.12s;
+
+    &[data-active] {
+        opacity: 1;
+        padding: 8px 14px;
+        background: var(--setka-call-red);
+        font-size: 14px;
+    }
+}
+
+.mx_SetkaCall_tile:hover .mx_SetkaCall_tileFs {
+    opacity: 1;
+}
+
+/* fullscreen call: the stage fills the screen, keep the glass backdrop */
+.mx_SetkaCall:fullscreen {
+    background: rgb(14 8 34);
+}
+
+.mx_SetkaCall_tile:fullscreen {
+    border-radius: 0;
+    background: #000;
+}
+
+.mx_SetkaCall_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--setka-call-btn, #3a3c42);
+    color: #f2f3f5;
+    cursor: pointer;
+    transition:
+        background 0.12s,
+        border-radius 0.12s;
+
+    &:hover {
+        background: var(--setka-call-btn-hover, #4a4d55);
+        border-radius: 16px;
+    }
+
+    /* muted / camera off: light button with crossed icon, like Discord */
+    &[data-off] {
+        background: rgb(255 255 255 / 90%);
+        color: #1e1b3a;
+    }
+
+    &[data-on] {
+        background: var(--setka-call-green, #23a559);
+        color: #fff;
+    }
+
+    &.mx_SetkaCall_btn_leave {
+        width: 64px;
+        border-radius: 24px;
+        background: var(--setka-call-red, #da373c);
+        color: #fff;
+
+        &:hover {
+            background: #a12828;
+        }
+
+        svg {
+            transform: rotate(0);
+        }
+    }
+}
+
+.mx_SetkaCallDock_audio {
+    position: fixed;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.mx_SetkaCallDock {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 120;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px 10px 16px;
+    border-radius: 16px;
+    background: #1e1f22;
+    color: #f2f3f5;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 40%);
+
+    .mx_SetkaCall_controls {
+        padding: 0;
+        gap: 8px;
+    }
+
+    .mx_SetkaCall_btn {
+        width: 40px;
+        height: 40px;
+        background: #3a3c42;
+    }
+
+    .mx_SetkaCall_btn[data-off] {
+        background: #f2f3f5;
+    }
+
+    .mx_SetkaCall_btn_leave {
+        width: 48px;
+        background: #da373c;
+    }
+}
+
+.mx_SetkaCallDock_info {
+    display: flex;
+    flex-direction: column;
+    max-width: 180px;
+}
+
+.mx_SetkaCallDock_title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.mx_SetkaCallDock_sub {
+    color: var(--setka-call-green, #23a559);
+    font-size: 12px;
+}
+
+/* Discord-like incoming call card */
+.mx_SetkaIncomingToast {
+    background: #111214;
+    border-radius: 14px;
+}
+
+.mx_SetkaIncoming {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 280px;
+    padding: 22px 28px 20px;
+    color: #f2f3f5;
+    text-align: center;
+}
+
+.mx_SetkaIncoming_avatar {
+    padding: 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px #3a3c42;
+
+    &[data-ring] {
+        animation: mx_SetkaIncoming_pulse 1.4s ease-out infinite;
+    }
+}
+
+@keyframes mx_SetkaIncoming_pulse {
+    0% {
+        box-shadow: 0 0 0 3px #23a559;
+    }
+
+    70% {
+        box-shadow: 0 0 0 16px rgb(35 165 89 / 0%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 3px rgb(35 165 89 / 0%);
+    }
+}
+
+.mx_SetkaIncoming_title {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.mx_SetkaIncoming_sub {
+    color: #b5bac1;
+    font-size: 13px;
+}
+
+.mx_SetkaIncoming_note {
+    color: #f0b232;
+    font-size: 12px;
+}
+
+.mx_SetkaIncoming_buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.mx_SetkaIncoming_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.12s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+    }
+}
+
+.mx_SetkaIncoming_btn_decline {
+    background: #da373c;
+}
+
+.mx_SetkaIncoming_btn_accept {
+    background: #23a559;
+}
+
+/* The call event lives inside the normal message bubble: no card of its own, just a row of content. */
+.mx_SetkaCallTile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+    color: inherit;
+}
+
+.mx_SetkaCallTile_icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 14%);
+
+    .mx_SetkaCallTile[data-live] & {
+        background: #23a559;
+        color: #fff;
+    }
+}
+
+.mx_SetkaCallTile_text {
+    flex: 1;
+    min-width: 0;
+    font-weight: 600;
+}
+
+.mx_SetkaCallTile_state {
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.mx_SetkaCallTile[data-live] .mx_SetkaCallTile_state {
+    color: #3ddc84;
+    opacity: 1;
+}
+
+.mx_SetkaCallTile_title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+}
+
+.mx_SetkaCallTile_badge {
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 14%);
+    font-size: 11px;
+    font-weight: 600;
+
+    .mx_SetkaCallTile[data-live] & {
+        background: #23a559;
+        color: #fff;
+    }
+}
+
+.mx_SetkaCallTile_sub {
+    margin-top: 2px;
+    color: var(--cpd-color-text-secondary);
+    font-size: 13px;
+}
+
+.mx_SetkaCallTile_join {
+    flex: none;
+    padding: 6px 16px;
+    border: 0;
+    border-radius: 999px;
+    background: #23a559;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+        background: #1a8a49;
+    }
+}
+
+.mx_SetkaCallRoomInfo_body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: min(360px, 80vw);
+    padding: 8px 8px 16px;
+    text-align: center;
+
+    h2 {
+        margin: 8px 0 0;
+    }
+}
+
+.mx_SetkaCallRoomInfo_topic,
+.mx_SetkaCallRoomInfo_meta {
+    margin: 0;
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaCallRoomInfo_actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+
+    button {
+        padding: 8px 18px;
+        border: 1px solid rgb(255 255 255 / 16%);
+        border-radius: 999px;
+        background: rgb(255 255 255 / 10%);
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+
+        &:hover {
+            background: rgb(255 255 255 / 20%);
+        }
+    }
+}
+
+/* space-panel call button + popover */
+.mx_SetkaCallSpaceButton {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
+}
+
+.mx_SetkaCallSpaceButton_btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 14px;
+    background: rgb(255 255 255 / 8%);
+    color: var(--cpd-color-icon-secondary, #c8c8e0);
+    cursor: pointer;
+
+    &:hover {
+        background: rgb(255 255 255 / 16%);
+    }
+
+    &[data-live] {
+        border-color: rgb(35 165 89 / 60%);
+        background: rgb(35 165 89 / 20%);
+        color: #3ddc84;
+    }
+}
+
+.mx_SetkaCallSpaceButton_dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #23a559;
+    animation: mx_SetkaIncoming_pulse 1.6s ease-out infinite;
+}
+
+.mx_SetkaCallMini {
+    position: fixed;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: min(340px, calc(100vw - 24px));
+    padding: 12px;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 18px;
+    background: rgb(22 14 48 / 82%);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 12px 36px rgb(0 0 0 / 45%);
+    color: #f2f3f5;
+
+    .mx_SetkaCall_dot {
+        flex: none;
+    }
+
+    .mx_SetkaCall_controls {
+        padding: 0;
+    }
+
+    .mx_SetkaCall_controlsBar {
+        gap: 6px;
+        padding: 6px 8px;
+        background: rgb(255 255 255 / 8%);
+        backdrop-filter: none;
+        box-shadow: none;
+    }
+
+    .mx_SetkaCall_btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .mx_SetkaCall_btn_leave {
+        width: 48px;
+    }
+}
+
+.mx_SetkaCallMini_head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mx_SetkaCallMini_title {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+
+    b,
+    span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    span {
+        color: #cfd2ff;
+        font-size: 12px;
+    }
+}
+
+.mx_SetkaCallMini_open {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 16%);
+    color: inherit;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+
+    &:hover {
+        background: rgb(255 255 255 / 28%);
+    }
+}
+
+.mx_SetkaCallMini_screen {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+
+    .mx_SetkaCall_video {
+        object-fit: contain;
+    }
+}
+
+.mx_SetkaCallMini_screenName {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgb(0 0 0 / 60%);
+    font-size: 12px;
+}
+
+.mx_SetkaCallMini_empty {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+
+    span {
+        color: #cfd2ff;
+        font-size: 12px;
+    }
+}

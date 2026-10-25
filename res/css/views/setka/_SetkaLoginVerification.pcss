@@ -1,0 +1,54 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaLoginVerification {
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cpd-space-4x);
+    text-align: center;
+    padding: var(--cpd-space-6x) var(--cpd-space-4x);
+}
+
+.mx_SetkaLoginVerification_icon {
+    color: var(--cpd-color-icon-accent-primary);
+}
+
+.mx_SetkaLoginVerification_subtitle,
+.mx_SetkaLoginVerification_meta {
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-md-regular);
+}
+
+.mx_SetkaLoginVerification_error {
+    color: var(--cpd-color-text-critical-primary);
+    font: var(--cpd-font-body-sm-regular);
+}
+
+.mx_SetkaLoginVerification_actions,
+.mx_SetkaLoginVerification_recovery {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-3x);
+    width: 100%;
+}
+
+.mx_SetkaLoginVerification_recovery input {
+    width: 100%;
+    padding: var(--cpd-space-3x);
+    border-radius: 8px;
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    background: var(--cpd-color-bg-canvas-default);
+    color: var(--cpd-color-text-primary);
+    font: var(--cpd-font-body-md-regular);
+}
+
+.mx_SetkaLoginVerification_recovery label {
+    text-align: left;
+    font: var(--cpd-font-body-sm-semibold);
+    color: var(--cpd-color-text-primary);
+}

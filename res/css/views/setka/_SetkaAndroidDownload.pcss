@@ -1,0 +1,47 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaAndroidDownloadDialog_body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+    gap: var(--cpd-space-6x);
+    align-items: stretch;
+}
+
+.mx_SetkaAndroidDownloadDialog_copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-4x);
+    justify-content: space-between;
+    min-height: 420px;
+}
+
+.mx_SetkaAndroidDownloadDialog_preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: var(--cpd-color-bg-subtle-secondary);
+    padding: var(--cpd-space-4x);
+}
+
+.mx_SetkaAndroidDownloadDialog_preview img {
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    border-radius: 16px;
+    background: var(--cpd-color-bg-canvas-default);
+}
+
+@media (max-width: 720px) {
+    .mx_SetkaAndroidDownloadDialog_body {
+        grid-template-columns: 1fr;
+    }
+
+    .mx_SetkaAndroidDownloadDialog_copy {
+        min-height: 0;
+    }
+}

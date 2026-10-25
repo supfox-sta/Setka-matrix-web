@@ -1,0 +1,208 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Keep flex/grid children from forcing the whole application wider or taller. */
+html[data-setka-client="true"] .mx_RoomView,
+html[data-setka-client="true"] .mx_RoomView_body,
+html[data-setka-client="true"] .mx_MainSplit,
+html[data-setka-client="true"] .mx_RoomView_timeline,
+html[data-setka-client="true"] .mx_RoomView_messagePanel,
+html[data-setka-client="true"] .mx_RightPanel,
+html[data-setka-client="true"] .mx_LeftPanel,
+html[data-setka-client="true"] .mx_LeftPanel_panel {
+    min-width: 0;
+    min-height: 0;
+}
+
+html[data-setka-client="true"] .mx_RoomView_body,
+html[data-setka-client="true"] .mx_RightPanel,
+html[data-setka-client="true"] .mx_LeftPanel_panel {
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_RoomHeader,
+html[data-setka-client="true"] .mx_RoomHeader_name,
+html[data-setka-client="true"] .mx_RoomHeader_topic,
+html[data-setka-client="true"] .mx_RoomTile_name,
+html[data-setka-client="true"] .mx_RoomTile_preview {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+html[data-setka-client="true"] .mx_RoomHeader_name,
+html[data-setka-client="true"] .mx_RoomTile_name,
+html[data-setka-client="true"] .mx_RoomTile_preview {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* A room change should not cover cached messages with a full-screen spinner.
+   Keep loading feedback visible but non-blocking while the new timeline settles. */
+html[data-setka-client="true"] .mx_SetkaRoomLoadingOverlay {
+    inset: var(--cpd-space-3x) var(--cpd-space-3x) auto auto;
+    z-index: 12;
+    width: auto;
+    height: auto;
+    padding: var(--cpd-space-2x);
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    border-radius: 999px;
+    background: var(--cpd-color-bg-canvas-default);
+    box-shadow: 0 3px 12px rgb(0 0 0 / 10%);
+    pointer-events: none;
+}
+
+html[data-setka-client="true"] .mx_SetkaRoomLoadingOverlay .mx_Spinner,
+html[data-setka-client="true"] .mx_SetkaRoomLoadingOverlay .mx_Spinner img {
+    width: 22px;
+    height: 22px;
+}
+
+/* Message bubbles used backdrop blur per event, which is expensive while a long
+   timeline scrolls. Keep the translucent Setka look without repainting the
+   wallpaper behind every visible message. */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_EventTile_line {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none;
+}
+
+/* All floating surfaces use the same border/radius language without changing
+   Element's semantic colors or reducing contrast in the light theme. */
+html[data-setka-client="true"] .mx_ContextualMenu,
+html[data-setka-client="true"] .mx_Dialog,
+html[data-setka-client="true"] .mx_CompoundDialog,
+html[data-setka-client="true"] .mx_ConfirmDialog {
+    max-width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+    box-sizing: border-box;
+}
+
+html[data-setka-client="true"] button:focus-visible,
+html[data-setka-client="true"] [role="button"]:focus-visible,
+html[data-setka-client="true"] a:focus-visible,
+html[data-setka-client="true"] input:focus-visible,
+html[data-setka-client="true"] textarea:focus-visible,
+html[data-setka-client="true"] [contenteditable="true"]:not(.mx_BasicMessageComposer_input):not(.mx_WysiwygComposer_Editor_content):focus-visible {
+    outline: 2px solid var(--setka-accent-user, #7c5cff);
+    outline-offset: 2px;
+}
+
+/* Explicitly reset any harsh outlines on composer inputs */
+html[data-setka-client="true"] .mx_BasicMessageComposer_input,
+html[data-setka-client="true"] .mx_BasicMessageComposer_input:focus,
+html[data-setka-client="true"] .mx_BasicMessageComposer_input:focus-visible,
+html[data-setka-client="true"] .mx_WysiwygComposer_Editor_content,
+html[data-setka-client="true"] .mx_WysiwygComposer_Editor_content:focus,
+html[data-setka-client="true"] .mx_WysiwygComposer_Editor_content:focus-visible {
+    outline: none !important;
+}
+
+/* Refined, elegant glow on composer when typing */
+html[data-setka-client="true"] .mx_MessageComposer_wrapper:focus-within {
+    border-color: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 36%, rgb(255 255 255 / 24%)) !important;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 10%), 0 8px 24px rgb(0 0 0 / 14%) !important;
+}
+
+/* Small screens: remove decorative gutters before they consume usable width. */
+@media (max-width: 700px) {
+    html[data-setka-client="true"] .mx_RoomHeader,
+    html[data-setka-client="true"] .mx_PinnedMessageBanner,
+    html[data-setka-client="true"] .mx_MessageComposer_wrapper {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    html[data-setka-client="true"] .mx_RoomView_messagePanel {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RoomView_body.mx_MainSplit_call {
+        min-height: 0 !important;
+        flex: 1 1 0 !important;
+    }
+
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RightPanel_ResizeWrapper {
+        min-height: 96px !important;
+        max-height: 42vh !important;
+        flex: 0 1 auto !important;
+    }
+
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+
+@media (max-height: 520px) {
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RoomView_body.mx_MainSplit_call {
+        min-height: 0 !important;
+    }
+
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RightPanel_ResizeWrapper {
+        min-height: 80px !important;
+        max-height: 38vh !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html[data-setka-client="true"] *,
+    html[data-setka-client="true"] *::before,
+    html[data-setka-client="true"] *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Room chrome must remain stable while the timeline, notices and composer
+   below it change height. Long names are clipped inside the title area. */
+html[data-setka-client="true"] .mx_RoomHeader {
+    flex: 0 0 auto;
+    min-width: 0;
+}
+
+html[data-setka-client="true"] .mx_RoomHeader_infoWrapper {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_RoomHeader_info,
+html[data-setka-client="true"] .mx_RoomHeader_heading {
+    min-width: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_RoomView_body.mx_MainSplit_call > .mx_RoomHeader {
+    flex: 0 0 auto;
+}
+
+html[data-setka-client="true"] .mx_RoomView_body.mx_MainSplit_call > .mx_CallView {
+    flex: 1 1 0;
+    min-height: 0;
+}
+
+html[data-setka-client="true"] .mx_RoomHeader_buttons {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 48%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+}
+
+html[data-setka-client="true"] .mx_RoomHeader_buttons::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    html[data-setka-client="true"] .mx_RoomHeader_buttons {
+        max-width: 42%;
+    }
+}

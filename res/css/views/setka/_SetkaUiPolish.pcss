@@ -1,0 +1,1018 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* ===== Settings dialog: centered fixed-size glass window ===== */
+html[data-setka-client="true"] .mx_Dialog_border:has(.mx_UserSettingsDialog) {
+    max-width: none !important;
+    width: auto !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog {
+    width: min(92vw, 960px) !important;
+    height: min(80vh, 680px) !important;
+    max-height: calc(100vh - 80px) !important;
+    margin: 0 auto !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    border: 1px solid var(--setka-panel-bubble-border, rgb(255 255 255 / 16%)) !important;
+    background: var(--setka-panel-bubble-bg) !important;
+    backdrop-filter: blur(calc(var(--setka-blur-strength, 10px) * 1.4));
+    -webkit-backdrop-filter: blur(calc(var(--setka-blur-strength, 10px) * 1.4));
+    box-shadow: 0 24px 64px rgb(0 0 0 / 40%) !important;
+}
+
+/* Header: no offset tied to the sidebar, title sits at the left edge */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_Dialog_header,
+html[data-setka-client="true"] .mx_UserSettingsDialog [class*="Dialog_header"] {
+    padding-left: 24px !important;
+    padding-right: 56px !important;
+    background: transparent !important;
+}
+
+/* Sidebar: narrower, separated by a thin line */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabels {
+    width: 220px !important;
+    flex: 0 0 220px !important;
+    background: rgb(255 255 255 / 4%) !important;
+    border-right: 1px solid rgb(255 255 255 / 8%);
+    padding: 8px !important;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel {
+    border-radius: 12px !important;
+    margin-bottom: 2px;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel_active {
+    background: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 38%, transparent) !important;
+}
+
+/* Content column fills the remaining width, no nested card chrome */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabPanel {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsTab {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 8px 28px 28px !important;
+    box-sizing: border-box;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsSection {
+    max-width: none !important;
+}
+
+/* ---- Settings content: every block is one clear card, no 80px dead gutters ---- */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsSection_subSections,
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsTab_sections {
+    gap: 14px !important;
+    margin: 0 0 14px !important;
+    padding-bottom: 0 !important;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsSection {
+    margin-bottom: 14px;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsSubsection {
+    padding: 16px 18px;
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: 18px;
+    background: rgb(255 255 255 / 5%);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsSubsection h3,
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsSubsection [class*="eading"] {
+    margin: 0 0 10px;
+    font: var(--cpd-font-body-lg-semibold);
+    color: var(--cpd-color-text-primary);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsFlag,
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsTab_section .mx_SettingsFlag,
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsTab_section > p,
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsTab_subsectionText {
+    margin-inline-end: 0 !important;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsFlag {
+    padding: 8px 0;
+    border-bottom: 1px solid rgb(255 255 255 / 6%);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsFlag:last-child {
+    border-bottom: none;
+}
+
+/* Sidebar: accent icons + roomier rows */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel {
+    padding: 10px 12px !important;
+    gap: 10px;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel_active .mx_TabbedView_maskedIcon {
+    background-color: #fff !important;
+}
+
+/* Nested generic appearance options sit flush under the Setka sections */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SetkaAppearanceTab_more .mx_SettingsTab {
+    padding: 0 !important;
+    min-width: 0;
+}
+
+/* ===== Left panel ===== */
+html[data-setka-client="true"] .mx_LeftPanel [class*="header"],
+html[data-setka-client="true"] .mx_LeftPanel [class*="Header"] {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel .mx_RoomTile {
+    position: relative;
+}
+
+/* Selected row: accent bar + soft fill */
+html[data-setka-client="true"] .mx_LeftPanel .mx_RoomTile_selected::before {
+    content: "";
+    position: absolute;
+    left: -8px;
+    top: 22%;
+    bottom: 22%;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+    background: var(--setka-accent-user, #7c5cff);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel .mx_RoomTile_selected,
+html[data-setka-client="true"] .mx_LeftPanel .mx_RoomTile_selected:hover {
+    background: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 24%, rgb(255 255 255 / 8%)) !important;
+}
+
+/* ===== Channels ===== */
+/* One quiet link under a post instead of a loud pill on each */
+html[data-setka-client="true"] .mx_SetkaChannelCommentsRow {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 4px 2px 0 !important;
+    border-radius: 8px;
+    color: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 70%, white) !important;
+    font: var(--cpd-font-body-sm-medium);
+}
+
+html[data-setka-client="true"] .mx_SetkaChannelCommentsRow:hover {
+    background: rgb(255 255 255 / 8%) !important;
+}
+
+/* ===== Call events: ONE bubble (line is a transparent wrapper, the tile is the bubble) ===== */
+/* The regular message bubble (the .mx_EventTile_line) is the ONE bubble; the tile inside is bare content. */
+html[data-setka-client="true"] .mx_EventTile .mx_SetkaCallTile {
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+    max-width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* ===== Right panel: user profile (mx_UserInfo_setka) — calm glass card instead of a raw accent block ===== */
+html[data-setka-client="true"] .mx_UserInfo_setka.mx_BaseCard {
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_AutoHideScrollbar {
+    padding: 12px 12px 16px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaUserProfileSection {
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 10px;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_hero {
+    min-height: 0;
+    border-radius: 22px;
+    border: 1px solid rgb(255 255 255 / 12%);
+    background-image: linear-gradient(180deg, rgb(12 8 32 / 30%) 0%, rgb(12 8 32 / 80%) 100%) !important;
+    box-shadow: 0 10px 28px rgb(0 0 0 / 28%);
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaProfilePage_heroOverlay {
+    background: linear-gradient(180deg, transparent 30%, rgb(12 8 32 / 55%) 100%) !important;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_heroContent {
+    flex-direction: column !important;
+    align-items: center;
+    text-align: center !important;
+    gap: 10px;
+    padding: 22px 16px 18px !important;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaMxcAvatarWrap {
+    width: 88px;
+    height: 88px;
+    border: 3px solid rgb(255 255 255 / 85%);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 35%);
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_heroText {
+    align-items: center;
+    gap: 4px;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_nameRow {
+    justify-content: center !important;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_hero,
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_hero * {
+    color: #fff !important;
+    text-shadow: 0 1px 6px rgb(0 0 0 / 35%);
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_name {
+    font-size: 20px;
+    font-weight: 700;
+    white-space: normal !important;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_bio {
+    text-align: center !important;
+    opacity: 0.9;
+}
+
+/* info + option blocks: same glass cards as everywhere else */
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_SetkaDmProfileSection_info,
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container {
+    margin: 0 !important;
+    padding: 12px 14px !important;
+    border: 1px solid var(--setka-panel-bubble-border, rgb(255 255 255 / 12%)) !important;
+    border-radius: 16px !important;
+    background: var(--setka-panel-bubble-bg) !important;
+    box-shadow: none !important;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container h3,
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container [class*="heading"] {
+    margin: 0 0 6px;
+    font: var(--cpd-font-body-xs-semibold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cpd-color-text-secondary);
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka [role="menuitem"],
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_AccessibleButton:not(.mx_CopyableText_copyButton) {
+    border-radius: 12px;
+    transition: background 120ms ease;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka [role="menuitem"]:hover {
+    background: rgb(255 255 255 / 10%);
+}
+
+/* ===== Call stage: never clip the top of an overflowing grid (plain `center` cuts it off) ===== */
+.mx_SetkaCall_grid,
+.mx_SetkaCall_focusMain {
+    align-content: safe center !important;
+    justify-content: safe center !important;
+    align-items: safe center;
+    min-width: 0;
+    min-height: 0;
+    overflow: auto;
+}
+
+/* ===== Call event: kill every wrapper background around the chip (one bubble only) ===== */
+html[data-setka-client="true"] .mx_EventTile .mx_SetkaCallTile_join {
+    padding: 5px 12px;
+    border-radius: 999px;
+}
+
+/* ===== Left panel: only the room list scrolls, never the panel itself ===== */
+html[data-setka-client="true"] .mx_LeftPanel,
+html[data-setka-client="true"] .mx_LeftPanel_panel,
+html[data-setka-client="true"] .mx_LeftPanel_panel > *,
+html[data-setka-client="true"] .mx_SetkaLeftPanel_body {
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel,
+html[data-setka-client="true"] .mx_LeftPanel_panel {
+    overflow-y: hidden !important;
+    min-height: 0;
+    max-height: 100%;
+}
+
+/* ===== Startup intro (GIF) ===== */
+.mx_SetkaSKeySplash.mx_SetkaSKeySplash_intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 340ms ease;
+}
+
+.mx_SetkaSKeySplash_intro_fade {
+    opacity: 0;
+}
+
+.mx_SetkaSKeySplash_introImg {
+    width: min(560px, 80vw);
+    height: auto;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* ===== Call: avatars + device settings ===== */
+.mx_SetkaCall_avatar_member {
+    background: transparent !important;
+
+    .mx_BaseAvatar,
+    .mx_BaseAvatar_image {
+        width: 100% !important;
+        height: 100% !important;
+        font-size: inherit !important;
+    }
+
+    .mx_BaseAvatar_initial {
+        font-size: inherit !important;
+        width: 100% !important;
+        line-height: normal !important;
+    }
+}
+
+.mx_SetkaCall_controls {
+    position: relative;
+}
+
+.mx_SetkaCallDevices {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(340px, 92vw);
+    padding: 14px;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 18px;
+    background: rgb(22 14 48 / 94%);
+    box-shadow: 0 14px 40px rgb(0 0 0 / 50%);
+    color: #f2f3f5;
+}
+
+.mx_SetkaCallDevices_title {
+    font-weight: 700;
+}
+
+.mx_SetkaCallDevices_row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: #cfd2ff;
+
+    select {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid rgb(255 255 255 / 16%);
+        border-radius: 10px;
+        background: rgb(255 255 255 / 8%);
+        color: #fff;
+        font: inherit;
+        font-size: 13px;
+
+        option {
+            color: #111;
+        }
+    }
+}
+
+/* ===== Room list header: breathing room above the search ===== */
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="RoomListHeader"],
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="roomListHeader"],
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="room-list-header"],
+html[data-setka-client="true"] .mx_LeftPanel_panel [data-testid="room-list-header"] {
+    padding: 10px 14px 12px !important;
+    margin-bottom: 8px !important;
+    border-bottom: 1px solid rgb(255 255 255 / 8%) !important;
+    gap: 10px;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="RoomListSearch"],
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="roomListSearch"],
+html[data-setka-client="true"] .mx_LeftPanel_panel [data-testid="room-list-search"] {
+    margin: 4px 12px 10px !important;
+}
+
+/* ===== Glass switched off: no blur and solid surfaces EVERYWHERE (not only the few tokenised panels) ===== */
+html[data-setka-client="true"][data-setka-glass="off"] {
+    --setka-bubble-in-bg: color-mix(in srgb, var(--setka-interface-solid, #2c2c34) 86%, white);
+    --setka-bubble-out-bg: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 38%, var(--setka-interface-solid, #2c2c34));
+    --setka-panel-bubble-bg: var(--setka-interface-solid, #2c2c34);
+    --setka-leftpanel-glass-bg: var(--setka-interface-solid, #2c2c34);
+}
+
+html[data-setka-client="true"][data-setka-glass="off"] *,
+html[data-setka-client="true"][data-setka-glass="off"] *::before,
+html[data-setka-client="true"][data-setka-glass="off"] *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+html[data-setka-client="true"][data-setka-glass="off"]
+    :is(
+        .mx_RightPanel,
+        .mx_BaseCard,
+        .mx_ContextualMenu,
+        [role="menu"],
+        [role="dialog"],
+        .mx_Dialog_border,
+        .mx_Dialog,
+        .mx_CompoundDialog,
+        .mx_UserSettingsDialog,
+        .mx_Toast_toast,
+        .mx_Tooltip,
+        .mx_SetkaUserMenu_container,
+        .mx_SetkaCall_menu,
+        .mx_SetkaCallDevices,
+        .mx_SetkaCallMini,
+        .mx_SetkaMiniPlayer,
+        .mx_SetkaMiniPlayer_volumePop,
+        .mx_SetkaCallTile_join,
+        .mx_RoomHeader,
+        .mx_MessageComposer_wrapper,
+        .mx_LeftPanel,
+        .mx_LeftPanel_panel,
+        .mx_SpacePanel,
+        .mx_AppTileMenuBar,
+        .mx_EmojiPicker,
+        .mx_SettingsSubsection,
+        .mx_SetkaProfilePage_card,
+        .mx_UserInfo_container,
+        .mx_SetkaDmProfileSection_info,
+        .mx_PinnedMessageBanner
+    ) {
+    background: var(--setka-interface-solid, #2c2c34) !important;
+    background-color: var(--setka-interface-solid, #2c2c34) !important;
+    box-shadow: none;
+}
+
+/* calls: stage / bars / lobby / dock / incoming are solid too */
+html[data-setka-client="true"][data-setka-glass="off"]
+    :is(
+        .mx_RoomView_setkaCall .mx_MainSplit,
+        .mx_RoomView_setkaCall .mx_CallView,
+        .mx_RoomView_setkaCall .mx_RightPanel,
+        .mx_RoomView_setkaCall .mx_RightPanel .mx_MessageComposer_wrapper,
+        .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard_header,
+        .mx_SetkaCall,
+        .mx_SetkaCall_stage,
+        .mx_SetkaCall_header,
+        .mx_SetkaCall_controlsBar,
+        .mx_SetkaCall_controls,
+        .mx_SetkaCallLobby_card,
+        .mx_SetkaCallDock,
+        .mx_SetkaIncoming,
+        .mx_SetkaIncomingToast
+    ) {
+    background: color-mix(in srgb, var(--setka-interface-solid, #2c2c34) 55%, black) !important;
+    background-color: color-mix(in srgb, var(--setka-interface-solid, #2c2c34) 55%, black) !important;
+    border-color: rgb(255 255 255 / 10%) !important;
+}
+
+/* cards sit one step lighter than the surface they are on */
+html[data-setka-client="true"][data-setka-glass="off"]
+    :is(.mx_SettingsSubsection, .mx_SetkaProfilePage_card, .mx_UserInfo_container, .mx_SetkaDmProfileSection_info) {
+    background: color-mix(in srgb, var(--setka-interface-solid, #2c2c34) 90%, white) !important;
+}
+
+/* ===== Calling someone (DM): dimmed, pulsing avatar until they join ===== */
+.mx_SetkaCall_tile_ringing .mx_SetkaCall_avatar {
+    opacity: 0.5;
+    filter: brightness(0.55) saturate(0.8);
+    animation: mx_SetkaRingPulse 1.6s ease-in-out infinite;
+}
+
+.mx_SetkaCall_tile_ringing .mx_SetkaCall_name {
+    color: rgb(255 255 255 / 72%);
+}
+
+@keyframes mx_SetkaRingPulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.62;
+    }
+}
+
+/* ===== Message send / receive animation (newest tile only) ===== */
+@keyframes mx_SetkaMsgInRight {
+    from {
+        opacity: 0;
+        transform: translateX(18px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes mx_SetkaMsgInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-18px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* disabled: the transform animation on the last tile made the scroll position jump while the timeline re-rendered */
+
+/* ===== PiP player in the left panel: one rounded bubble, every control inside it ===== */
+html[data-setka-client="true"] .mx_SetkaLeftPanelLogo.mx_SetkaLeftPanelLogo_pip {
+    display: block !important;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px !important;
+}
+
+html[data-setka-client="true"] .mx_SetkaPip {
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 12px 8px !important;
+    border-radius: 20px !important;
+    border: 1px solid rgb(255 255 255 / 16%) !important;
+    background: color-mix(in srgb, var(--setka-interface-solid, #2c2c34) 70%, transparent) !important;
+}
+
+html[data-setka-client="true"] .mx_SetkaPip button {
+    appearance: none;
+    box-shadow: none;
+    font-family: inherit;
+    margin: 0;
+    min-width: 0;
+}
+
+html[data-setka-client="true"] .mx_SetkaPip_row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 10px !important;
+}
+
+html[data-setka-client="true"] .mx_SetkaPip .mx_SetkaPip_play {
+    width: 38px !important;
+    height: 38px !important;
+    background: var(--setka-accent-user, #7c5cff) !important;
+    color: #fff !important;
+}
+
+html[data-setka-client="true"] .mx_SetkaPip .mx_SetkaPip_close {
+    width: 28px !important;
+    height: 28px !important;
+    background: rgb(255 255 255 / 10%) !important;
+}
+
+html[data-setka-client="true"] .mx_SetkaPip .mx_SetkaPip_item,
+html[data-setka-client="true"] .mx_SetkaPip .mx_SetkaPip_goto {
+    width: 100%;
+    background: rgb(255 255 255 / 5%) !important;
+    border-radius: 12px !important;
+}
+
+html[data-setka-client="true"] .mx_SetkaPip .mx_SetkaPip_item_active {
+    background: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 35%, transparent) !important;
+}
+
+/* ===== Separator between chat list and room: a quiet drag handle that lights up on hover ===== */
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type]::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 0;
+    width: 4px;
+    height: 56px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 22%);
+    transform: translate(-50%, -50%);
+    transition:
+        height 180ms ease,
+        background 180ms ease,
+        width 180ms ease;
+    pointer-events: none;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_MatrixChat .mx_Separator[data-separator-type]::before {
+    background: rgb(28 20 48 / 22%);
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type]:hover::before,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type]:active::before,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type]:focus-visible::before {
+    width: 5px;
+    height: 120px;
+    background: var(--setka-accent-user, #7c5cff);
+}
+
+/* the chevron is only a hint now: small, hidden until hover */
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type]::after {
+    width: 7px !important;
+    height: 7px !important;
+    border-width: 0 0 2px 2px !important;
+    opacity: 0;
+    transition: opacity 160ms ease;
+    z-index: 1;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type]:hover::after,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type]:focus-visible::after {
+    opacity: 1;
+    border-color: #fff !important;
+}
+
+/* ===== Native browser lists (<select>, <datalist>, autofill): were white text on a white popup ===== */
+html[data-setka-client="true"] {
+    color-scheme: dark;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] {
+    color-scheme: light;
+}
+
+html[data-setka-client="true"] :is(select, select option, select optgroup, datalist, datalist option) {
+    background-color: color-mix(in srgb, var(--setka-interface-solid, #2c2c34) 92%, black);
+    color: #f2f3f5;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] :is(select, select option, select optgroup, datalist, datalist option) {
+    background-color: #fff;
+    color: #1c1430;
+}
+
+html[data-setka-client="true"] select option:checked,
+html[data-setka-client="true"] select option:hover {
+    background-color: var(--setka-accent-user, #7c5cff);
+    color: #fff;
+}
+
+/* ===== Read marker: a fine accent line with a label instead of a stray rule ===== */
+html[data-setka-client="true"] :is(.mx_MessagePanel_myReadMarker, .mx_RoomView_myReadMarker) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    margin: 6px 0;
+    list-style: none;
+}
+
+html[data-setka-client="true"] :is(.mx_MessagePanel_myReadMarker, .mx_RoomView_myReadMarker) hr {
+    position: absolute;
+    inset-inline: 12px;
+    top: 50%;
+    height: 1px;
+    margin: 0;
+    border: none !important;
+    background: linear-gradient(90deg, transparent, var(--setka-accent-user, #7c5cff) 20%, var(--setka-accent-user, #7c5cff) 80%, transparent) !important;
+    opacity: 0.7;
+}
+
+/* the label exists only while Element itself still shows the marker (it fades the hr out via inline opacity) */
+/* constant height: toggling display here shifted the timeline and made scrolling jump */
+html[data-setka-client="true"] .mx_MessagePanel_myReadMarker:not(:has(hr[style*="opacity: 1"]))::after {
+    opacity: 0;
+}
+
+html[data-setka-client="true"] .mx_MessagePanel_myReadMarker::after {
+    content: "Новые сообщения";
+    position: relative;
+    z-index: 1;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--setka-accent-user, #7c5cff);
+    color: #fff;
+    font: var(--cpd-font-body-xs-semibold);
+}
+
+/* ===== Media with a caption: the text gets breathing room under the picture ===== */
+html[data-setka-client="true"] .mx_EventTile .mx_EventTile_line :is(.mx_MImageBody, .mx_MVideoBody, .mx_MStickerBody, .mx_SetkaMediaBatch) ~ :is(.mx_EventTile_body, .mx_MTextBody, [class*="caption"], [class*="Caption"]),
+html[data-setka-client="true"] .mx_EventTile .mx_EventTile_line :is(.mx_MImageBody, .mx_MVideoBody) + * {
+    padding: 8px 6px 2px !important;
+    margin: 0 !important;
+    line-height: 1.35;
+}
+
+html[data-setka-client="true"] .mx_EventTile .mx_EventTile_line:has(.mx_MImageBody, .mx_MVideoBody) {
+    padding-bottom: 6px;
+}
+
+/* ===== Profile editor: clear groups, sticky save bar ===== */
+.mx_SetkaProfilePage_group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 0;
+    border-top: 1px solid rgb(255 255 255 / 8%);
+}
+
+.mx_SetkaProfilePage_group:first-of-type {
+    border-top: none;
+}
+
+.mx_SetkaProfilePage_groupTitle {
+    font: var(--cpd-font-body-md-semibold);
+    color: var(--cpd-color-text-primary);
+}
+
+.mx_SetkaProfilePage_groupHint {
+    margin-top: -4px;
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaProfilePage_customColor {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 12px 0 4px;
+    border: 1px dashed rgb(255 255 255 / 30%);
+    border-radius: 999px;
+    font: var(--cpd-font-body-sm-medium);
+    cursor: pointer;
+
+    input[type="color"] {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: none;
+        cursor: pointer;
+    }
+}
+
+.mx_SetkaProfilePage_saveBar {
+    position: sticky;
+    bottom: -8px;
+    z-index: 2;
+    align-items: center;
+    margin-top: 6px;
+    padding: 12px 0 4px;
+    background: transparent;
+}
+
+/* the name field must not reserve an empty message row under it */
+.mx_SetkaProfilePage_displayName > :not(label):not(input):not(div:has(input)):empty,
+.mx_SetkaProfilePage_displayName [class*="message"]:empty {
+    display: none;
+}
+
+.mx_SetkaProfilePage_heroContent {
+    min-height: 0 !important;
+    gap: var(--cpd-space-3x) !important;
+    padding-bottom: var(--cpd-space-4x) !important;
+}
+
+.mx_SetkaProfilePage_hero {
+    min-height: 0 !important;
+}
+
+/* ===== Contact methods (mail / phone binding) ===== */
+.mx_SetkaContactMethods {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mx_SetkaContactMethods_group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.mx_SetkaContactMethods_title {
+    font: var(--cpd-font-body-md-semibold);
+}
+
+.mx_SetkaContactMethods_row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgb(255 255 255 / 6%);
+}
+
+.mx_SetkaContactMethods_value {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mx_SetkaContactMethods_flow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.mx_SetkaContactMethods_actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mx_SetkaContactMethods_hint {
+    margin: 0;
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaContactMethods_error {
+    margin: 0;
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-critical-primary);
+}
+
+/* ===== Sessions: reset-all banner ===== */
+.mx_SetkaSessionsReset {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+    border: 1px solid rgb(255 90 90 / 35%);
+    border-radius: 16px;
+    background: rgb(255 90 90 / 8%);
+}
+
+.mx_SetkaSessionsReset_text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    span {
+        font: var(--cpd-font-body-sm-regular);
+        color: var(--cpd-color-text-secondary);
+    }
+}
+
+/* ===== Appearance settings: sections as tidy rows ===== */
+.mx_SetkaAppearanceSettings_section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid rgb(255 255 255 / 8%);
+}
+
+.mx_SetkaAppearanceSettings_section:first-of-type {
+    border-top: none;
+}
+
+.mx_SetkaAppearanceSettings_sectionTitle {
+    margin: 0;
+    font: var(--cpd-font-body-md-semibold);
+}
+
+.mx_SetkaAppearanceSettings_field {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) minmax(120px, 2fr) 48px;
+    align-items: center;
+    gap: 12px;
+}
+
+.mx_SetkaAppearanceSettings_toggle {
+    grid-template-columns: 1fr auto;
+}
+
+.mx_SetkaAppearanceSettings_value {
+    text-align: end;
+    color: var(--cpd-color-text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+.mx_SetkaAppearanceSettings_field input[type="range"] {
+    width: 100%;
+    accent-color: var(--setka-accent-user, #7c5cff);
+}
+
+.mx_SetkaAppearanceSettings_presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* ===== Room view must never scroll as a whole (only the timeline inside it does) ===== */
+html[data-setka-client="true"] .mx_RoomView,
+html[data-setka-client="true"] .mx_RoomView_wrapper,
+html[data-setka-client="true"] .mx_RoomView_body {
+    overflow: hidden !important;
+    min-height: 0;
+}
+
+
+/* ScrollPanel pins an inline height/min-height on the message list ("prevent shrinking"); it left an empty band above the first message */
+
+
+
+/* ===== Profile card opened during a call: the header with back / close stays visible ===== */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard.mx_UserInfo .mx_BaseCard_header {
+    display: flex !important;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    flex: none;
+    gap: 8px;
+    padding: 10px 12px !important;
+    border-bottom: 1px solid rgb(255 255 255 / 10%) !important;
+    background: rgb(20 14 44 / 80%) !important;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard.mx_UserInfo .mx_BaseCard_header_title {
+    flex: 1 1 auto;
+}
+
+/* ===== UserInfo option blocks: quiet list rows instead of heavy cards ===== */
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container {
+    padding: 6px !important;
+    border-radius: 18px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container h3,
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container [class*="heading"] {
+    margin: 0 !important;
+    padding: 8px 10px 4px;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container .mx_AccessibleButton,
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container [role="menuitem"],
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container button:not([class*="Copy"]) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 10px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    background: transparent !important;
+    color: var(--cpd-color-text-primary) !important;
+    text-align: start;
+    font: var(--cpd-font-body-md-regular);
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container .mx_AccessibleButton:hover,
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container button:not([class*="Copy"]):hover {
+    background: rgb(255 255 255 / 10%) !important;
+}
+
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container .mx_AccessibleButton_kind_danger,
+html[data-setka-client="true"] .mx_UserInfo_setka .mx_UserInfo_container .mx_UserInfo_destructive {
+    color: var(--cpd-color-text-critical-primary) !important;
+}

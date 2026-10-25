@@ -1,0 +1,59 @@
+{
+    "default_server_config": {
+        "m.homeserver": {
+            "base_url": "https://matrix.setka-matrix.ru",
+            "server_name": "matrix.setka-matrix.ru"
+        },
+        "m.identity_server": {
+            "base_url": "https://id.setka-matrix.ru"
+        }
+    },
+    "permalink_prefix": "https://web-beta.setka-matrix.ru",
+    "disable_custom_urls": true,
+    "disable_guests": true,
+    "disable_login_language_selector": false,
+    "disable_3pid_login": false,
+    "enable_client_well_known_lookups": true,
+    "brand": "Сетка",
+    "default_country_code": "RU",
+    "show_labs_settings": false,
+    "default_federate": true,
+    "default_theme": "light",
+    "room_directory": {
+        "servers": ["matrix.setka-matrix.ru"]
+    },
+    "setting_defaults": {
+        "breadcrumbs": true,
+        "feature_user_status": true,
+        "language": "ru",
+        "layout": "bubble",
+        "enableLegacyCallsVoip": false
+    },
+    "features": {
+        "feature_element_call_video_rooms": true,
+        "feature_group_calls": true,
+        "feature_video_rooms": true,
+        "UIFeature.voip": false
+    },
+    "oidc_metadata": {
+        "client_uri": "https://web-beta.setka-matrix.ru"
+    },
+    "oidc_static_clients": {
+        "https://auth.setka-matrix.ru/": {
+            "client_id": "01KZ9XW3DNR98E76P4JFMMFCCD"
+        }
+    },
+    "element_call": {
+        "brand": "Сетка Call",
+        "disable": false,
+        "use_exclusively": false
+    },
+    "branding": {
+        "auth_header_logo_url": "themes/setka/img/setka-logo.svg",
+        "auth_footer_links": []
+    },
+    "integrations_ui_url": "",
+    "integrations_rest_url": "",
+    "integrations_widgets_urls": [],
+    "map_style_url": "https://api.maptiler.com/maps/streets/style.json?key=vZkbqJEE9wFEFPr0XCgu"
+}

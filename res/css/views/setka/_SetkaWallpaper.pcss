@@ -1,0 +1,55 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+:root[data-setka-wallpaper="on"] {
+    --setka-wallpaper-overlay: rgb(0 0 0 / 18%);
+}
+
+html[data-setka-client="true"][data-setka-wallpaper="on"] {
+    background-color: var(--setka-wallpaper-color, var(--cpd-color-bg-canvas-default));
+    background-image: var(--setka-wallpaper-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    min-height: 100%;
+}
+
+.mx_SetkaWallpaperSettings {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-3x);
+}
+
+.mx_SetkaWallpaperSettings_hint {
+    margin: 0;
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaWallpaperSettings_options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cpd-space-2x);
+}
+
+.mx_SetkaWallpaperSettings_option {
+    border-radius: 999px !important;
+    padding: 6px 14px !important;
+    border: 1px solid var(--cpd-color-border-interactive-secondary) !important;
+    background: var(--cpd-color-bg-subtle-secondary) !important;
+    color: var(--cpd-color-text-primary) !important;
+}
+
+.mx_SetkaWallpaperSettings_option_active {
+    border-color: var(--cpd-color-border-accent) !important;
+    background: var(--cpd-color-bg-canvas-default) !important;
+}
+
+.mx_SetkaWallpaperSettings_error {
+    margin: 0;
+    color: var(--cpd-color-text-critical-primary);
+    font: var(--cpd-font-body-sm-regular);
+}

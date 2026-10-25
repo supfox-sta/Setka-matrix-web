@@ -1,0 +1,230 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaContactsPanel {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    color: rgb(255 255 255 / 94%);
+}
+
+.mx_SetkaContactsPanel_loading {
+    align-items: center;
+    justify-content: center;
+    padding: var(--cpd-space-8x);
+}
+
+.mx_SetkaContactsPanel_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--cpd-space-2x);
+    padding: var(--cpd-space-3x) var(--cpd-space-4x);
+    font: var(--cpd-font-body-md-semibold);
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
+    flex: 0 0 auto;
+}
+
+.mx_SetkaContactsPanel_empty {
+    padding: var(--cpd-space-8x) var(--cpd-space-4x);
+    text-align: center;
+    color: rgb(255 255 255 / 72%);
+    font: var(--cpd-font-body-sm-regular);
+}
+
+.mx_SetkaContactsPanel_list {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: var(--cpd-space-2x);
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-2x);
+}
+
+.mx_SetkaContactsPanel_rowWrap {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    min-height: 72px;
+    border-radius: 16px;
+    border: 1px solid rgb(255 255 255 / 12%);
+    background: rgb(255 255 255 / 8%);
+    transition:
+        transform 140ms ease,
+        background 140ms ease,
+        border-color 140ms ease;
+}
+
+.mx_SetkaContactsPanel_cover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.55;
+}
+
+.mx_SetkaContactsPanel_rowWrap .mx_SetkaContactsPanel_row {
+    position: relative;
+    z-index: 1;
+}
+
+.mx_SetkaContactsPanel_avatarVideo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.mx_SetkaContactsPanel_rowWrap:hover,
+.mx_SetkaContactsPanel_rowWrap:focus-within {
+    border-color: rgb(255 255 255 / 22%);
+    transform: translateY(-1px);
+}
+
+.mx_SetkaContactsPanel_rowWrap:has(.mx_SetkaContactsPanel_cover) {
+    border-color: rgb(255 255 255 / 18%);
+    background-color: rgb(0 0 0 / 20%);
+}
+
+.mx_SetkaContactsPanel_rowWrap:has(.mx_SetkaContactsPanel_cover) .mx_SetkaContactsPanel_name {
+    color: #fff;
+}
+
+.mx_SetkaContactsPanel_row {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-3x);
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    padding: var(--cpd-space-3x);
+    text-align: left;
+    background: transparent !important;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.mx_SetkaContactsPanel_avatar {
+    flex: 0 0 auto;
+}
+
+.mx_SetkaContactsPanel_avatar .mx_BaseAvatar {
+    border: 2px solid rgb(255 255 255 / 18%);
+}
+
+.mx_SetkaContactsPanel_sub_onCover {
+    color: rgb(255 255 255 / 82%);
+}
+
+.mx_SetkaContactsPanel_row[style*="background-image"] .mx_SetkaContactsPanel_name,
+.mx_SetkaContactsPanel_rowWrap[style*="background-image"] .mx_SetkaContactsPanel_name {
+    color: #fff;
+}
+
+.mx_SetkaContactsPanel_actions {
+    position: absolute;
+    right: var(--cpd-space-2x);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-1x);
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease;
+}
+
+.mx_SetkaContactsPanel_rowWrap:hover .mx_SetkaContactsPanel_actions,
+.mx_SetkaContactsPanel_rowWrap:focus-within .mx_SetkaContactsPanel_actions {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mx_SetkaContactsPanel_rowWrap:hover .mx_SetkaContactsPanel_row,
+.mx_SetkaContactsPanel_rowWrap:focus-within .mx_SetkaContactsPanel_row {
+    padding-inline-end: calc(var(--cpd-space-3x) + 84px);
+}
+
+.mx_SetkaContactsPanel_actionBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    color: rgb(255 255 255 / 88%);
+    background: rgb(0 0 0 / 28%);
+    backdrop-filter: blur(8px);
+}
+
+.mx_SetkaContactsPanel_actionBtn:hover {
+    background: rgb(255 255 255 / 22%);
+    color: rgb(255 255 255 / 98%);
+}
+
+.mx_SetkaContactsPanel_actionBtn_danger:hover {
+    background: rgb(229 57 53 / 42%);
+    color: #ffb4b0;
+}
+
+.mx_SetkaContactsPanel_rowText {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.mx_SetkaContactsPanel_name {
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-1x);
+    font: var(--cpd-font-body-sm-semibold);
+    color: rgb(255 255 255 / 94%);
+}
+
+.mx_SetkaContactsPanel_sub {
+    margin-top: 2px;
+    font: var(--cpd-font-body-xs-regular);
+    color: rgb(255 255 255 / 68%);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mx_SetkaContactsPanel_status {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+@media (max-width: 480px) {
+    .mx_SetkaContactsPanel_header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mx_SetkaContactsPanel_actions {
+        position: static;
+        transform: none;
+        opacity: 1;
+        pointer-events: auto;
+        justify-content: flex-end;
+        padding: 0 var(--cpd-space-2x) var(--cpd-space-2x);
+    }
+
+    .mx_SetkaContactsPanel_rowWrap:hover .mx_SetkaContactsPanel_row,
+    .mx_SetkaContactsPanel_rowWrap:focus-within .mx_SetkaContactsPanel_row {
+        padding-inline-end: var(--cpd-space-3x);
+    }
+}

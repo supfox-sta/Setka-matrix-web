@@ -1,0 +1,435 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/**
+ * Setka call chrome UX:
+ * - Call above chat so both stay visible and usable
+ * - Chat open by default when entering a call
+ * - Header chat button collapses chat → call gets more vertical space
+ * - Member list opens as a modal (does not replace chat)
+ */
+
+html[data-setka-client="true"] {
+    --setka-call-bg: rgb(22 14 48);
+    --setka-call-radius: var(--setka-panel-bubble-radius, 20px);
+    --setka-call-chat-min: 220px;
+    --setka-call-chat-ideal: 38vh;
+}
+
+/* ── Stacked layout: call on top, room chat below ── */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit,
+html[data-setka-client="true"] .mx_RoomView.mx_RoomView_immersive.mx_RoomView_setkaCall .mx_MainSplit {
+    flex-direction: column !important;
+    align-items: stretch;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    gap: 0;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RoomView_body.mx_MainSplit_call {
+    /* The room header is inside this body, above CallView. Let the call take the
+       remaining height instead of assigning 62% plus a separately-sized chat. */
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Chat tray — full width beneath the call, with a bounded default height */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RightPanel_ResizeWrapper {
+    /* Keep the resizable panel height owned by re-resizable (inline style). */
+    flex: 0 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 40px !important;
+    align-self: stretch;
+    max-height: 85vh !important;
+    box-sizing: border-box;
+    margin: 0;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit .mx_ResizeHandle--horizontal {
+    display: none;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit .mx_ResizeHandle--vertical {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 10px;
+    width: 100%;
+    height: 10px;
+    cursor: row-resize;
+    touch-action: none;
+    z-index: 2;
+    background: transparent;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit .mx_ResizeHandle--vertical::after {
+    content: "";
+    width: 44px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 24%);
+    transition: background 140ms ease, width 140ms ease;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit .mx_ResizeHandle--vertical:hover::after {
+    background: rgb(255 255 255 / 50%);
+    width: 56px;
+}
+
+/* Keep the call split stacked even when the generic split has a legacy orientation class. */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit.mx_MainSplit_vertical {
+    flex-direction: column !important;
+}
+
+/* ── Call stage ── */
+html[data-setka-client="true"] .mx_MainSplit_call .mx_CallView,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_CallView {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+    margin: var(--cpd-space-2x) var(--cpd-space-2x) var(--cpd-space-2x) var(--cpd-space-3x);
+    border-radius: var(--setka-call-radius);
+    border: 1px solid rgb(255 255 255 / 10%);
+    background: var(--setka-call-bg) !important;
+    box-shadow: var(--setka-panel-bubble-shadow);
+    overflow: hidden;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* Fullscreen call when chat is collapsed (no right panel) */
+html[data-setka-client="true"]
+    .mx_RoomView_setkaCall
+    .mx_MainSplit:not(:has(.mx_RightPanel_ResizeWrapper))
+    .mx_CallView {
+    margin: var(--cpd-space-2x) var(--cpd-space-3x);
+}
+
+html[data-setka-client="true"] .mx_MainSplit_call .mx_CallView .mx_AppTile,
+html[data-setka-client="true"] .mx_MainSplit_call .mx_CallView .mx_AppTile_mini,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_CallView .mx_AppTile,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_AppTile,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_AppTileFullWidth {
+    border: none !important;
+    background: var(--setka-call-bg) !important;
+    border-radius: inherit;
+    height: 100%;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_MainSplit_call .mx_AppTileBody--large,
+html[data-setka-client="true"] .mx_MainSplit_call .mx_AppTileBody--call,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_CallView .mx_AppTileBody--large,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_CallView .mx_AppTileBody--call {
+    background: var(--setka-call-bg) !important;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_MainSplit_call .mx_AppTileBody iframe,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_CallView .mx_AppTileBody iframe,
+html[data-setka-client="true"] .mx_CallView iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: inherit;
+    background: var(--setka-call-bg) !important;
+}
+
+/* ── Native Element Call ── */
+html[data-setka-client="true"] .mx_CallView_native {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: var(--setka-call-bg) !important;
+}
+
+html[data-setka-client="true"] .mx_CallView_native > div[class*="root"] {
+    width: 100%;
+    height: 100%;
+    flex: 1 1 0;
+    min-height: 0;
+    background: transparent !important;
+}
+
+/* ── Chat panel during call ── */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0 var(--cpd-space-3x) var(--cpd-space-2x);
+    border-radius: var(--setka-call-radius);
+    border: var(--setka-panel-bubble-border);
+    background: var(--setka-panel-bubble-bg) !important;
+    box-shadow: var(--setka-panel-bubble-shadow);
+    /* A solid panel avoids expensive backdrop repaints while messages scroll. */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_TimelineCard,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_ThreadPanel {
+    background: transparent !important;
+    height: 100%;
+    min-height: 0;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_TimelineCard_timeline {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_MessageComposer {
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_MessageComposer_wrapper {
+    margin: var(--cpd-space-2x) var(--cpd-space-3x) var(--cpd-space-2x) !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    border: 1px solid rgb(255 255 255 / 14%) !important;
+    background: rgb(255 255 255 / 8%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 12%) !important;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_MessageComposer_wrapper:focus-within {
+    border-color: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 45%, rgb(255 255 255 / 28%)) !important;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 14%), 0 6px 18px rgb(0 0 0 / 18%) !important;
+}
+
+/* In-call chat header: clean, modern glass header */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px !important;
+    border-bottom: 1px solid rgb(255 255 255 / 10%) !important;
+    background: rgb(255 255 255 / 4%) !important;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard_header_title_heading,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard_header h2 {
+    font: var(--cpd-font-body-md-semibold) !important;
+    color: rgb(255 255 255 / 96%) !important;
+    margin: 0;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard_header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 8%);
+    border: none;
+    color: rgb(255 255 255 / 75%);
+    transition: background 140ms ease, color 140ms ease;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard_header button:hover {
+    background: rgb(255 255 255 / 18%);
+    color: rgb(255 255 255 / 98%);
+}
+
+/* Header stays usable during call */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RoomHeader {
+    flex: 0 0 auto;
+}
+
+/* Apps drawer if present alongside call */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_AppsDrawer {
+    margin: var(--cpd-space-2x) var(--cpd-space-3x) 0;
+    border-radius: var(--setka-call-radius);
+    border: var(--setka-panel-bubble-border);
+    background: var(--setka-panel-bubble-bg);
+    box-shadow: var(--setka-surface-shadow);
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_AppsContainer .mx_AppTile {
+    border-color: rgb(255 255 255 / 10%) !important;
+    background: transparent !important;
+}
+
+/* PiP / persisted call tile */
+html[data-setka-client="true"] #mx_PersistedElement_container .mx_AppTile,
+html[data-setka-client="true"] #mx_PersistedElement_container .mx_CallView,
+html[data-setka-client="true"] .mx_PictureInPictureDragger .mx_AppTile,
+html[data-setka-client="true"] .mx_PictureInPictureDragger .mx_CallView {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 10%);
+    box-shadow: var(--setka-panel-bubble-shadow);
+    background: var(--setka-call-bg) !important;
+}
+
+html[data-setka-client="true"] .mx_PictureInPictureDragger .mx_AppTile_pip,
+html[data-setka-client="true"] .mx_PictureInPictureDragger .mx_AppTileBody--mini {
+    border-radius: inherit;
+    background: var(--setka-call-bg) !important;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_PictureInPictureDragger .mx_AppTileBody--mini iframe {
+    border-radius: inherit;
+}
+
+/* Widget tiles in apps drawer */
+html[data-setka-client="true"] .mx_AppsDrawer .mx_AppTile,
+html[data-setka-client="true"] .mx_AppsContainer .mx_AppTile,
+html[data-setka-client="true"] .mx_AppTileFullWidth {
+    border: var(--setka-panel-bubble-border) !important;
+    border-radius: 16px !important;
+    background: var(--setka-panel-bubble-bg) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_AppsDrawer .mx_AppTile .mx_AppTileBody--large,
+html[data-setka-client="true"] .mx_AppTileFullWidth .mx_AppTileBody--large {
+    background: rgb(12 8 28 / 30%) !important;
+}
+
+/* Member list modal during call */
+.mx_SetkaCallMemberListDialog_wrapper .mx_Dialog {
+    width: min(420px, 92vw);
+    max-height: min(72vh, 640px);
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.mx_SetkaCallMemberListDialog.mx_BaseDialog {
+    padding: 0 !important;
+}
+
+.mx_SetkaCallMemberListDialog_body {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: min(60vh, 560px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.mx_SetkaCallMemberListDialog_body .mx_MemberListView,
+.mx_SetkaCallMemberListDialog_body .mx_BaseCard {
+    height: 100%;
+    max-height: none;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+/* ── Unified call + chat (Discord style): one surface, no gaps, no "Chat ✕" header ── */
+/* one glass frame around call + chat, same material as the other Setka panels */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit {
+    margin: 0 var(--cpd-space-3x) var(--cpd-space-3x);
+    border: var(--setka-panel-bubble-border);
+    border-radius: var(--setka-call-radius);
+    background: var(--setka-panel-bubble-bg, rgb(22 14 48 / 72%));
+    box-shadow: var(--setka-panel-bubble-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RoomView_body.mx_MainSplit_call,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_CallView {
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_MainSplit_call .mx_CallView,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_CallView,
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit:not(:has(.mx_RightPanel_ResizeWrapper)) .mx_CallView {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RightPanel_ResizeWrapper {
+    background: transparent !important;
+    border-top: 1px solid rgb(255 255 255 / 10%) !important;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_RightPanel .mx_BaseCard_header {
+    display: none !important;
+}
+
+/* the resize handle becomes a thin line right on the seam */
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit .mx_ResizeHandle--vertical {
+    flex: 0 0 6px;
+    height: 6px;
+    margin: -3px 0;
+}
+
+html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit .mx_ResizeHandle--vertical::after {
+    width: 36px;
+    height: 3px;
+}
+
+/* Responsive safeguards: preserve both call and chat on compact screens. */
+@media (max-width: 900px) {
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RoomView_body.mx_MainSplit_call {
+        flex: 1 1 0 !important;
+        min-height: 0 !important;
+        max-height: none !important;
+    }
+
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RightPanel_ResizeWrapper {
+        flex: 0 1 auto !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        min-height: 40px !important;
+        max-height: 85vh !important;
+    }
+
+}
+
+@media (max-height: 650px) {
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RoomView_body.mx_MainSplit_call {
+        min-height: 0 !important;
+    }
+
+    html[data-setka-client="true"] .mx_RoomView_setkaCall .mx_MainSplit > .mx_RightPanel_ResizeWrapper {
+        min-height: 40px !important;
+        max-height: 85vh !important;
+    }
+}

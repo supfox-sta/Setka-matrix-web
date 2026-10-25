@@ -1,0 +1,414 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+html[data-setka-client="true"] {
+    --setka-glass-alpha: 0.28;
+    --setka-glass-alpha-2: 0.22;
+    --setka-blur-strength: 10px;
+    --setka-accent-user: #e53935;
+    --setka-panel-bubble-bg: linear-gradient(
+        145deg,
+        rgb(255 255 255 / var(--setka-glass-alpha)),
+        rgb(255 255 255 / calc(var(--setka-glass-alpha-2) * 0.85))
+    );
+    --setka-panel-bubble-border: 1px solid rgb(255 255 255 / 14%);
+    --setka-panel-bubble-shadow:
+        0 1px 0 rgb(255 255 255 / 10%) inset,
+        0 10px 28px rgb(0 0 0 / 12%),
+        0 2px 8px rgb(0 0 0 / 8%);
+    --setka-panel-bubble-radius: 20px;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="dark"] {
+    --setka-panel-bubble-bg: linear-gradient(
+        145deg,
+        rgb(48 48 54 / var(--setka-glass-alpha)),
+        rgb(28 28 32 / var(--setka-glass-alpha-2))
+    );
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] {
+    --setka-panel-bubble-bg: linear-gradient(
+        145deg,
+        rgb(255 255 255 / var(--setka-glass-alpha)),
+        rgb(255 255 255 / calc(var(--setka-glass-alpha-2) * 0.85))
+    );
+    --setka-panel-bubble-shadow:
+        0 1px 0 rgb(255 255 255 / 40%) inset,
+        0 10px 28px rgb(0 0 0 / 8%),
+        0 2px 8px rgb(0 0 0 / 5%);
+}
+
+/* Transparent chain so html wallpaper is visible */
+html[data-setka-client="true"] body,
+html[data-setka-client="true"] #matrixchat,
+html[data-setka-client="true"] .mx_MatrixChat_wrapper,
+html[data-setka-client="true"] .mx_MatrixChat,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel-group],
+html[data-setka-client="true"] .mx_MatrixChat [data-group],
+html[data-setka-client="true"] .mx_MatrixChat [data-panel],
+html[data-setka-client="true"] .mx_MatrixChat .mx_LeftPanel_panel,
+html[data-setka-client="true"] .mx_LeftPanel,
+html[data-setka-client="true"] .mx_LeftPanel_wrapper,
+html[data-setka-client="true"] .mx_LeftPanel_wrapper--user,
+html[data-setka-client="true"] .mx_LeftPanel .mx_LeftPanel_roomListContainer,
+html[data-setka-client="true"] .mx_LeftPanel_outerWrapper,
+html[data-setka-client="true"] .mx_RoomListPanel,
+html[data-setka-client="true"] .mx_LeftPanelLiveShareWarning,
+html[data-setka-client="true"] .mx_RoomView_wrapper,
+html[data-setka-client="true"] .mx_RoomView,
+html[data-setka-client="true"] .mx_RoomView_body,
+html[data-setka-client="true"] .mx_MainSplit,
+html[data-setka-client="true"] .mx_RoomView_timeline,
+html[data-setka-client="true"] .mx_RoomView_messagePanel,
+html[data-setka-client="true"] .mx_ScrollPanel,
+html[data-setka-client="true"] .mx_MessagePanel {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Override structures/_MatrixChat.pcss opaque fill on the panel group and resizable panels */
+html[data-setka-client="true"] .mx_MatrixChat > :not(.mx_LeftPanel):not(.mx_SpacePanel):not(.mx_ResizeHandle):not(.mx_LeftPanel_outerWrapper),
+html[data-setka-client="true"] .mx_MatrixChat > [data-panel-group],
+html[data-setka-client="true"] .mx_MatrixChat > [data-group],
+html[data-setka-client="true"] .mx_MatrixChat .mx_LeftPanel_panel {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_RoomView_statusArea {
+    background-color: transparent !important;
+}
+
+/* Shared bubble chrome for floating side panels */
+html[data-setka-client="true"] .mx_SpacePanel {
+    border: var(--setka-panel-bubble-border) !important;
+    border-radius: var(--setka-panel-bubble-radius);
+    background: var(--setka-panel-bubble-bg) !important;
+    box-shadow: var(--setka-panel-bubble-shadow);
+    max-height: calc(100vh - 16px);
+    align-self: stretch;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"][data-setka-blur="on"] .mx_SpacePanel {
+    backdrop-filter: blur(var(--setka-blur-strength));
+    -webkit-backdrop-filter: blur(var(--setka-blur-strength));
+}
+
+/* Chat list resizable shell stays transparent; glass chrome on outerWrapper only */
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel,
+html[data-setka-client="true"] .mx_MatrixChat .mx_LeftPanel_panel:first-of-type {
+    max-height: calc(100vh - 16px);
+    align-self: stretch;
+    flex-shrink: 0;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type,
+html[data-setka-client="true"] .mx_MatrixChat .mx_LeftPanel_panel:first-of-type {
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper,
+html[data-setka-client="true"] .mx_MatrixChat .mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper {
+    border: var(--setka-panel-bubble-border) !important;
+    border-radius: var(--setka-panel-bubble-radius);
+    box-shadow: var(--setka-panel-bubble-shadow);
+    overflow: hidden;
+    height: 100%;
+}
+
+html[data-setka-client="true"][data-setka-blur="on"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper,
+html[data-setka-client="true"][data-setka-blur="on"] .mx_MatrixChat .mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper {
+    backdrop-filter: blur(var(--setka-blur-strength));
+    -webkit-backdrop-filter: blur(var(--setka-blur-strength));
+}
+
+/* Inner left panel: transparent, clipped to rounded shell */
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel_wrapper,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel_wrapper--user,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel_roomListContainer {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: inherit;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel {
+    height: 100%;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+/* Outer breathing room without shrinking the chat column */
+html[data-setka-client="true"] .mx_MatrixChat {
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat_splash,
+.mx_MatrixChat_splash[data-setka-client="true"] {
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Gap between space rail, chat list, separator and room */
+html[data-setka-client="true"] .mx_MatrixChat [data-panel-group] {
+    gap: 16px;
+    height: 100%;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Floating space rail — extra air before chat list */
+html[data-setka-client="true"] .mx_SpacePanel {
+    margin: 0;
+    margin-inline-end: 20px;
+    overflow: visible;
+    z-index: 2;
+}
+
+html[data-setka-client="true"] .mx_SpacePanel.collapsed {
+    width: 68px;
+}
+
+/* Floating chat list column — air before room view */
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type {
+    z-index: 1;
+    margin-inline-end: 16px;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper {
+    max-width: none;
+}
+
+/* Room view takes all remaining space */
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:last-of-type {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 100%;
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:last-of-type .mx_RoomView_wrapper,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:last-of-type .mx_RoomView {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel {
+    --collapsedWidth: 0px;
+}
+
+/* Collapsed chat list: hide panel chrome; separator arrow points right (expand) */
+html[data-setka-client="true"] .mx_MatrixChat [data-panel-collapsed="true"].mx_LeftPanel_panel:first-of-type,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel-collapsed="true"].mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper {
+    margin-inline-end: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Expanded (border): chevron points left (collapse). Collapsed (bar): points right (expand). */
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="border"]::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Round toggle between chat list and room — keep native hit area, restyle visuals only */
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator {
+    position: relative;
+    align-self: stretch;
+    margin-inline: 4px;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    outline: none;
+    cursor: pointer;
+    z-index: 3;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="bar"] {
+    width: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+    border-right: none !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="border"] {
+    width: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+}
+
+/* Keep separator clickable both when collapsed (bar) and expanded (border) —
+ * previously pointer-events:none on the host blocked collapse clicks. */
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator {
+    pointer-events: auto !important;
+    touch-action: none !important;
+    cursor: pointer !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator .activeSeparatorContainer,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="bar"],
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="border"] {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="border"] {
+    width: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator .activeSeparatorContainer,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator .activeSeparator,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="border"] > div,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="border"] > div > div {
+    display: flex !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 3;
+    border: none !important;
+    border-right: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="border"]:is(
+    [data-separator="hover"],
+    [data-separator="active"],
+    [data-separator="focus"],
+    :focus-visible
+) > div > div {
+    border: none !important;
+    border-right: none !important;
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="bar"]:is(
+    [data-separator="hover"],
+    :focus-visible
+) {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator svg {
+    display: none !important;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    border: var(--setka-panel-bubble-border);
+    border-radius: 50%;
+    background: var(--setka-panel-bubble-bg);
+    box-shadow: var(--setka-panel-bubble-shadow);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid rgb(255 255 255 / 92%);
+    border-bottom: 2px solid rgb(255 255 255 / 92%);
+    transform: translate(-50%, -50%) rotate(45deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Panel collapsed — arrow points right (expand) */
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="bar"]::after {
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator-type="border"]::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator:hover::before,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator:focus-visible::before,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator="hover"]::before,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator[data-separator="active"]::before {
+    background: color-mix(in srgb, rgb(124 92 255 / 0.38), transparent);
+}
+
+/* Space rail icons readable on glass */
+html[data-setka-client="true"] .mx_SpacePanel .mx_SpaceButton_icon {
+    background-color: rgb(255 255 255 / 12%);
+}
+
+html[data-setka-client="true"] .mx_SpacePanel .mx_SpaceButton_icon svg,
+html[data-setka-client="true"] .mx_SpacePanel .mx_SpaceButton_name,
+html[data-setka-client="true"] .mx_SpacePanel .mx_SetkaUserMenu_trigger,
+html[data-setka-client="true"] .mx_SpacePanel .mx_SetkaUserMenu_sideName {
+    color: rgb(255 255 255 / 92%);
+}
+
+html[data-setka-client="true"] .mx_SpacePanel .mx_SpaceButton_toggleCollapse svg {
+    color: rgb(255 255 255 / 72%);
+}
+
+html[data-setka-client="true"] .mx_SpacePanel .mx_SpaceButton_active:not(.mx_SpaceButton_narrow) .mx_SpaceButton_selectionWrapper {
+    background-color: rgb(255 255 255 / 14%);
+}
+
+html[data-setka-client="true"] .mx_SpacePanel .mx_SpacePanel_toggleCollapse {
+    background-color: rgb(255 255 255 / 28%);
+}
+
+html[data-setka-client="true"] .mx_SpacePanel .mx_SpacePanel_toggleCollapse svg {
+    color: rgb(255 255 255 / 92%);
+}
+
+/* Chat list text on glass — legacy mx_RoomTile; new list uses vars in _SetkaLeftPanel.pcss */
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile_title,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile_subtitle_text {
+    color: rgb(255 255 255 / 94%);
+}
+
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile_subtitle_text {
+    color: rgb(255 255 255 / 72%);
+}
+
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile:hover,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile:focus-within {
+    background: rgb(255 255 255 / 12%);
+}
+
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile_selected,
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile_selected:hover {
+    background: rgb(255 255 255 / 18%);
+}

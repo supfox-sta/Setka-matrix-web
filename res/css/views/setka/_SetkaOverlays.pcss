@@ -1,0 +1,127 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Context menus, dropdowns — see _SetkaMenus.pcss for menu items */
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_container {
+    background: var(--setka-surface) !important;
+    outline-color: var(--setka-surface-border) !important;
+    border-radius: 20px !important;
+    box-shadow: var(--setka-surface-shadow) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: var(--setka-surface-text);
+    padding-block: var(--cpd-space-4x) !important;
+    gap: var(--cpd-space-1x);
+}
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_displayName,
+html[data-setka-client="true"] .mx_SetkaUserMenu_sideName {
+    color: var(--setka-surface-text);
+}
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_userId {
+    color: var(--setka-surface-text-secondary);
+}
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_subHeader {
+    color: var(--setka-surface-text-secondary);
+}
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_actions [role="menuitem"]:last-child,
+html[data-setka-client="true"] .mx_SetkaUserMenu_logoutItem {
+    color: var(--cpd-color-text-critical-primary);
+}
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_actions [role="menuitem"]:last-child [class*="icon"],
+html[data-setka-client="true"] .mx_SetkaUserMenu_logoutItem [class*="icon"] {
+    color: var(--cpd-color-icon-critical-primary);
+}
+
+/* Cards in dialogs (right panel overrides below) */
+html[data-setka-client="true"] .mx_BaseCard {
+    background: var(--setka-surface) !important;
+    color: var(--setka-surface-text);
+    border-color: var(--setka-surface-border) !important;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+html[data-setka-client="true"] .mx_BaseCard_header {
+    border-bottom-color: var(--setka-surface-border) !important;
+}
+
+/* Right panel — floating glass bubble, spaced from chat */
+html[data-setka-client="true"] .mx_MainSplit > .mx_RightPanel_ResizeWrapper {
+    margin-inline-start: 16px;
+    max-height: calc(100vh - 16px);
+    align-self: stretch;
+}
+
+html[data-setka-client="true"] .mx_RightPanel {
+    border-left: none !important;
+    border: var(--setka-panel-bubble-border) !important;
+    border-radius: var(--setka-panel-bubble-radius) !important;
+    background: var(--setka-panel-bubble-bg) !important;
+    background-color: transparent !important;
+    box-shadow: var(--setka-panel-bubble-shadow);
+    overflow: hidden;
+    color: rgb(255 255 255 / 94%);
+    --cpd-color-text-primary: rgb(255 255 255 / 94%);
+    --cpd-color-text-secondary: rgb(255 255 255 / 72%);
+    --cpd-color-icon-primary: rgb(255 255 255 / 88%);
+    --cpd-color-icon-secondary: rgb(255 255 255 / 64%);
+    --cpd-color-bg-canvas-default: rgb(255 255 255 / 10%);
+    --cpd-color-bg-subtle-primary: rgb(255 255 255 / 10%);
+    --cpd-color-bg-subtle-secondary: rgb(255 255 255 / 14%);
+    --cpd-color-bg-action-tertiary-hovered: rgb(255 255 255 / 12%);
+    --cpd-color-border-subtle-primary: rgb(255 255 255 / 14%);
+    --cpd-color-border-interactive-secondary: rgb(255 255 255 / 18%);
+}
+
+html[data-setka-client="true"][data-setka-blur="on"] .mx_RightPanel {
+    backdrop-filter: blur(var(--setka-blur-strength));
+    -webkit-backdrop-filter: blur(var(--setka-blur-strength));
+}
+
+html[data-setka-client="true"] .mx_RightPanel .mx_BaseCard,
+html[data-setka-client="true"] .mx_RightPanel .mx_BaseCard_header {
+    background: transparent !important;
+    border-bottom-color: rgb(255 255 255 / 14%) !important;
+}
+
+html[data-setka-client="true"] .mx_RightPanel .mx_BaseCard_header_title_heading,
+html[data-setka-client="true"] .mx_RightPanel .mx_BaseCard_header h2 {
+    color: rgb(255 255 255 / 94%);
+}
+
+html[data-setka-client="true"] .mx_RightPanel .mx_BaseCard_header button svg {
+    color: rgb(255 255 255 / 72%);
+}
+
+html[data-setka-client="true"] .mx_RightPanel .mx_BaseCard_header button:hover svg {
+    color: rgb(255 255 255 / 94%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_RightPanel {
+    color: rgb(28 20 48 / 94%);
+    --cpd-color-text-primary: rgb(28 20 48 / 94%);
+    --cpd-color-text-secondary: rgb(28 20 48 / 68%);
+    --cpd-color-icon-primary: rgb(28 20 48 / 88%);
+    --cpd-color-icon-secondary: rgb(28 20 48 / 58%);
+    --cpd-color-bg-canvas-default: rgb(124 92 255 / 8%);
+    --cpd-color-bg-subtle-primary: rgb(124 92 255 / 8%);
+    --cpd-color-bg-subtle-secondary: rgb(124 92 255 / 12%);
+    --cpd-color-bg-action-tertiary-hovered: rgb(124 92 255 / 10%);
+    --cpd-color-border-subtle-primary: rgb(124 92 255 / 14%);
+    --cpd-color-border-interactive-secondary: rgb(124 92 255 / 18%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_RightPanel .mx_BaseCard_header_title_heading,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_RightPanel .mx_BaseCard_header h2 {
+    color: rgb(28 20 48 / 94%);
+}
+
+/* Element Call — see _SetkaCallChrome.pcss */

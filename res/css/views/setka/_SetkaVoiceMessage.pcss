@@ -1,0 +1,41 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody .mx_AudioPlayerView,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody .mx_RecordingPlayback {
+    width: 100%;
+    max-width: min(280px, 72vw);
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody {
+    display: block;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody .mx_AudioPlayerView,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody .mx_RecordingPlayback {
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--setka-panel-bubble-bg) 88%, transparent);
+    border: var(--setka-panel-bubble-border);
+    box-shadow: var(--setka-panel-bubble-shadow);
+    padding: var(--cpd-space-2x) var(--cpd-space-3x);
+    box-sizing: border-box;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody .mx_Waveform,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody canvas {
+    filter: none;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody .mx_PlayPauseButton,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody button {
+    color: rgb(255 255 255 / 92%);
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVoiceMessageBody .mx_Clock {
+    color: rgb(255 255 255 / 72%);
+}

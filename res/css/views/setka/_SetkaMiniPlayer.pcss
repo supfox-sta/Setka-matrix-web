@@ -1,0 +1,207 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Slim one-row player: [transport] [title + seekbar] [volume, close] */
+.mx_SetkaMiniPlayer {
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-3x);
+    margin: var(--cpd-space-2x) var(--cpd-space-3x) 0;
+    padding: 6px 8px 6px 6px;
+    border-radius: 999px;
+    border: 1px solid var(--setka-panel-bubble-border, rgb(255 255 255 / 14%));
+    background: var(--setka-panel-bubble-bg, rgb(30 24 60 / 70%));
+    box-shadow: 0 6px 20px rgb(0 0 0 / 22%);
+    color: rgb(255 255 255 / 94%);
+    animation: mx_SetkaMiniPlayerIn 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mx_SetkaMiniPlayer_closing {
+    animation: mx_SetkaMiniPlayerOut 220ms ease forwards;
+}
+
+@keyframes mx_SetkaMiniPlayerIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes mx_SetkaMiniPlayerOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+}
+
+.mx_SetkaMiniPlayer_transport,
+.mx_SetkaMiniPlayer_side {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 2px;
+}
+
+.mx_SetkaMiniPlayer_main {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.mx_SetkaMiniPlayer_title {
+    overflow: hidden;
+    font: var(--cpd-font-body-sm-semibold);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mx_SetkaMiniPlayer_progressRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mx_SetkaMiniPlayer_timeText {
+    flex: none;
+    min-width: 32px;
+    font: var(--cpd-font-body-xs-regular);
+    font-variant-numeric: tabular-nums;
+    color: rgb(255 255 255 / 66%);
+
+    &:last-child {
+        text-align: right;
+    }
+}
+
+.mx_SetkaMiniPlayer_seek {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 6px 0;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.mx_SetkaMiniPlayer_seekTrack {
+    height: 4px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 18%);
+    overflow: hidden;
+}
+
+.mx_SetkaMiniPlayer_seek:hover .mx_SetkaMiniPlayer_seekTrack {
+    height: 6px;
+}
+
+.mx_SetkaMiniPlayer_seekFill {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--setka-accent-user, #7c5cff);
+}
+
+.mx_SetkaMiniPlayer_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    color: rgb(255 255 255 / 88%);
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+        transform 120ms ease,
+        background 120ms ease;
+}
+
+.mx_SetkaMiniPlayer_btn:hover {
+    background: rgb(255 255 255 / 14%);
+}
+
+.mx_SetkaMiniPlayer_btn:active {
+    transform: scale(0.94);
+}
+
+.mx_SetkaMiniPlayer_btn_primary {
+    width: 38px;
+    height: 38px;
+    background: var(--setka-accent-user, #7c5cff);
+    color: #fff;
+}
+
+.mx_SetkaMiniPlayer_btn_primary:hover {
+    background: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 82%, white);
+}
+
+.mx_SetkaMiniPlayer_volumeWrap {
+    position: relative;
+}
+
+.mx_SetkaMiniPlayer_volumePop {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 5;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgb(255 255 255 / 14%);
+    background: rgb(22 14 48 / 96%);
+    box-shadow: 0 10px 28px rgb(0 0 0 / 40%);
+
+    input[type="range"] {
+        width: 120px;
+        accent-color: var(--setka-accent-user, #7c5cff);
+    }
+}
+
+.mx_SetkaMiniPlayer_floatingVideo {
+    position: fixed;
+    right: 24px;
+    top: 148px;
+    z-index: 40;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgb(255 255 255 / 24%);
+    box-shadow: 0 10px 28px rgb(52 28 120 / 28%);
+    touch-action: none;
+    cursor: grab;
+    animation: mx_SetkaMiniPlayerFloatIn 200ms ease;
+}
+
+.mx_SetkaMiniPlayer_floatingVideo_el {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+@keyframes mx_SetkaMiniPlayerFloatIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner + .mx_SetkaMiniPlayer {
+    margin-top: var(--cpd-space-2x);
+}

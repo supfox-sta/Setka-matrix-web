@@ -1,0 +1,913 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Timeline: no hover highlight */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:hover::before,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_selected::before {
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:hover .mx_EventTile_avatar {
+    border-color: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="group"]:hover .mx_EventTile_line,
+html[data-setka-client="true"] .mx_EventTile[data-layout="irc"]:hover .mx_EventTile_line {
+    background-color: transparent !important;
+}
+
+/* Keep download available on hover; bubble layout hides the default hover chrome elsewhere */
+html[data-setka-client="true"] .mx_EventTile:hover .mx_MessageActionBar,
+html[data-setka-client="true"] .mx_EventTile:focus-within .mx_MessageActionBar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+html[data-setka-client="true"] .mx_MessageActionBar {
+    border-radius: 12px;
+    background: var(--cpd-color-bg-canvas-default);
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+}
+
+/* Bubble chrome: header, pinned bar, composer — default floating style */
+html[data-setka-client="true"] .mx_RoomHeader,
+html[data-setka-client="true"] .mx_PinnedMessageBanner,
+html[data-setka-client="true"] .mx_MessageComposer_wrapper {
+    margin: var(--cpd-space-3x) var(--cpd-space-3x) 0;
+    backdrop-filter: blur(var(--setka-blur-strength, 10px));
+    -webkit-backdrop-filter: blur(var(--setka-blur-strength, 10px));
+    background: color-mix(in srgb, var(--cpd-color-bg-canvas-default) 92%, transparent) !important;
+}
+
+html[data-setka-client="true"] .mx_RoomHeader {
+    padding: var(--cpd-space-2x) var(--cpd-space-3x);
+    height: auto;
+    min-height: 56px;
+    border: 1px solid var(--setka-surface-border, rgb(255 255 255 / 14%));
+    border-radius: 18px;
+    background: var(--setka-surface) !important;
+    box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* In-call header keeps floating glass style */
+html[data-setka-client="true"] .mx_RoomView_immersive .mx_RoomHeader,
+html[data-setka-client="true"] .mx_RoomView_inCall .mx_RoomHeader {
+    margin: var(--cpd-space-3x) var(--cpd-space-3x) 0 !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--setka-surface-border, rgb(255 255 255 / 14%)) !important;
+    background: var(--setka-panel-bubble-bg) !important;
+    box-shadow: 0 4px 20px rgb(0 0 0 / 8%) !important;
+}
+
+html[data-setka-client="true"] .mx_RoomView_inCall .mx_MessageComposer_wrapper {
+    margin: 0 var(--cpd-space-3x) var(--cpd-space-3x);
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    border-radius: 22px;
+    border-top: 1px solid var(--cpd-color-border-interactive-secondary);
+}
+
+html[data-setka-client="true"] .mx_RoomHeader:hover {
+    background: var(--setka-surface) !important;
+    border-color: rgb(255 255 255 / 22%) !important;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
+}
+
+html[data-setka-client="true"] .mx_RoomHeader_infoWrapper:hover {
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_RoomHeader_infoWrapper:active {
+    transform: scale(0.985);
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner {
+    margin: var(--cpd-space-2x) var(--cpd-space-3x) 0;
+    border: 1px solid rgb(255 255 255 / 14%);
+    border-radius: 16px;
+    background: var(--setka-surface) !important;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+    min-width: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner_content {
+    min-width: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner_message {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: min(60vw, 540px);
+    min-width: 0;
+    color: rgb(255 255 255 / 88%) !important;
+    font: var(--cpd-font-body-sm-regular);
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner_title {
+    color: rgb(255 255 255 / 94%) !important;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner_title_counter {
+    color: rgb(255 255 255 / 65%);
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner_PinIcon {
+    fill: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 75%, white) !important;
+    color: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 75%, white) !important;
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner_actions {
+    border-radius: 999px !important;
+    padding: 4px 12px !important;
+    background: rgb(255 255 255 / 10%) !important;
+    color: rgb(255 255 255 / 92%) !important;
+    font: var(--cpd-font-body-xs-medium) !important;
+    transition: background 140ms ease;
+}
+
+html[data-setka-client="true"] .mx_PinnedMessageBanner_actions:hover {
+    background: rgb(255 255 255 / 18%) !important;
+    color: #fff !important;
+}
+
+
+html[data-setka-client="true"] .mx_MessageComposer_wrapper {
+    margin: 0 var(--cpd-space-3x) var(--cpd-space-3x);
+    padding: var(--cpd-space-2x);
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    border-radius: 22px;
+    background: var(--cpd-color-bg-canvas-default);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+}
+
+html[data-setka-client="true"] .mx_MessageComposer_wrapper {
+    border-top: 1px solid var(--cpd-color-border-interactive-secondary);
+}
+
+html[data-setka-client="true"] .mx_SendWysiwygComposer .mx_WysiwygComposer_Editor {
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+/* Right panel slide-in */
+html[data-setka-client="true"] .mx_MainSplit > .mx_RightPanel_ResizeWrapper {
+    transition:
+        width 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 220ms ease,
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-setka-client="true"] .mx_RightPanel {
+    animation: mx_SetkaRightPanelIn 280ms cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: var(--setka-panel-bubble-radius);
+    overflow: hidden;
+}
+
+@keyframes mx_SetkaRightPanelIn {
+    from {
+        opacity: 0;
+        transform: translateX(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+html[data-setka-client="true"] .mx_RoomSummaryCard_setkaDm {
+    padding: var(--cpd-space-3x) 0 var(--cpd-space-4x);
+}
+
+html[data-setka-client="true"] .mx_RoomSummaryCard_setkaDm .mx_BaseCard_header {
+    padding-left: var(--cpd-space-4x);
+    padding-right: var(--cpd-space-4x);
+}
+
+/* Left panel: transparent inside floating shell */
+html[data-setka-client="true"] .mx_LeftPanel {
+    background: transparent;
+}
+
+html[data-setka-client="true"] .mx_RoomTile {
+    margin: 0 var(--cpd-space-2x);
+    border-radius: 12px;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomTile:hover,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomTile:focus-within {
+    background: rgb(255 255 255 / 12%);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomTile_selected,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomTile_selected:hover {
+    background: rgb(255 255 255 / 18%);
+}
+
+/* Timeline breathing room */
+html[data-setka-client="true"] .mx_RoomView_messagePanel {
+    padding-left: var(--cpd-space-2x);
+    padding-right: var(--cpd-space-2x);
+}
+
+/* Message bubbles — one glass style for incoming and outgoing.
+   Tokens live in _SetkaThemes.pcss. Surfaces keep a floor of opacity so wallpapers never
+   reduce text contrast. Backdrop blur is only added when a wallpaper is behind the
+   timeline (the only time it is visible), which keeps scrolling cheap. */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:not(.mx_EventTile_info):not(.mx_EventTile_sticker):not(:has(.mx_SetkaVideoNote)) .mx_EventTile_line {
+    background: var(--setka-bubble-in-bg) !important;
+    border: 1px solid var(--setka-bubble-border);
+    box-shadow: var(--setka-bubble-shadow);
+    color: var(--setka-bubble-text) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+html[data-setka-client="true"][data-setka-wallpaper="on"][data-setka-blur="on"] .mx_EventTile[data-layout="bubble"]:not(.mx_EventTile_info):not(.mx_EventTile_sticker):not(:has(.mx_SetkaVideoNote)) .mx_EventTile_line {
+    backdrop-filter: blur(calc(var(--setka-blur-strength, 12px) * 0.6)) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(calc(var(--setka-blur-strength, 12px) * 0.6)) saturate(120%) !important;
+}
+
+/* Outgoing: same glass, light accent tint */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:not(.mx_EventTile_leftAlignedBubble):not(.mx_EventTile_info):not(.mx_EventTile_sticker):not(:has(.mx_SetkaVideoNote)) .mx_EventTile_line {
+    background: var(--setka-bubble-out-bg) !important;
+    border-color: var(--setka-bubble-out-border);
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:not(.mx_EventTile_info):not(.mx_EventTile_sticker) .mx_MTextBody,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:not(.mx_EventTile_info):not(.mx_EventTile_sticker) .mx_EventTile_reply {
+    color: var(--setka-bubble-text) !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:not(.mx_EventTile_info):not(.mx_EventTile_sticker) .mx_MessageTimestamp,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:not(.mx_EventTile_info):not(.mx_EventTile_sticker) .mx_ReplyChain {
+    color: var(--setka-bubble-text-secondary) !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_DisambiguatedProfile {
+    color: var(--setka-bubble-text-secondary) !important;
+}
+
+/* State/system events are compact, centered notices rather than normal messages. */
+html[data-setka-client="true"] .mx_EventTile_info[data-layout="bubble"] .mx_EventTile_line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile_info[data-layout="bubble"] .mx_EventTile_info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--cpd-space-2x);
+    margin: var(--cpd-space-1x) auto;
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 10%);
+    background: rgb(255 255 255 / 8%) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-xs-regular);
+    max-width: min(92%, 560px);
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_EventTile_e2eIcon {
+    display: none !important;
+}
+
+html[data-setka-client="true"] .mx_MessageComposer_e2eIconWrapper {
+    display: none !important;
+}
+
+html[data-setka-client="true"] .mx_MStickerBody_wrapper,
+html[data-setka-client="true"] .mx_MStickerBody_hidden {
+    width: 180px !important;
+    height: 180px !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible;
+}
+
+html[data-setka-client="true"] .mx_MStickerBody_wrapper img,
+html[data-setka-client="true"] .mx_MStickerBody_hidden img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+    object-fit: contain !important;
+    background: transparent !important;
+}
+
+/* Video notes & stickers: tile alignment — match normal bubble gutter (no extra -9px drift) */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:has(.mx_SetkaVideoNote),
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_sticker {
+    display: flex;
+    flex-direction: column;
+    --EventTile_bubble-margin-inline-start: 49px;
+    --EventTile_bubble-margin-inline-end: 60px;
+    --EventTile_bubble_line-margin-inline-start: 0;
+    --EventTile_bubble_line-margin-inline-end: 0;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="true"]:has(.mx_SetkaVideoNote),
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="true"].mx_EventTile_sticker {
+    align-items: flex-end;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="false"]:has(.mx_SetkaVideoNote),
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="false"].mx_EventTile_sticker {
+    align-items: flex-start;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:has(.mx_SetkaVideoNote) .mx_EventTile_avatar,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_sticker .mx_EventTile_avatar {
+    display: none !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MessageTimestamp,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_DisambiguatedProfile {
+    color: var(--setka-bubble-text-secondary);
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MTextBody,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MImageBody,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVideoBody {
+    color: var(--setka-bubble-text);
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MImageBody,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVideoBody {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_EventTile_content:has(.mx_MImageBody) .mx_EventTile_caption,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_EventTile_content:has(.mx_MVideoBody) .mx_EventTile_caption {
+    margin-top: 10px;
+    padding-top: 4px;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MImageBody .mx_MImageBody_info,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVideoBody .mx_MVideoBody_info {
+    margin-top: var(--cpd-space-2x);
+    padding-bottom: var(--cpd-space-1x);
+}
+
+
+
+html[data-setka-client="true"] .mx_RoomView_messagePanel .mx_RoomView_statusArea {
+    color: var(--cpd-color-text-secondary);
+}
+
+/* DM profile card in room info */
+html[data-setka-client="true"] .mx_SetkaDmProfileSection {
+    gap: var(--cpd-space-3x);
+}
+
+html[data-setka-client="true"] .mx_SetkaDmProfileSection_hero {
+    min-height: 0;
+}
+
+html[data-setka-client="true"] .mx_SetkaDmProfileSection_heroContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: var(--cpd-space-4x);
+    padding: var(--cpd-space-4x);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+html[data-setka-client="true"] .mx_SetkaDmProfileSection_heroText {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-2x);
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+html[data-setka-client="true"] .mx_SetkaDmProfileSection_nameRow {
+    justify-content: flex-start;
+}
+
+html[data-setka-client="true"] .mx_SetkaDmProfileSection_name {
+    font: var(--cpd-font-heading-md-semibold);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-setka-client="true"] .mx_SetkaDmProfileSection_bio {
+    text-align: left;
+    max-height: 4.5em;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_SetkaDmProfileSection_info {
+    margin: 0;
+    min-width: 0;
+}
+
+/* Call events: compact message-like semi-transparent tiles */
+
+html[data-setka-client="true"] .mx_EventTile_info[data-layout="bubble"] .mx_EventTile_avatar {
+    display: none;
+}
+
+/* Call events: compact message-like semi-transparent tiles */
+html[data-setka-client="true"] .mx_LegacyCallEvent_wrapper,
+html[data-setka-client="true"] .mx_CallEvent_wrapper {
+    justify-content: flex-start;
+    padding: 2px 0;
+    width: 100%;
+}
+
+html[data-setka-client="true"] .mx_LegacyCallEvent {
+    width: auto;
+    max-width: min(88%, 420px);
+    margin: 4px 0;
+    padding: 10px 14px;
+    border-radius: 16px;
+    border: 1px solid rgb(255 255 255 / 14%);
+    background: var(--setka-panel-bubble-bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 14%);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: var(--cpd-space-2x);
+}
+
+html[data-setka-client="true"] .mx_LegacyCallEvent_info {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+html[data-setka-client="true"] .mx_LegacyCallEvent_info_basic {
+    margin-left: var(--cpd-space-2x);
+    margin-right: 0;
+}
+
+html[data-setka-client="true"] .mx_LegacyCallEvent_sender {
+    font: var(--cpd-font-body-sm-semibold);
+    color: #fff;
+}
+
+html[data-setka-client="true"] .mx_LegacyCallEvent_type {
+    color: rgb(255 255 255 / 82%);
+    font: var(--cpd-font-body-xs-regular);
+}
+
+html[data-setka-client="true"] .mx_LegacyCallEvent_content {
+    margin-inline-start: 0;
+    padding: 0;
+    border: none;
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-xs-regular);
+    opacity: 0.9;
+    flex: 0 0 auto;
+}
+
+html[data-setka-client="true"] .mx_LegacyCallEvent.mx_LegacyCallEvent_narrow {
+    flex-direction: row;
+    min-width: 0;
+    max-width: min(88%, 420px);
+}
+
+html[data-setka-client="true"] .mx_CallEvent {
+    max-width: min(88%, 420px);
+    padding: 10px 14px;
+    border-radius: 16px;
+    border: 1px solid rgb(255 255 255 / 14%);
+    background: var(--setka-panel-bubble-bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 14%);
+    gap: var(--cpd-space-2x);
+}
+
+html[data-setka-client="true"] .mx_CallEvent_title {
+    font: var(--cpd-font-body-sm-semibold);
+    color: #fff;
+}
+
+html[data-setka-client="true"] .mx_CallEvent .mx_LiveContentSummary,
+html[data-setka-client="true"] .mx_CallEvent_details {
+    color: rgb(255 255 255 / 82%);
+    font: var(--cpd-font-body-xs-regular);
+}
+
+html[data-setka-client="true"] .mx_EventTile_leftAlignedBubble .mx_LegacyCallEvent_wrapper,
+html[data-setka-client="true"] .mx_EventTile_leftAlignedBubble .mx_CallEvent_wrapper {
+    padding-left: 52px;
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_GenericEventListSummary_spacer {
+    display: none;
+}
+
+/* Stickers: no bubble chrome, align under sender side */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_sticker .mx_EventTile_line {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_sticker .mx_EventTile_line.mx_EventTile_sticker {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="true"].mx_EventTile_sticker .mx_EventTile_line {
+    align-items: flex-end;
+    margin-inline-start: auto;
+}
+
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MessageTimestamp,
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MessageActionBar + .mx_MessageTimestamp {
+    position: static !important;
+    right: unset !important;
+    left: unset !important;
+    padding: 4px 0 0 !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MStickerBody_wrapper {
+    margin: 0 !important;
+}
+
+/* Date separators: bubble text, no horizontal rules */
+html[data-setka-client="true"] .mx_TimelineSeparator[role="separator"],
+html[data-setka-client="true"] .mx_TimelineSeparator[role="none"] {
+    justify-content: center;
+    margin: var(--cpd-space-3x) 0;
+}
+
+html[data-setka-client="true"] .mx_TimelineSeparator > hr {
+    display: none !important;
+}
+
+html[data-setka-client="true"] .mx_TimelineSeparator h2,
+html[data-setka-client="true"] .mx_TimelineSeparator button {
+    margin: 0;
+    padding: 6px 14px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--cpd-color-bg-subtle-secondary) 78%, transparent);
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-xs-regular);
+    text-transform: none;
+}
+
+/* Deeper bubble depth */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:not(.mx_EventTile_info):not(.mx_EventTile_sticker) .mx_EventTile_line {
+    box-shadow:
+        0 1px 0 rgb(255 255 255 / 10%) inset,
+        0 10px 28px rgb(52 28 120 / 22%),
+        0 2px 8px rgb(0 0 0 / 12%);
+}
+
+/* Notification highlight: gradient border instead of yellow wash */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_highlight::before {
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_highlight .mx_EventTile_line {
+    border: 1px solid rgb(255 255 255 / 22%) !important;
+    background: var(--setka-panel-bubble-bg) !important;
+    box-shadow: 0 10px 28px rgb(0 0 0 / 14%);
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_highlight .mx_EventTile_avatar {
+    border-color: rgb(140 110 255 / 70%) !important;
+}
+
+/* Media: consistent sizing, bubble hugs content */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_EventTile_line.mx_EventTile_mediaLine {
+    width: fit-content;
+    max-width: min(72%, 320px);
+    padding: 4px !important;
+}
+
+html[data-setka-client="true"] .mx_MImageBody img,
+html[data-setka-client="true"] .mx_MVideoBody video,
+html[data-setka-client="true"] .mx_MImageBody .mx_MImageBody_thumbnail {
+    display: block;
+    max-width: min(280px, 68vw) !important;
+    max-height: 320px !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 14px;
+    object-fit: contain;
+    pointer-events: auto;
+}
+
+html[data-setka-client="true"] .mx_MVideoBody button,
+html[data-setka-client="true"] .mx_MVideoBody .mx_MVideoBody_container {
+    pointer-events: auto;
+}
+
+/* Video notes & stickers: no bubble chrome */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"]:has(.mx_SetkaVideoNote)::before,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_sticker::before {
+    display: none !important;
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_EventTile_line:has(.mx_SetkaVideoNote),
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_sticker .mx_EventTile_line {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="true"] .mx_EventTile_line:has(.mx_SetkaVideoNote),
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="true"].mx_EventTile_sticker .mx_EventTile_line {
+    align-items: flex-end;
+    margin-inline-start: auto !important;
+}
+
+html[data-setka-client="true"] .mx_SetkaVideoNote {
+    justify-content: flex-start;
+    width: auto;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="true"] .mx_SetkaVideoNote {
+    justify-content: flex-end;
+    margin-inline-start: auto;
+}
+
+html[data-setka-client="true"] .mx_SetkaVideoNote_shell {
+    background: transparent;
+}
+
+/* Sticker timestamp inside image */
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MStickerBody_wrapper {
+    position: relative;
+    display: flex !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MessageTimestamp {
+    position: absolute !important;
+    right: 6px !important;
+    bottom: 6px !important;
+    left: auto !important;
+    top: auto !important;
+    margin: 0 !important;
+    padding: 2px 7px !important;
+    border-radius: 9px;
+    background: rgb(0 0 0 / 48%);
+    color: rgb(255 255 255 / 92%) !important;
+    font: var(--cpd-font-body-xs-regular);
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+/* Custom MXC reactions */
+html[data-setka-client="true"] .mx_ReactionsRow .mx_ReactionsRowButton img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+/* System / membership events as centered pills */
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: var(--cpd-space-3x) auto !important;
+    margin-inline: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 var(--cpd-space-4x);
+    max-width: min(100%, 560px);
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    --gutterSize: 0;
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"][data-expanded="false"] {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--cpd-space-2x);
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"][data-expanded="true"] {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cpd-space-2x);
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_GenericEventListSummary_toggle {
+    position: static !important;
+    order: 2 !important;
+    align-self: center;
+    margin: 0 !important;
+    flex: 0 0 auto;
+    float: none !important;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--cpd-color-bg-subtle-secondary) 80%, transparent);
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-xs-medium);
+    text-decoration: none;
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"][data-expanded="true"] .mx_GenericEventListSummary_toggle {
+    order: -1 !important;
+    margin-bottom: var(--cpd-space-1x) !important;
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_EventTile_line {
+    justify-content: center;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100%;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    flex: 0 1 auto;
+    order: 1;
+    margin-inline: 0 !important;
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_GenericEventListSummary_unstyledList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cpd-space-2x);
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_GenericEventListSummary_unstyledList > .mx_EventTile.mx_EventTile_info {
+    margin-inline: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100%;
+    max-width: min(100%, 520px);
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_EventTile_info,
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_GenericEventListSummary_summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--cpd-space-2x);
+    margin: 0 auto;
+    padding: 7px 14px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--cpd-color-bg-subtle-secondary) 82%, transparent);
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-sm-regular);
+    max-width: min(100%, 520px);
+    text-align: center;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 6%);
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"][data-expanded="true"] .mx_EventTile_info {
+    margin: var(--cpd-space-1x) auto;
+    padding: 7px 14px;
+}
+
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_EventTile.mx_EventTile_info .mx_EventTile_line::before,
+html[data-setka-client="true"] .mx_GenericEventListSummary[data-layout="bubble"] .mx_EventTile.mx_EventTile_info::before {
+    display: none !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile.mx_EventTile_info[data-layout="bubble"] {
+    margin: var(--cpd-space-2x) auto !important;
+    margin-inline: auto !important;
+    padding: 4px var(--cpd-space-4x) !important;
+    max-width: min(100%, 560px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+html[data-setka-client="true"] .mx_EventTile.mx_EventTile_bubbleContainer[data-layout="bubble"],
+html[data-setka-client="true"] .mx_EventTile.mx_EventTile_leftAlignedBubble[data-layout="bubble"] {
+    padding: 2px 0;
+}
+
+/* Keep redacted/deleted messages visible so the timeline does not appear to
+   have unexplained gaps; render them as muted, non-interactive notices. */
+html[data-setka-client="true"] .mx_EventTile:has(.mx_RedactedBody) .mx_EventTile_line {
+    background: var(--cpd-color-bg-subtle-secondary) !important;
+    border: 1px dashed var(--cpd-color-border-subtle-primary) !important;
+    color: var(--cpd-color-text-secondary) !important;
+    box-shadow: none !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile:has(.mx_RedactedBody) .mx_RedactedBody {
+    color: var(--cpd-color-text-secondary) !important;
+    font-style: italic;
+}
+
+/* System event timestamps stay hidden; normal message timestamps remain visible. */
+html[data-setka-client="true"] .mx_EventTile_info .mx_MessageTimestamp,
+html[data-setka-client="true"] .mx_GenericEventListSummary .mx_MessageTimestamp,
+html[data-setka-client="true"] .mx_EventTile_info[data-layout="bubble"] .mx_EventTile_line > a {
+    display: none !important;
+}
+
+/* New room intro bubble */
+html[data-setka-client="true"] .mx_NewRoomIntro {
+    margin: var(--cpd-space-6x) auto;
+    padding: var(--cpd-space-5x) var(--cpd-space-4x);
+    max-width: min(92%, 400px);
+    border-radius: 20px;
+    background: color-mix(in srgb, var(--cpd-color-bg-canvas-default) 90%, transparent);
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    box-shadow:
+        0 1px 0 rgb(255 255 255 / 10%) inset,
+        0 10px 32px rgb(0 0 0 / 12%);
+    text-align: center;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+html[data-setka-client="true"] .mx_NewRoomIntro > h2 {
+    margin-top: var(--cpd-space-4x);
+}
+
+html[data-setka-client="true"] .mx_NewRoomIntro > p {
+    color: var(--cpd-color-text-secondary);
+}
+
+html[data-setka-client="true"] .mx_NewRoomIntro_buttons {
+    justify-content: center;
+}
+
+/* Composer no-permission notice */
+html[data-setka-client="true"] .mx_MessageComposer_noperm_error {
+    font: var(--cpd-font-body-md-semibold);
+    color: var(--cpd-color-text-secondary);
+}
+
+@media (max-width: 480px) {
+    html[data-setka-client="true"] .mx_SetkaDmProfileSection_heroContent {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    html[data-setka-client="true"] .mx_SetkaDmProfileSection_nameRow {
+        justify-content: center;
+    }
+
+    html[data-setka-client="true"] .mx_SetkaDmProfileSection_bio {
+        text-align: center;
+    }
+}

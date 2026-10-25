@@ -1,0 +1,277 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Left panel glass shell: readable tokens for room list (CSS modules inherit vars) */
+html[data-setka-client="true"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper,
+html[data-setka-client="true"] .mx_MatrixChat .mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper {
+    --cpd-color-text-primary: rgb(255 255 255 / 94%);
+    --cpd-color-text-secondary: rgb(255 255 255 / 72%);
+    --cpd-color-text-disabled: rgb(255 255 255 / 46%);
+    --cpd-color-icon-primary: rgb(255 255 255 / 88%);
+    --cpd-color-icon-secondary: rgb(255 255 255 / 64%);
+    --cpd-color-bg-subtle-primary: rgb(255 255 255 / 10%);
+    --cpd-color-bg-subtle-secondary: rgb(255 255 255 / 14%);
+    --cpd-color-bg-action-tertiary-hovered: rgb(255 255 255 / 12%);
+    --cpd-color-bg-action-tertiary-selected: rgb(255 255 255 / 18%);
+    --cpd-color-bg-canvas-default: rgb(255 255 255 / 10%);
+    --cpd-color-border-subtle-primary: rgb(255 255 255 / 14%);
+    --cpd-color-border-interactive-secondary: rgb(255 255 255 / 18%);
+
+    background: var(--setka-leftpanel-glass-bg, var(--setka-panel-bubble-bg)) !important;
+    background-color: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomListPanel,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel_wrapper,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel_wrapper--user,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel_roomListContainer,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaContactsPanel,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--cpd-color-text-primary);
+}
+
+/* Search + header strip on glass */
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomListPanel [class*="search"],
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomListPanel [class*="search_text"],
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomListPanel [class*="title"] h1 {
+    color: var(--cpd-color-text-primary);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomListPanel [class*="view"] {
+    border-bottom-color: var(--cpd-color-border-subtle-primary) !important;
+}
+
+/* Contacts on glass */
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaContactsPanel_header,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaContactsPanel_name {
+    color: var(--cpd-color-text-primary);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaContactsPanel_sub,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaContactsPanel_empty {
+    color: var(--cpd-color-text-secondary);
+}
+
+html[data-setka-client="true"] .mx_SetkaLeftPanel_body .mx_SetkaContactsPanel_list {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaContactsPanel_rowWrap:hover {
+    background: var(--cpd-color-bg-action-tertiary-hovered);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaContactsPanel_actionBtn {
+    color: var(--cpd-color-icon-secondary);
+}
+
+/* Feed tabs + empty states on glass */
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_subTab {
+    background: rgb(255 255 255 / 10%) !important;
+    color: var(--cpd-color-text-secondary) !important;
+    border: 1px solid rgb(255 255 255 / 10%);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_subTab_active {
+    background: rgb(255 255 255 / 18%) !important;
+    color: var(--cpd-color-text-primary) !important;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 22%);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_centered,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_postMeta,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_channelMeta,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_postBody {
+    color: var(--cpd-color-text-secondary);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_postChannel,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_channelName {
+    color: var(--cpd-color-text-primary);
+}
+
+/* Feed posts: purple glass bubbles */
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_postCard,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_channelCard {
+    background: var(--setka-panel-bubble-bg) !important;
+    border: 1px solid rgb(255 255 255 / 14%) !important;
+    box-shadow: 0 4px 18px rgb(52 28 120 / 18%);
+    color: rgb(255 255 255 / 94%);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_postChannel,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_channelName,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_postBody {
+    color: rgb(255 255 255 / 94%);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_postMeta,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_channelMeta {
+    color: rgb(255 255 255 / 72%);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_action {
+    background: rgb(255 255 255 / 12%);
+    color: rgb(255 255 255 / 78%);
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaFeedPanel_action_active {
+    color: rgb(255 200 200 / 96%);
+}
+
+/* Live location banner */
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanelLiveShareWarning {
+    background: color-mix(in srgb, var(--setka-accent-user) 18%, transparent) !important;
+    color: rgb(255 255 255 / 94%);
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
+}
+
+/* Only inner lists scroll — lock resizable panel shell */
+html[data-setka-client="true"] .mx_LeftPanel_panel[data-panel]:first-of-type {
+    overflow: hidden !important;
+    overscroll-behavior: contain;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel[data-panel]:first-of-type > div {
+    overflow: hidden !important;
+    overscroll-behavior: contain;
+    min-height: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel_outerWrapper {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel_wrapper,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel_wrapper--user,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel,
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_LeftPanel_roomListContainer {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel [role="gridcell"] {
+    min-width: 0;
+}
+
+/* Pinned overlay header is redundant in a glass sidebar and collides with scrolling sticky rows.
+   Let section headers scroll naturally inside the virtualized list without stacking, sticking, or overlapping. */
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="stickyHeader"] {
+    display: none !important;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="stickyRow"] {
+    position: relative !important;
+    top: unset !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="stickyBackground"]::before {
+    display: none !important;
+}
+
+/* Clean, transparent typography for section headers (Избранное, Чаты…) */
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="header"] {
+    background: transparent !important;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="header"] [class*="container"] {
+    background: transparent;
+    border-radius: 10px;
+    transition: background-color 140ms ease;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel [class*="header"]:hover [class*="container"] {
+    background: rgb(255 255 255 / 10%);
+}
+
+html[data-setka-client="true"] .mx_SetkaLeftPanel_body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_SetkaLeftPanel_body .mx_SetkaFeedPanel,
+html[data-setka-client="true"] .mx_SetkaLeftPanel_body .mx_SetkaContactsPanel {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_SetkaLeftPanel_body .mx_SetkaFeedPanel_list {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomListPanel {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomListPanel [class*="list"] {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_RoomListPanel [class*="scrollbar"] {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaLeftPanel_body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaLeftPanel_body > * {
+    min-width: 0;
+    min-height: 0;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaLeftPanel_body [class*="RoomListHeader"],
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaLeftPanel_body [class*="roomListHeader"] {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaLeftPanel_body [class*="RoomListView"],
+html[data-setka-client="true"] .mx_LeftPanel_panel .mx_SetkaLeftPanel_body [class*="roomListView"] {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}

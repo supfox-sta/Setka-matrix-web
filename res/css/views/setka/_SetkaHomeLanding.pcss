@@ -1,0 +1,153 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaHomeLanding {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: min(72vh, 720px);
+    padding: var(--cpd-space-10x) var(--cpd-space-6x);
+    overflow: hidden;
+}
+
+.mx_SetkaHomeLanding_glow {
+    position: absolute;
+    inset: 10% 15%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(229 57 53 / 28%), transparent 68%);
+    filter: blur(48px);
+    pointer-events: none;
+    animation: mx_SetkaHomeGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes mx_SetkaHomeGlow {
+    from {
+        transform: scale(0.92) translateY(4%);
+        opacity: 0.7;
+    }
+
+    to {
+        transform: scale(1.08) translateY(-4%);
+        opacity: 1;
+    }
+}
+
+.mx_SetkaHomeLanding_card {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 560px);
+    padding: var(--cpd-space-8x) var(--cpd-space-6x);
+    border-radius: 28px;
+    border: 1px solid rgb(255 255 255 / 16%);
+    background: linear-gradient(155deg, rgb(255 255 255 / 14%), rgb(255 255 255 / 6%));
+    box-shadow:
+        0 24px 60px rgb(20 10 48 / 28%),
+        inset 0 1px 0 rgb(255 255 255 / 18%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    text-align: center;
+    animation: mx_SetkaHomeCardIn 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mx_SetkaHomeCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.mx_SetkaHomeLanding_badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font: var(--cpd-font-body-xs-semibold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 92%);
+    background: rgb(229 57 53 / 22%);
+    border: 1px solid rgb(255 255 255 / 14%);
+}
+
+.mx_SetkaHomeLanding_title {
+    margin: var(--cpd-space-4x) 0 var(--cpd-space-2x);
+    font: var(--cpd-font-heading-lg-semibold);
+    color: rgb(255 255 255 / 96%);
+}
+
+.mx_SetkaHomeLanding_subtitle {
+    margin: 0 0 var(--cpd-space-6x);
+    font: var(--cpd-font-body-md-regular);
+    color: rgb(255 255 255 / 72%);
+    line-height: 1.5;
+}
+
+.mx_SetkaHomeLanding_logo {
+    display: block;
+    width: min(72px, 18vw);
+    height: auto;
+    margin: 0 auto var(--cpd-space-4x);
+    object-fit: contain;
+}
+
+.mx_SetkaHomeLanding_buttons {
+    display: grid;
+    gap: var(--cpd-space-3x);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mx_SetkaHomeLanding_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--cpd-space-2x);
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: var(--cpd-space-3x) var(--cpd-space-4x);
+    border-radius: 16px;
+    font: var(--cpd-font-body-md-semibold);
+    color: rgb(255 255 255 / 94%);
+    background: rgb(255 255 255 / 10%);
+    border: 1px solid rgb(255 255 255 / 14%);
+    transition:
+        transform 140ms ease,
+        background 140ms ease,
+        border-color 140ms ease;
+}
+
+.mx_SetkaHomeLanding_button > span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mx_SetkaHomeLanding_button:hover {
+    background: rgb(255 255 255 / 16%);
+    border-color: rgb(255 255 255 / 24%);
+    transform: translateY(-1px);
+}
+
+.mx_SetkaHomeLanding_button:first-child {
+    background: linear-gradient(135deg, rgb(229 57 53 / 88%), rgb(180 30 30 / 88%));
+    border-color: rgb(255 255 255 / 18%);
+}
+
+.mx_SetkaHomeLanding_button:first-child:hover {
+    background: linear-gradient(135deg, rgb(229 57 53 / 96%), rgb(180 30 30 / 96%));
+}
+
+html[data-setka-client="true"] .mx_HomePage.mx_HomePage_default {
+    background: transparent;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сетка — не удалось загрузить</title>
+    <style type="text/css">
+        #custom_is,
+        #is_url {
+            display: none;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(160deg, rgb(244 240 252), rgb(230 222 248));
+            max-width: 680px;
+            margin: auto;
+            min-height: 100%;
+            font-family:
+                -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            color: rgb(28 20 48 / 92%);
+        }
+
+        .mx_HomePage_header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .mx_HomePage_logo img {
+            display: block;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+        }
+
+        .mx_HomePage_container {
+            margin: 32px 20px;
+        }
+
+        .mx_HomePage_container h1,
+        .mx_HomePage_container h2 {
+            font-weight: 600;
+            margin: 0 0 16px;
+        }
+
+        .mx_HomePage_errorContainer {
+            display: none;
+            margin: 20px;
+            border: 1px solid rgb(220 60 80);
+            background: rgb(255 235 238);
+            padding: 12px 16px;
+            border-radius: 12px;
+        }
+
+        .mx_Spacer {
+            margin-top: 32px;
+        }
+
+        .mx_FooterLink {
+            color: rgb(124 92 255);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .mx_FooterLink:hover {
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 1120px) {
+            .mx_HomePage_header {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mx_HomePage_errorContainer"></div>
+
+    <div class="mx_HomePage_container">
+        <div class="mx_HomePage_header">
+            <span class="mx_HomePage_logo">
+                <img src="../themes/setka/img/setka-logo.svg" alt="Сетка" width="48" height="48" />
+            </span>
+            <h1>Не удалось загрузить</h1>
+        </div>
+        <div>
+            <h2 id="step1_heading">Сетка не запустилась</h2>
+            <p>Что-то пошло не так, и веб-клиент не смог загрузиться. Попробуйте обновить страницу или зайти позже.</p>
+        </div>
+        <p class="mx_Spacer">
+            <a href="https://setka-matrix.ru" target="_blank" rel="noopener noreferrer" class="mx_FooterLink">
+                Перейти на setka-matrix.ru
+            </a>
+        </p>
+    </div>
+</body>
+</html>

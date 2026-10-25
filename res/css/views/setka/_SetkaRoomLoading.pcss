@@ -1,0 +1,21 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+html[data-setka-client="true"] .mx_RoomView_timeline {
+    position: relative;
+}
+
+.mx_SetkaRoomLoadingOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Avoid blurring/repainting every message while history is loading. */
+    background: color-mix(in srgb, var(--cpd-color-bg-canvas-default) 88%, transparent);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}

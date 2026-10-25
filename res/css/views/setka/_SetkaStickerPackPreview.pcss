@@ -1,0 +1,93 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaStickerPackPreview_wrapper .mx_Dialog {
+    max-width: min(92vw, 420px);
+}
+
+.mx_SetkaStickerPackPreview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-4x);
+}
+
+.mx_SetkaStickerPackPreview_title {
+    margin: 0;
+    font: var(--cpd-font-heading-md-semibold);
+}
+
+.mx_SetkaStickerPackPreview_centered {
+    display: flex;
+    justify-content: center;
+    padding: var(--cpd-space-6x) 0;
+}
+
+.mx_SetkaStickerPackPreview_header {
+    display: flex;
+    gap: var(--cpd-space-3x);
+    align-items: center;
+    padding: var(--cpd-space-3x);
+    border-radius: 16px;
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+.mx_SetkaStickerPackPreview_icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    object-fit: cover;
+    flex: 0 0 auto;
+}
+
+.mx_SetkaStickerPackPreview_icon_placeholder {
+    background: var(--cpd-color-bg-canvas-default);
+}
+
+.mx_SetkaStickerPackPreview_meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.mx_SetkaStickerPackPreview_name {
+    font: var(--cpd-font-body-md-semibold);
+}
+
+.mx_SetkaStickerPackPreview_kind {
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaStickerPackPreview_grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.mx_SetkaStickerPackPreview_sticker {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    border-radius: 10px;
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+.mx_SetkaStickerPackPreview_action {
+    width: 100%;
+}
+
+.mx_SetkaStickerPackPreview_close {
+    width: 100%;
+}
+
+.mx_SetkaStickerPackPreview_error {
+    margin: 0;
+    color: var(--cpd-color-text-critical-primary);
+    font: var(--cpd-font-body-sm-regular);
+    text-align: center;
+}

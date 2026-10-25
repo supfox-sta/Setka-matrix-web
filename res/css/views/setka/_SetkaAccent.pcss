@@ -1,0 +1,32 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+html[data-setka-client="true"] {
+    --setka-online-accent: #c4b5fd;
+    --setka-accent-red: var(--setka-accent-user, #e53935);
+
+    --cpd-color-bg-accent-rest: var(--setka-accent-red);
+    --cpd-color-icon-accent-primary: var(--setka-accent-red);
+    --cpd-color-icon-success-primary: var(--setka-accent-red);
+    --cpd-color-text-success-primary: var(--setka-accent-red);
+    --cpd-color-border-accent: var(--setka-accent-red);
+    --cpd-color-text-action-accent: var(--setka-accent-red);
+    --cpd-color-text-secondary: rgb(255 255 255 / 78%);
+    --cpd-color-text-tertiary: rgb(255 255 255 / 62%);
+    --cpd-color-icon-secondary: rgb(255 255 255 / 82%);
+    --cpd-color-icon-tertiary: rgb(255 255 255 / 68%);
+}
+
+html[data-setka-client="true"] .mx_PresenceLabel_online {
+    color: var(--setka-online-accent) !important;
+}
+
+html[data-setka-client="true"] .mx_PresenceIconView .mx_PresenceIconView_online {
+    color: var(--setka-online-accent) !important;
+}
+
+html[data-setka-client="true"] .mx_DecoratedRoomAvatar_icon_online::before {
+    background-color: var(--setka-online-accent) !important;
+}

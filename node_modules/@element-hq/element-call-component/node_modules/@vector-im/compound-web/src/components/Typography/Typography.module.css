@@ -1,0 +1,155 @@
+/*
+Copyright 2023 New Vector Ltd.
+
+SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+Please see LICENSE files in the repository root for full details.
+*/
+
+/**
+ * Font – Body – Extra Small
+ */
+
+.font-body-xs-regular {
+  letter-spacing: var(--cpd-font-letter-spacing-body-xs);
+  font: var(--cpd-font-body-xs-regular);
+}
+
+.font-body-xs-semibold {
+  letter-spacing: var(--cpd-font-letter-spacing-body-xs);
+  font: var(--cpd-font-body-xs-semibold);
+}
+
+.font-body-xs-medium {
+  letter-spacing: var(--cpd-font-letter-spacing-body-xs);
+  font: var(--cpd-font-body-xs-medium);
+}
+
+/**
+ * Font – Body – Small
+ */
+
+.font-body-sm-regular {
+  letter-spacing: var(--cpd-font-letter-spacing-body-sm);
+  font: var(--cpd-font-body-sm-regular);
+}
+
+.font-body-sm-semibold {
+  letter-spacing: var(--cpd-font-letter-spacing-body-sm);
+  font: var(--cpd-font-body-sm-semibold);
+}
+
+.font-body-sm-medium {
+  letter-spacing: var(--cpd-font-letter-spacing-body-sm);
+  font: var(--cpd-font-body-sm-medium);
+}
+
+/**
+ * Font – Body – Medium
+ */
+
+.font-body-md-regular {
+  letter-spacing: var(--cpd-font-letter-spacing-body-md);
+  font: var(--cpd-font-body-md-regular);
+}
+
+.font-body-md-semibold {
+  letter-spacing: var(--cpd-font-letter-spacing-body-md);
+  font: var(--cpd-font-body-md-semibold);
+}
+
+.font-body-md-medium {
+  letter-spacing: var(--cpd-font-letter-spacing-body-md);
+  font: var(--cpd-font-body-md-medium);
+}
+
+/**
+ * Font – Body – Large
+ */
+
+.font-body-lg-regular {
+  letter-spacing: var(--cpd-font-letter-spacing-body-lg);
+  font: var(--cpd-font-body-lg-regular);
+}
+
+.font-body-lg-semibold {
+  letter-spacing: var(--cpd-font-letter-spacing-body-lg);
+  font: var(--cpd-font-body-lg-semibold);
+}
+
+.font-body-lg-medium {
+  letter-spacing: var(--cpd-font-letter-spacing-body-lg);
+  font: var(--cpd-font-body-lg-medium);
+}
+
+/**
+ * Font – Heading – Small
+ */
+
+.font-heading-sm-regular {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-sm);
+  font: var(--cpd-font-heading-sm-regular);
+}
+
+.font-heading-sm-semibold {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-sm);
+  font: var(--cpd-font-heading-sm-semibold);
+}
+
+.font-heading-sm-medium {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-sm);
+  font: var(--cpd-font-heading-sm-medium);
+}
+
+/**
+ * Font – Heading – Medium
+ */
+
+.font-heading-md-regular {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-md);
+  font: var(--cpd-font-heading-md-regular);
+}
+
+.font-heading-md-semibold {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-md);
+  font: var(--cpd-font-heading-md-semibold);
+}
+
+/**
+ * Font – Heading – Large
+ */
+
+.font-heading-lg-regular {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-lg);
+  font: var(--cpd-font-heading-lg-regular);
+}
+
+.font-heading-lg-semibold {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-lg);
+  font: var(--cpd-font-heading-lg-semibold);
+}
+
+/**
+ * Font – Heading – Extra Large
+ */
+
+.font-heading-xl-regular {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-xl);
+  font: var(--cpd-font-heading-xl-regular);
+}
+
+.font-heading-xl-semibold {
+  letter-spacing: var(--cpd-font-letter-spacing-heading-xl);
+  font: var(--cpd-font-heading-xl-semibold);
+}
+
+/**
+  * Reset font-feature-settings after letter-spacing has been tweaked.
+  * We want to apply Inter Dynamic metrics (https://rsms.me/inter/dynmetrics/)
+  * We need to tweak the `letter-spacing` property and doing so, disables by
+  * default the optional ligatures
+  * `font-feature-settings` allows us to override this behaviour and have the
+  * correct ligatures and the proper dynamic metric spacing.
+  */
+.typography {
+  font-feature-settings: var(--cpd-font-feature-settings);
+}

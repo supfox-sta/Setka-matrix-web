@@ -1,0 +1,410 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/**
+ * Setka settings — one visual system for the user settings dialog.
+ *
+ * Structure (after Apple HIG "Settings" + "Sidebars" + "Lists and tables"):
+ *   - stable sidebar on the left, always visible, active item clearly marked
+ *   - content = one column, section title above, one grouped card per section
+ *   - inside a card: rows separated by hairlines (no cards inside cards)
+ *   - the dialog itself is the same glass as the rest of the app, with an opacity floor
+ */
+
+html[data-setka-client="true"] {
+    --setka-settings-radius: 24px;
+    --setka-settings-card-radius: 16px;
+    --setka-settings-sidebar-width: 260px;
+    --setka-settings-dialog-bg: linear-gradient(155deg, rgb(30 30 38 / 82%), rgb(18 18 24 / 86%));
+    --setka-settings-card-bg: rgb(255 255 255 / 5%);
+    --setka-settings-card-border: rgb(255 255 255 / 10%);
+    --setka-settings-divider: rgb(255 255 255 / 8%);
+    --setka-settings-text: rgb(255 255 255 / 94%);
+    --setka-settings-text-secondary: rgb(255 255 255 / 68%);
+    --setka-settings-hover: rgb(255 255 255 / 8%);
+    --setka-settings-active: color-mix(in srgb, var(--setka-accent-user, #e53935) 24%, rgb(255 255 255 / 8%));
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] {
+    --setka-settings-dialog-bg: linear-gradient(155deg, rgb(255 255 255 / 96%), rgb(244 244 248 / 94%));
+    --setka-settings-card-bg: rgb(255 255 255 / 80%);
+    --setka-settings-card-border: rgb(0 0 0 / 8%);
+    --setka-settings-divider: rgb(0 0 0 / 7%);
+    --setka-settings-text: rgb(20 20 26 / 94%);
+    --setka-settings-text-secondary: rgb(20 20 26 / 62%);
+    --setka-settings-hover: rgb(0 0 0 / 5%);
+    --setka-settings-active: color-mix(in srgb, var(--setka-accent-user, #e53935) 14%, rgb(0 0 0 / 3%));
+}
+
+/* ───────────── Dialog shell ───────────── */
+html[data-setka-client="true"] .mx_Dialog_border:has(.mx_UserSettingsDialog) {
+    max-width: none;
+    max-height: min(90vh, 780px);
+    border-radius: var(--setka-settings-radius);
+    overflow: hidden;
+}
+
+html[data-setka-client="true"] .mx_Dialog:has(.mx_UserSettingsDialog) {
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: var(--setka-settings-dialog-bg) !important;
+    border: 1px solid var(--setka-settings-card-border);
+    border-radius: var(--setka-settings-radius);
+    box-shadow:
+        0 1px 0 rgb(255 255 255 / 8%) inset,
+        0 24px 64px rgb(0 0 0 / 38%);
+    backdrop-filter: blur(var(--setka-blur-strength, 14px)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--setka-blur-strength, 14px)) saturate(120%);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog {
+    display: flex;
+    flex-direction: column;
+    width: min(94vw, 1020px);
+    max-width: none;
+    height: min(86vh, 760px);
+    max-height: 100%;
+    padding: 0;
+    overflow: hidden;
+    color: var(--setka-settings-text);
+    --cpd-color-text-primary: var(--setka-settings-text);
+    --cpd-color-text-secondary: var(--setka-settings-text-secondary);
+    --cpd-color-bg-canvas-default: transparent;
+    --cpd-color-bg-subtle-primary: var(--setka-settings-card-bg);
+    --cpd-color-bg-subtle-secondary: var(--setka-settings-hover);
+    --cpd-color-border-subtle-primary: var(--setka-settings-divider);
+    --cpd-color-border-interactive-secondary: var(--setka-settings-card-border);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_Dialog_header {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: var(--cpd-space-5x) var(--cpd-space-14x) var(--cpd-space-4x) calc(var(--setka-settings-sidebar-width) + var(--cpd-space-8x));
+    border-bottom: 1px solid var(--setka-settings-divider);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_UserSettingsDialog_title {
+    color: var(--setka-settings-text);
+    font: var(--cpd-font-heading-md-semibold) !important;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_Dialog_cancelButton {
+    top: var(--cpd-space-4x);
+    right: var(--cpd-space-4x);
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    border-radius: 50%;
+    background: var(--setka-settings-hover);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_Dialog_cancelButton:hover {
+    background: var(--setka-settings-active);
+}
+
+/* Content area fills the remaining space; TabbedView lays itself out as sidebar + panel. */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_SettingsDialog_content {
+    position: relative;
+    flex: 1 1 0;
+    min-height: 0;
+    display: flex;
+}
+
+/* ───────────── Sidebar + panel ───────────── */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView {
+    position: static;
+    inset: auto;
+    top: auto;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabLabels {
+    position: static;
+    flex: 0 0 var(--setka-settings-sidebar-width);
+    width: var(--setka-settings-sidebar-width);
+    max-width: var(--setka-settings-sidebar-width);
+    box-sizing: border-box;
+    margin: 0;
+    padding: var(--cpd-space-4x) var(--cpd-space-3x);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: auto;
+    border-inline-end: 1px solid var(--setka-settings-divider);
+    list-style: none;
+    color: var(--setka-settings-text-secondary);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel {
+    min-block-size: 40px;
+    padding-inline: var(--cpd-space-3x);
+    border-radius: 12px;
+    color: var(--setka-settings-text-secondary);
+    font: var(--cpd-font-body-md-medium);
+    transition:
+        background-color 0.12s ease,
+        color 0.12s ease;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel svg {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    margin-inline-end: var(--cpd-space-3x);
+    color: inherit;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel_text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabLabel:hover {
+    background: var(--setka-settings-hover);
+    color: var(--setka-settings-text);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabLabel_active,
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabLabel_active:hover {
+    background: var(--setka-settings-active);
+    color: var(--setka-settings-text);
+    outline: none;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel_active svg {
+    color: var(--setka-accent-user, #e53935);
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabPanel {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    flex-direction: column;
+}
+
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabPanelContent {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* ───────────── Content column ───────────── */
+html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView .mx_SettingsTab {
+    min-width: 0;
+    max-width: 760px;
+    margin: 0;
+    padding: var(--cpd-space-6x) var(--cpd-space-8x) var(--cpd-space-14x);
+    box-sizing: border-box;
+    color: var(--setka-settings-text);
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsTab_sections {
+    gap: var(--cpd-space-6x);
+    padding-bottom: var(--cpd-space-10x);
+}
+
+/* One grouped card per section — replaces the older per-section card. */
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSection {
+    margin: 0;
+    padding: var(--cpd-space-2x) var(--cpd-space-5x);
+    border: 1px solid var(--setka-settings-card-border);
+    border-radius: var(--setka-settings-card-radius);
+    background: var(--setka-settings-card-bg);
+    color: var(--setka-settings-text);
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSection > .mx_SettingsSection_subSections {
+    gap: 0;
+    margin: 0;
+}
+
+/* Subsections are rows of the card, separated by hairlines. */
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSubsection {
+    min-width: 0;
+    padding-block: var(--cpd-space-4x);
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSection > .mx_SettingsSubsection + .mx_SettingsSubsection,
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSection_subSections > .mx_SettingsSubsection + .mx_SettingsSubsection {
+    border-top: 1px solid var(--setka-settings-divider);
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSubsection [role="separator"] {
+    display: none;
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSubsection_content {
+    margin-top: var(--cpd-space-3x);
+    gap: var(--cpd-space-3x);
+    /* Element packs content to the start; rows in a grouped card must span the card. */
+    justify-items: stretch;
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSubsection_content.mx_SettingsSubsection_noHeading {
+    margin-top: 0;
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSubsection .mx_SettingsSubsection_dropdown {
+    min-width: 0;
+    width: 100%;
+}
+
+/* Ensure font scale dropdown and select inputs display full text like '16 (по умолчанию)' */
+html[data-setka-client="true"] .mx_SettingsTab .mx_FontScalingPanel_Dropdown,
+html[data-setka-client="true"] .mx_SettingsTab .mx_Field_select {
+    width: auto !important;
+    min-width: 210px !important;
+    max-width: 320px !important;
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_Field select {
+    padding-right: 28px !important;
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSubsection_text,
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsFlag_microcopy,
+html[data-setka-client="true"] .mx_SettingsTab .mx_PreferencesUserSettingsTab_section_hint {
+    color: var(--setka-settings-text-secondary);
+    font: var(--cpd-font-body-sm-regular);
+}
+
+/* Headings */
+html[data-setka-client="true"] .mx_SettingsTab h2.mx_Heading_h4,
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsSubsectionHeading_heading {
+    margin: 0;
+    color: var(--setka-settings-text);
+    font: var(--cpd-font-body-lg-semibold);
+    overflow-wrap: anywhere;
+}
+
+html[data-setka-client="true"] .mx_SettingsTab h3 {
+    margin: 0;
+    font: var(--cpd-font-body-md-semibold);
+    overflow-wrap: anywhere;
+}
+
+/* Toggle rows: label left, switch right, hairline between rows. */
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsFlag {
+    align-items: center;
+    gap: var(--cpd-space-4x);
+    margin: 0;
+    padding-block: var(--cpd-space-3x);
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsFlag + .mx_SettingsFlag {
+    border-top: 1px solid var(--setka-settings-divider);
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SettingsFlag_label {
+    padding: 0;
+    color: var(--setka-settings-text);
+    font: var(--cpd-font-body-md-regular);
+}
+
+html[data-setka-client="true"] .mx_SettingsTab_section .mx_SettingsFlag {
+    margin-inline-end: 0;
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_ToggleSwitch_on {
+    background-color: var(--setka-accent-user, #e53935);
+}
+
+/* Buttons never stretch full width inside a card. */
+html[data-setka-client="true"] .mx_SettingsTab .mx_AccessibleButton {
+    align-self: flex-start;
+}
+
+/* ───────────── Setka tabs: remove nested cards ───────────── */
+html[data-setka-client="true"] .mx_SetkaAppearanceSettings {
+    gap: 0;
+}
+
+html[data-setka-client="true"] .mx_SetkaAppearanceSettings_section {
+    padding: var(--cpd-space-4x) 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+}
+
+html[data-setka-client="true"] .mx_SetkaAppearanceSettings_section + .mx_SetkaAppearanceSettings_section {
+    border-top: 1px solid var(--setka-settings-divider);
+}
+
+html[data-setka-client="true"] .mx_SetkaAppearanceSettings_swatch {
+    width: 30px;
+    height: 30px;
+}
+
+html[data-setka-client="true"] .mx_SetkaAppearanceSettings input[type="range"] {
+    accent-color: var(--setka-accent-user, #e53935);
+}
+
+html[data-setka-client="true"] .mx_SetkaWallpaperSettings_option {
+    border-radius: 999px !important;
+}
+
+html[data-setka-client="true"] .mx_SettingsTab .mx_SetkaProfileSettings_card {
+    border-color: var(--setka-settings-card-border);
+    background: transparent;
+}
+
+/* ───────────── Compact screens: sidebar becomes a top icon bar ───────────── */
+@media (max-width: 760px) {
+    html[data-setka-client="true"] .mx_Dialog_border:has(.mx_UserSettingsDialog),
+    html[data-setka-client="true"] .mx_Dialog:has(.mx_UserSettingsDialog),
+    html[data-setka-client="true"] .mx_UserSettingsDialog {
+        width: 100vw;
+        height: 100dvh;
+        max-height: 100dvh;
+        border-radius: 0;
+    }
+
+    html[data-setka-client="true"] .mx_UserSettingsDialog .mx_Dialog_header {
+        padding-inline: var(--cpd-space-5x) var(--cpd-space-14x);
+    }
+
+    html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView {
+        flex-direction: column;
+    }
+
+    html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabsOnLeft .mx_TabbedView_tabLabels {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: none;
+        flex-direction: row;
+        gap: var(--cpd-space-1x);
+        padding: var(--cpd-space-2x) var(--cpd-space-3x);
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-inline-end: none;
+        border-bottom: 1px solid var(--setka-settings-divider);
+        scrollbar-width: none;
+    }
+
+    html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel {
+        flex: 0 0 auto;
+        padding-inline: var(--cpd-space-3x);
+    }
+
+    html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel_text {
+        display: none;
+    }
+
+    html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView_tabLabel svg {
+        margin-inline-end: 0;
+    }
+
+    html[data-setka-client="true"] .mx_UserSettingsDialog .mx_TabbedView .mx_SettingsTab {
+        padding: var(--cpd-space-4x) var(--cpd-space-4x) var(--cpd-space-8x);
+    }
+}

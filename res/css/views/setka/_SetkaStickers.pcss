@@ -1,0 +1,91 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaStickerBody_box {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    background: transparent;
+}
+
+.mx_SetkaStickerBody_box .mx_MStickerBody_placeholder {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+}
+
+.mx_SetkaStickerBody_image {
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+    object-fit: contain !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MStickerBody_wrapper,
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MStickerBody_hidden {
+    width: 180px !important;
+    height: 180px !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MImageBody_thumbnail_container {
+    width: 180px !important;
+    height: 180px !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+    aspect-ratio: unset !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+    border-radius: 0 !important;
+    contain: none !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MImageBody_thumbnail_container > div {
+    width: auto !important;
+    height: auto !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MImageBody_thumbnail,
+html[data-setka-client="true"] .mx_EventTile_sticker .mx_MImageBody_thumbnail img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+    object-fit: contain !important;
+}
+
+/* Bubble layout adds margin-right on own stickers — breaks Setka alignment */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"][data-self="true"] .mx_EventTile_sticker {
+    margin-right: 0 !important;
+}
+
+/* Kill Element's default -9px / -12px line offsets so stickers align with text bubbles */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_sticker {
+    --EventTile_bubble_line-margin-inline-start: 0 !important;
+    --EventTile_bubble_line-margin-inline-end: 0 !important;
+    --EventTile_bubble-margin-inline-start: 49px;
+    --EventTile_bubble-margin-inline-end: 60px;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"].mx_EventTile_sticker .mx_EventTile_line {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+}

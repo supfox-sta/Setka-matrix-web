@@ -1,0 +1,148 @@
+/*
+Copyright 2023 New Vector Ltd.
+
+SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+Please see LICENSE files in the repository root for full details.
+*/
+
+.item {
+  display: grid;
+  grid-template: "icon label ." auto "empty1 label empty2" auto / auto auto minmax(
+      /* Reserve space for the chevron so that the layout doesn't shift on
+      hover */
+      var(--cpd-space-2x),
+      1fr
+    );
+  place-items: center end;
+  padding-block: var(--cpd-space-2x);
+  padding-inline: var(--cpd-space-4x);
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 200px;
+  color: var(--cpd-color-text-secondary);
+  background: var(--cpd-color-bg-action-secondary-rest);
+}
+
+.item.interactive,
+.item[data-state] {
+  cursor: pointer;
+}
+
+.item.no-label {
+  grid-template: "icon ." auto / auto 1fr;
+}
+
+.label {
+  grid-area: label;
+  margin-inline-end: var(--cpd-space-4x);
+  text-align: start;
+  word-break: break-word; /* stylelint-disable-line declaration-property-value-keyword-no-deprecated */
+}
+
+.item.no-icon {
+  grid-template: "label ." auto / auto 1fr;
+
+  .label {
+    /* Without icon, the height changes when hovered */
+    min-block-size: 24px;
+  }
+}
+
+.icon {
+  grid-area: icon;
+  margin-inline-end: var(--cpd-space-3x);
+}
+
+.item.no-label .icon {
+  margin-inline-end: var(--cpd-space-4x);
+}
+
+.nav-hint {
+  /* Hidden until the item is hovered over */
+  display: none;
+  flex-shrink: 0;
+}
+
+button.item {
+  appearance: none;
+  border: none;
+}
+
+.item[data-kind="primary"] > .label {
+  color: var(--cpd-color-text-primary);
+}
+
+.item[data-kind="primary"] > .icon {
+  color: var(--cpd-color-icon-primary);
+}
+
+.item[data-kind="primary"] > .nav-hint {
+  color: var(--cpd-color-icon-tertiary);
+}
+
+.item[data-kind="critical"] > .label {
+  color: var(--cpd-color-text-critical-primary);
+}
+
+.item[data-kind="critical"] > .icon,
+.item[data-kind="critical"] > .nav-hint {
+  color: var(--cpd-color-icon-critical-primary);
+}
+
+/* Submenu triggers: always show the chevron and apply hover style when open */
+.item[data-state] > .nav-hint {
+  display: initial;
+}
+
+.item[data-state] > .nav-hint ~ * {
+  display: none;
+}
+
+.item[data-state="open"][data-kind="primary"] {
+  background: var(--cpd-color-bg-action-secondary-hovered);
+}
+
+.item[data-state="open"][data-kind="critical"] {
+  background: var(--cpd-color-bg-critical-subtle);
+}
+
+@media (hover) {
+  .item.interactive[data-kind="primary"]:hover,
+  .item[data-state][data-kind="primary"]:hover {
+    background: var(--cpd-color-bg-action-secondary-hovered);
+  }
+
+  .item.interactive[data-kind="critical"]:hover,
+  .item[data-state][data-kind="critical"]:hover {
+    background: var(--cpd-color-bg-critical-subtle);
+  }
+
+  /* Replace the children with the navigation hint on hover */
+  .item.interactive:hover > .nav-hint {
+    display: initial;
+  }
+
+  .item.interactive:hover > .nav-hint ~ * {
+    display: none;
+  }
+}
+
+.item.interactive[data-kind="primary"]:active,
+.item[data-state][data-kind="primary"]:active {
+  background: var(--cpd-color-bg-action-secondary-pressed);
+}
+
+.item.interactive[data-kind="critical"]:active,
+.item[data-state][data-kind="critical"]:active {
+  background: var(--cpd-color-bg-critical-subtle-hovered);
+}
+
+.item[data-kind].disabled {
+  pointer-events: none;
+}
+
+.item[data-kind].disabled > .label,
+.item[data-kind].disabled > .icon,
+.item[data-kind].disabled > .nav-hint {
+  color: var(--cpd-color-text-disabled);
+}

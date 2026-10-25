@@ -1,0 +1,147 @@
+/*
+ * Setka overrides for embedded Element Call widget (CSS modules build).
+ */
+:root {
+    --setka-ec-bg: rgb(22 14 48);
+    --setka-ec-bg-elevated: rgb(32 22 62);
+}
+
+html,
+body,
+body.cpd-theme-dark,
+body.no-theme,
+body.no-scroll-body,
+#root,
+[class*="_inRoom_"] {
+    background: var(--setka-ec-bg) !important;
+    background-color: var(--setka-ec-bg) !important;
+    min-height: 100%;
+}
+
+body[data-background="gradient"],
+body[data-background="solid"] {
+    background: var(--setka-ec-bg) !important;
+    background-color: var(--setka-ec-bg) !important;
+}
+
+body[data-background="gradient"]::before,
+body[data-background="solid"]::before,
+body[data-background="gradient"]::after,
+body[data-background="solid"]::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+    background-image: none !important;
+}
+
+[class*="_scrollingGrid_"],
+[class*="_fixedGrid_"],
+[class*="_scrolling_"],
+[class*="_slot_"],
+[class*="_grid_"] {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+[class*="_bg_"][class*="_animate_"],
+[class*="_overlay_"][data-show="false"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+[data-testid="videoTile"],
+[class*="_media_"][data-testid="videoTile"],
+[class*="_tile_"][data-background="solid"] {
+    background: var(--setka-ec-bg-elevated) !important;
+    background-color: var(--setka-ec-bg-elevated) !important;
+}
+
+[class*="_media_"] [class*="_bg_"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    opacity: 1 !important;
+}
+
+[class*="_footer_"],
+[data-testid="footer-container"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Bottom gradient scrim over participant tiles when grid overflows */
+[class*="_overflowing_"] > [class*="_footer_"],
+[class*="_fixedGrid_"]:has([data-maximised="true"]) ~ [class*="_footer_"] {
+    background: none !important;
+    background-image: none !important;
+}
+
+[class*="_header_"]:not([class*="_filler_"]) {
+    background: transparent !important;
+}
+
+[class*="_tile_"],
+[class*="_media_"][data-testid="videoTile"] {
+    border-radius: 16px !important;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 10%) !important;
+    box-shadow: 0 6px 20px rgb(0 0 0 / 22%);
+}
+
+[class*="_nameTag_"],
+[class*="_name_"] {
+    background: rgb(0 0 0 / 40%) !important;
+    border-radius: 8px;
+    padding: 2px 8px;
+}
+
+[class*="_button_"],
+[class*="_icon-button_"],
+button[role="switch"] {
+    border-radius: 12px !important;
+    transition: background 140ms ease, transform 120ms ease;
+}
+
+[class*="_button_"]:not(:disabled):hover,
+[class*="_icon-button_"]:not(:disabled):hover,
+button[role="switch"]:not(:disabled):hover {
+    background: rgb(255 255 255 / 14%) !important;
+}
+
+[class*="_button_"][data-kind="primary"]:not(._destructive_) {
+    background: rgb(124 92 255 / 72%) !important;
+}
+
+[class*="_button_"]._destructive_ {
+    background: rgb(220 60 80 / 80%) !important;
+}
+
+[class*="_typography_"],
+[class*="_font-"],
+span,
+label,
+p,
+h1,
+h2,
+h3 {
+    color: rgb(255 255 255 / 92%);
+}
+
+[data-vaul-drawer],
+[data-vaul-overlay],
+[role="dialog"],
+[role="menu"],
+[class*="_tooltip_"] {
+    background: var(--setka-ec-bg-elevated) !important;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-radius: 16px;
+}
+
+[class*="_overlay_"][data-show="true"] {
+    background: rgb(22 14 48 / 88%) !important;
+}

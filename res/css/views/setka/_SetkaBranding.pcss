@@ -1,0 +1,212 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaPrivacySettingsTab_fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-4x);
+}
+
+.mx_SetkaPlusDialog_status {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-1x);
+}
+
+.mx_SetkaPlusDialog_statusLabel {
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaPlusDialog_plans {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-3x);
+    width: 100%;
+    text-align: left;
+}
+
+.mx_SetkaPlusDialog_plan {
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    border-radius: 12px;
+    padding: var(--cpd-space-4x);
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+.mx_SetkaPlusDialog_planHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--cpd-space-3x);
+    font: var(--cpd-font-body-md-medium);
+}
+
+.mx_SetkaPlusDialog_planFeatures {
+    margin: var(--cpd-space-2x) 0 0;
+    padding-left: var(--cpd-space-5x);
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-sm-regular);
+}
+
+.mx_SetkaPlusDialog_voucher {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-3x);
+    width: 100%;
+    text-align: left;
+}
+
+.mx_SetkaPlusDialog_voucherHint,
+.mx_SetkaPlusDialog_voucherFooter {
+    margin: 0;
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaPlusDialog_noticeSuccess {
+    margin: 0;
+    color: var(--cpd-color-text-success-primary);
+    font: var(--cpd-font-body-sm-medium);
+}
+
+.mx_DefaultWelcome_setka .mx_DefaultWelcome_logo img {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+}
+
+.mx_DefaultWelcome_setka h1 {
+    background: linear-gradient(135deg, #7b61ff 0%, #5a8cff 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mx_SetkaProfilePage_subtitle {
+    margin: 0;
+    max-width: 420px;
+    text-align: center;
+    font: var(--cpd-font-body-sm-regular);
+}
+
+.mx_SetkaProfilePage_subtitle_aboveHero {
+    margin: 0 auto var(--cpd-space-4x);
+    padding: 0 var(--cpd-space-4x);
+    color: var(--cpd-color-text-secondary);
+    text-align: center;
+}
+
+.mx_SetkaProfilePage_hero_themeDark {
+    color: #fff;
+}
+
+.mx_SetkaProfilePage_hero_themeDark .mx_SetkaProfilePage_subtitle {
+    color: rgb(255 255 255 / 88%);
+}
+
+.mx_SetkaProfilePage_hero_themeDark .mx_SetkaProfilePage_displayName,
+.mx_SetkaProfilePage_hero_themeDark .mx_SetkaProfilePage_displayName label,
+.mx_SetkaProfilePage_hero_themeDark .mx_SetkaProfilePage_displayName input,
+.mx_SetkaProfilePage_hero_themeDark .mx_SetkaProfilePage_displayName button,
+.mx_SetkaProfilePage_hero_themeDark .mx_SetkaDmProfileSection_name,
+.mx_SetkaProfilePage_hero_themeDark .mx_SetkaDmProfileSection_bio {
+    color: #fff;
+}
+
+.mx_SetkaProfilePage_hero_themeLight {
+    color: #17191c;
+}
+
+.mx_SetkaProfilePage_hero_themeLight .mx_SetkaProfilePage_subtitle {
+    color: rgb(23 25 28 / 72%);
+}
+
+.mx_SetkaProfilePage_hero_themeLight .mx_SetkaProfilePage_displayName,
+.mx_SetkaProfilePage_hero_themeLight .mx_SetkaProfilePage_displayName label,
+.mx_SetkaProfilePage_hero_themeLight .mx_SetkaProfilePage_displayName input,
+.mx_SetkaProfilePage_hero_themeLight .mx_SetkaProfilePage_displayName button,
+.mx_SetkaProfilePage_hero_themeLight .mx_SetkaDmProfileSection_name,
+.mx_SetkaProfilePage_hero_themeLight .mx_SetkaDmProfileSection_bio {
+    color: #17191c;
+}
+
+.mx_SetkaProfilePage_hero_themeLight .mx_SetkaProfilePage_heroOverlay {
+    background: linear-gradient(180deg, rgb(255 255 255 / 8%) 0%, rgb(255 255 255 / 28%) 100%);
+}
+
+.mx_SetkaProfilePage_hero_loading {
+    pointer-events: none;
+}
+
+.mx_SetkaProfilePage_skeletonHero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cpd-space-4x);
+    width: 100%;
+}
+
+.mx_SetkaProfilePage_skeletonAvatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(
+        90deg,
+        rgb(255 255 255 / 12%) 0%,
+        rgb(255 255 255 / 28%) 50%,
+        rgb(255 255 255 / 12%) 100%
+    );
+    background-size: 200% 100%;
+    animation: mx_SetkaProfilePage_shimmer 1.4s ease-in-out infinite;
+}
+
+.mx_SetkaProfilePage_skeletonLine {
+    height: 14px;
+    width: 72%;
+    border-radius: 999px;
+    background: linear-gradient(
+        90deg,
+        rgb(255 255 255 / 10%) 0%,
+        rgb(255 255 255 / 24%) 50%,
+        rgb(255 255 255 / 10%) 100%
+    );
+    background-size: 200% 100%;
+    animation: mx_SetkaProfilePage_shimmer 1.4s ease-in-out infinite;
+}
+
+.mx_SetkaProfilePage_skeletonLine_short {
+    width: 42%;
+}
+
+.mx_SetkaProfilePage_skeletonLine_long {
+    width: 88%;
+}
+
+.mx_SetkaProfilePage_card_skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-3x);
+}
+
+.mx_SetkaProfilePage_card_skeleton .mx_SetkaProfilePage_skeletonLine {
+    background: linear-gradient(
+        90deg,
+        var(--cpd-color-bg-subtle-secondary) 0%,
+        var(--cpd-color-bg-subtle-primary) 50%,
+        var(--cpd-color-bg-subtle-secondary) 100%
+    );
+}
+
+@keyframes mx_SetkaProfilePage_shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.mx_SetkaProfilePage_card {
+    box-shadow: 0 8px 24px rgb(17 24 39 / 6%);
+}

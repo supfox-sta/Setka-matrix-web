@@ -1,0 +1,178 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing {
+    margin: var(--cpd-space-4x);
+    padding: var(--cpd-space-6x);
+    border-radius: var(--setka-panel-bubble-radius);
+    border: var(--setka-panel-bubble-border);
+    background: var(--setka-panel-bubble-bg);
+    box-shadow: var(--setka-panel-bubble-shadow);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    color: rgb(255 255 255 / 94%);
+    gap: var(--cpd-space-4x);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_header .mx_BaseAvatar {
+    width: 88px !important;
+    height: 88px !important;
+    border: 2px solid rgb(255 255 255 / 20%);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_name {
+    margin: 0;
+    color: rgb(255 255 255 / 94%);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_name h1 {
+    font: var(--cpd-font-heading-md-semibold);
+    color: rgb(255 255 255 / 96%);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_inviter {
+    color: rgb(255 255 255 / 72%);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_infoBar {
+    padding-top: var(--cpd-space-2x);
+    border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_inviteButton {
+    border-radius: 999px !important;
+    background: rgb(220 38 38 / 88%) !important;
+    color: rgb(255 255 255 / 96%) !important;
+    transition: transform 140ms ease, background 140ms ease;
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_inviteButton:hover {
+    background: rgb(220 38 38) !important;
+    transform: translateY(-1px);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_settingsButton svg {
+    color: rgb(255 255 255 / 78%);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing_topic {
+    color: rgb(255 255 255 / 90%);
+    padding: var(--cpd-space-3x) var(--cpd-space-4x);
+    border-radius: 14px;
+    background: rgb(255 255 255 / 8%);
+    border: 1px solid rgb(255 255 255 / 12%);
+    line-height: 1.5;
+}
+
+/* Space search box on glass */
+html[data-setka-client="true"] .mx_SpaceRoomView_landing .mx_SearchBox {
+    background: rgb(255 255 255 / 8%) !important;
+    border: 1px solid rgb(255 255 255 / 14%) !important;
+    border-radius: 14px !important;
+    padding: 4px 12px !important;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing .mx_SearchBox input {
+    color: rgb(255 255 255 / 96%) !important;
+    font: var(--cpd-font-body-md-regular);
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing .mx_SearchBox input::placeholder {
+    color: rgb(255 255 255 / 55%) !important;
+}
+
+html[data-setka-client="true"] .mx_SpaceRoomView_landing .mx_SearchBox_searchIcon::before {
+    background-color: rgb(255 255 255 / 78%) !important;
+}
+
+/* Space hierarchy section & header */
+html[data-setka-client="true"] .mx_SpaceHierarchy_listHeader {
+    color: rgb(255 255 255 / 96%) !important;
+    margin-top: var(--cpd-space-2x);
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_listHeader_header {
+    color: rgb(255 255 255 / 96%) !important;
+    font: var(--cpd-font-body-lg-semibold) !important;
+}
+
+/* Action buttons on space landing (Добавить, Удалить, etc.) */
+html[data-setka-client="true"] .mx_SpaceHierarchy_listHeader_buttons .mx_AccessibleButton {
+    border-radius: 999px !important;
+    padding: 6px 16px !important;
+    background: rgb(255 255 255 / 10%) !important;
+    border: 1px solid rgb(255 255 255 / 16%) !important;
+    color: rgb(255 255 255 / 92%) !important;
+    font: var(--cpd-font-body-sm-medium) !important;
+    transition: background 140ms ease, color 140ms ease;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_listHeader_buttons .mx_AccessibleButton:hover {
+    background: rgb(255 255 255 / 18%) !important;
+    color: #fff !important;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_listHeader_buttons .mx_AccessibleButton_kind_primary {
+    background: rgb(255 255 255 / 92%) !important;
+    color: rgb(18 12 36) !important;
+    font-weight: 600 !important;
+    border: none !important;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_listHeader_buttons .mx_AccessibleButton_kind_primary:hover {
+    background: #fff !important;
+    color: rgb(18 12 36) !important;
+}
+
+/* Space room list cards */
+html[data-setka-client="true"] .mx_SpaceHierarchy_list li.mx_SpaceHierarchy_roomTileWrapper {
+    margin-bottom: 8px;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_roomTile {
+    background: rgb(255 255 255 / 6%) !important;
+    border: 1px solid rgb(255 255 255 / 10%) !important;
+    border-radius: 14px !important;
+    padding: 12px 16px !important;
+    transition: background 140ms ease, border-color 140ms ease;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_roomTile:hover {
+    background: rgb(255 255 255 / 12%) !important;
+    border-color: rgb(255 255 255 / 18%) !important;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_roomTile_name {
+    color: rgb(255 255 255 / 96%) !important;
+    font: var(--cpd-font-body-md-semibold) !important;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_roomTile_info {
+    color: rgb(255 255 255 / 72%) !important;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_roomTile_joined {
+    color: var(--setka-online-accent, #c4b5fd) !important;
+}
+
+html[data-setka-client="true"] .mx_SpaceHierarchy_roomTile_joined svg {
+    color: var(--setka-online-accent, #c4b5fd) !important;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SpaceRoomView_landing {
+    color: rgb(28 20 48 / 94%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SpaceRoomView_landing_name,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SpaceRoomView_landing_name h1 {
+    color: rgb(28 20 48 / 94%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SpaceRoomView_landing_topic {
+    color: rgb(28 20 48 / 68%);
+    background: rgb(124 92 255 / 8%);
+}

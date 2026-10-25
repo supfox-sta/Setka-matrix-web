@@ -1,0 +1,78 @@
+/*
+Copyright 2023 New Vector Ltd.
+
+SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+Please see LICENSE files in the repository root for full details.
+*/
+
+.bg {
+  position: fixed;
+  inset: 0;
+
+  /* TODO: This value is used across modals and menu drawers, so would be worth
+  tokenizing */
+  background: rgb(3 12 27 / 52.8%);
+}
+
+.drawer {
+  position: fixed;
+  background: var(--cpd-color-bg-canvas-default);
+  inset-block-end: 0;
+  inset-inline: 0;
+
+  /* Cap the inline content size at 520px, filling the rest of the space with
+  padding */
+  padding-inline: max(0px, calc((100% - 520px) / 2));
+  border-start-start-radius: var(--border-radius);
+  border-start-end-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+
+  /* Drawer comes in the Android style by default */
+  --border-radius: 28px;
+  --handle-block-size: 4px;
+  --handle-inline-size: 32px;
+  --handle-inset-block-start: var(--cpd-space-4x);
+  --handle-inset-block-end: 0px;
+  --content-inset-block-start: calc(
+    var(--handle-inset-block-start) + var(--handle-block-size) +
+      var(--handle-inset-block-end)
+  );
+}
+
+.drawer[data-platform="ios"] {
+  --border-radius: 10px;
+  --handle-block-size: 5px;
+  --handle-inline-size: 36px;
+  --handle-inset-block-start: var(--cpd-space-1-5x);
+  --handle-inset-block-end: 1px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cpd-space-2x);
+  padding-block: calc(var(--content-inset-block-start) + var(--cpd-space-6x))
+    var(--cpd-space-12x);
+  border-start-start-radius: var(--border-radius);
+  border-start-end-radius: var(--border-radius);
+
+  /* Even with overflow: auto, the content can still overflow at the corners
+  where it meets with the curved border. A contain: paint fixes that. */
+  contain: paint;
+  overflow: auto;
+  scrollbar-width: none;
+
+  --cpd-separator-spacing: 0;
+  --cpd-separator-inset: var(--cpd-space-4x);
+}
+
+.body::before {
+  content: "";
+  position: absolute;
+  block-size: var(--handle-block-size);
+  inset-inline: calc((100% - var(--handle-inline-size)) / 2);
+  inset-block-start: var(--handle-inset-block-start);
+  background: var(--cpd-color-icon-secondary);
+  border-radius: var(--cpd-radius-pill-effect);
+}

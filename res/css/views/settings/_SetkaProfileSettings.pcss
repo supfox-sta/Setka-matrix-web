@@ -1,0 +1,232 @@
+/*
+
+Copyright 2026 Setka Matrix
+
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+
+*/
+
+
+
+.mx_SetkaProfileSettings {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--cpd-space-4x);
+
+}
+
+
+
+.mx_SetkaProfileSettings_card {
+
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    background: var(--cpd-color-bg-canvas-default);
+
+}
+
+
+
+.mx_SetkaProfileSettings_preview {
+
+    padding: var(--cpd-space-6x);
+
+    color: #fff;
+
+    min-height: 120px;
+
+}
+
+
+
+.mx_SetkaProfileSettings_previewBody {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--cpd-space-2x);
+
+}
+
+
+
+.mx_SetkaProfileSettings_previewName {
+
+    font: var(--cpd-font-heading-sm-semibold);
+
+}
+
+
+
+.mx_SetkaProfileSettings_previewBio {
+
+    font: var(--cpd-font-body-md-regular);
+
+    opacity: 0.92;
+
+    white-space: pre-wrap;
+
+}
+
+
+
+.mx_SetkaProfileSettings_previewEmojis {
+
+    display: flex;
+
+    gap: var(--cpd-space-2x);
+
+    margin-top: var(--cpd-space-2x);
+
+}
+
+
+
+.mx_SetkaProfileSettings_form,
+
+.mx_SetkaProfileSettings_loading {
+
+    padding: var(--cpd-space-5x);
+
+}
+
+
+
+.mx_SetkaProfileSettings_form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--cpd-space-4x);
+
+}
+
+
+
+.mx_SetkaProfileSettings_label {
+
+    font: var(--cpd-font-body-md-medium);
+
+    margin-bottom: var(--cpd-space-2x);
+
+}
+
+
+
+.mx_SetkaProfileSettings_colorBlock {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--cpd-space-3x);
+
+}
+
+
+
+.mx_SetkaProfileSettings_colorPresets {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: var(--cpd-space-2x);
+
+}
+
+
+
+.mx_SetkaProfileSettings_colorSwatch {
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 999px;
+
+    border: 2px solid transparent;
+
+    cursor: pointer;
+
+}
+
+
+
+.mx_SetkaProfileSettings_colorSwatch_selected {
+
+    border-color: var(--cpd-color-border-accent);
+
+    box-shadow: 0 0 0 2px var(--cpd-color-bg-canvas-default);
+
+}
+
+
+
+.mx_SetkaProfileSettings_emojiRow {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: var(--cpd-space-3x);
+
+}
+
+
+
+@media (max-width: 640px) {
+
+    .mx_SetkaProfileSettings_emojiRow {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+
+.mx_SetkaProfileSettings_emojiPreview {
+
+    width: 40px;
+
+    height: 40px;
+
+    object-fit: contain;
+
+    background: rgb(255 255 255 / 18%);
+
+    border-radius: 10px;
+
+    padding: 4px;
+
+}
+
+
+
+.mx_SetkaProfileSettings_actions {
+
+    align-items: center;
+
+}
+
+
+
+.mx_SetkaProfileSettings_saved {
+
+    color: var(--cpd-color-text-success-primary);
+
+    font: var(--cpd-font-body-sm-regular);
+
+}
+

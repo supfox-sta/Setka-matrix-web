@@ -1,0 +1,160 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaHomeLanding_card {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mx_SetkaHomeLanding_logo {
+    display: block;
+    width: min(72px, 18vw);
+    height: auto;
+    margin: 0 auto var(--cpd-space-4x);
+}
+
+.mx_SetkaHomeLanding_buttons {
+    display: grid;
+    gap: var(--cpd-space-3x);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mx_SetkaHomeLanding_button {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.mx_SetkaHomeLanding_button span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaHomeLanding_card {
+    background: linear-gradient(155deg, rgb(255 255 255 / 0.92), rgb(248 244 255 / 0.88));
+    border-color: rgb(124 92 255 / 20%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaHomeLanding_title,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaHomeLanding_badge {
+    color: rgb(28 20 48 / 94%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaHomeLanding_subtitle {
+    color: rgb(28 20 48 / 68%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaHomeLanding_button {
+    color: rgb(28 20 48 / 92%);
+    background: rgb(124 92 255 / 10%);
+    border-color: rgb(124 92 255 / 18%);
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator {
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator .activeSeparator,
+html[data-setka-client="true"] .mx_MatrixChat .mx_Separator .activeSeparatorContainer {
+    pointer-events: none !important;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_MatrixChat .mx_Separator::before {
+    background: rgb(255 255 255 / 88%);
+    border-color: rgb(124 92 255 / 22%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_MatrixChat .mx_Separator::after {
+    border-left-color: rgb(28 20 48 / 82%);
+    border-bottom-color: rgb(28 20 48 / 82%);
+}
+
+/* Light theme: left panel + room list readable */
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile_title,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_MatrixChat [data-panel].mx_LeftPanel_panel:first-of-type .mx_RoomTile_subtitle_text,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SpacePanel .mx_SpaceButton_name,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SpacePanel .mx_SetkaUserMenu_sideName {
+    color: rgb(28 20 48 / 92%) !important;
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_LeftPanel_panel .mx_SetkaContactsPanel,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_LeftPanel_panel .mx_SetkaFeedPanel {
+    color: rgb(28 20 48 / 92%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaContactsPanel_name {
+    color: rgb(28 20 48 / 94%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaContactsPanel_sub {
+    color: rgb(28 20 48 / 68%);
+}
+
+/* Media bubbles: extra bottom padding when caption/time below */
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MImageBody,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVideoBody {
+    margin-bottom: var(--cpd-space-2x);
+    padding-bottom: var(--cpd-space-2x);
+    min-height: 0;
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MImageBody .mx_MImageBody_info,
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MVideoBody .mx_MVideoBody_info {
+    margin-top: var(--cpd-space-2x);
+    padding-bottom: var(--cpd-space-1x);
+}
+
+html[data-setka-client="true"] .mx_EventTile[data-layout="bubble"] .mx_MessageTimestamp {
+    margin-top: 2px;
+}
+
+.mx_SetkaProfileEmoji {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    vertical-align: -3px;
+    margin-inline-start: 4px;
+}
+
+html[data-setka-client="true"] .mx_DisambiguatedProfile .mx_Username {
+    color: inherit;
+}
+
+html[data-setka-client="true"][data-setka-glass="off"] .mx_RoomHeader,
+html[data-setka-client="true"][data-setka-glass="off"] .mx_MessageComposer_wrapper,
+html[data-setka-client="true"][data-setka-glass="off"] .mx_LeftPanel_outerWrapper,
+html[data-setka-client="true"][data-setka-glass="off"] [data-testid="widget-pip-container"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--setka-surface-solid) !important;
+}
+
+.mx_SetkaMiniPlayer_collapsed {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--cpd-space-2x);
+    padding: var(--cpd-space-2x) var(--cpd-space-3x);
+}
+
+.mx_SetkaMiniPlayer_collapsed .mx_SetkaMiniPlayer_seek,
+.mx_SetkaMiniPlayer_collapsed .mx_SetkaMiniPlayer_controls {
+    display: none;
+}
+
+.mx_SetkaMiniPlayer_volume {
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-1x);
+    width: 100%;
+}
+
+.mx_SetkaMiniPlayer_volume input[type="range"] {
+    flex: 1 1 auto;
+    min-width: 0;
+}

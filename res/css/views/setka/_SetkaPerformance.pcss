@@ -1,0 +1,52 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Scroll surfaces: avoid expensive backdrop-filter repaints */
+html[data-setka-client="true"] .mx_ScrollPanel,
+html[data-setka-client="true"] .mx_MessagePanel,
+html[data-setka-client="true"] .mx_RoomView_messagePanel,
+html[data-setka-client="true"] .mx_RoomListPanel,
+html[data-setka-client="true"] .mx_SetkaLeftPanel_body {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+html[data-setka-client="true"] .mx_SetkaFeedPanel,
+html[data-setka-client="true"] .mx_SetkaContactsPanel_list {
+    contain: none;
+}
+
+/* Wallpaper layer: scroll with content to prevent flicker */
+html[data-setka-client="true"][data-setka-wallpaper="on"] {
+    background-attachment: scroll;
+}
+
+.mx_SetkaLeftPanel_sectionBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--cpd-space-2x);
+    margin: 0 var(--cpd-space-3x) var(--cpd-space-2x);
+    padding: var(--cpd-space-2x) var(--cpd-space-3x);
+    border-radius: 14px;
+    border: 1px solid rgb(255 255 255 / 14%);
+    background: rgb(255 255 255 / 8%);
+    color: rgb(255 255 255 / 94%);
+    font: var(--cpd-font-body-sm-semibold);
+}
+
+.mx_SetkaLeftPanel_sectionBar_back {
+    flex: 0 0 auto;
+    font: var(--cpd-font-body-xs-regular);
+    color: rgb(255 255 255 / 78%);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 10%);
+}
+
+.mx_SetkaLeftPanel_sectionBar_back:hover {
+    color: rgb(255 255 255 / 98%);
+    background: rgb(255 255 255 / 16%);
+}

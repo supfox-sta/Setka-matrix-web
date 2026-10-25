@@ -1,0 +1,344 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaProfilePage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-4x);
+}
+
+.mx_SetkaProfilePage_hero {
+    position: relative;
+    min-height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    color: var(--cpd-color-text-on-solid-primary);
+}
+
+.mx_SetkaProfilePage_heroBg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.72;
+    z-index: 0;
+}
+
+.mx_SetkaMxcAvatarWrap {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mx_SetkaMxcAvatarWrap_editable {
+    width: 120px;
+    height: 120px;
+}
+
+.mx_SetkaMxcAvatarWrap_editBtn {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    z-index: 2;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 45%);
+}
+
+.mx_SetkaMxcAvatarWrap_video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.mx_SetkaProfilePage_heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 4%) 0%, rgb(0 0 0 / 8%) 35%, rgb(0 0 0 / 42%) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.mx_SetkaProfilePage_heroActions {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 4;
+    display: flex;
+    gap: var(--cpd-space-2x);
+    pointer-events: auto;
+}
+
+.mx_SetkaProfilePage_heroUploading {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0 0 0 / 42%);
+    font: var(--cpd-font-body-md-semibold);
+    color: rgb(255 255 255 / 94%);
+    pointer-events: none;
+}
+
+.mx_SetkaProfilePage_hiddenInput {
+    display: none;
+}
+
+.mx_SetkaProfilePage_heroContent {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--cpd-space-4x);
+    min-height: 300px;
+    padding: var(--cpd-space-10x) var(--cpd-space-6x) var(--cpd-space-6x);
+}
+
+.mx_SetkaProfilePage_displayName {
+    width: 100%;
+    max-width: 440px;
+    background: rgb(0 0 0 / 42%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 14px;
+    padding: 10px 16px;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 24%);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+    box-sizing: border-box;
+}
+
+.mx_SetkaProfilePage_displayName:focus-within {
+    border-color: color-mix(in srgb, var(--setka-accent-user, #7c5cff) 50%, rgb(255 255 255 / 30%));
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 14%), 0 6px 20px rgb(0 0 0 / 28%);
+}
+
+.mx_SetkaProfilePage_displayName input {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    color: #fff !important;
+    font: var(--cpd-font-body-lg-medium) !important;
+}
+
+.mx_SetkaProfilePage_displayName label {
+    color: rgb(255 255 255 / 75%) !important;
+    font: var(--cpd-font-body-xs-medium) !important;
+}
+
+.mx_SetkaProfilePage_cardTitle {
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-2x);
+    font: var(--cpd-font-body-lg-semibold);
+    color: var(--cpd-color-text-primary);
+}
+
+.mx_SetkaProfilePage_heroActions .mx_AccessibleButton {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--cpd-space-1x);
+}
+
+.mx_SetkaProfilePage_body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-4x);
+}
+
+.mx_SetkaProfilePage_card {
+    border: 1px solid rgb(255 255 255 / 12%) !important;
+    border-radius: 16px !important;
+    padding: var(--cpd-space-5x) !important;
+    background: rgb(255 255 255 / 4%) !important;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-4x);
+}
+
+.mx_SetkaProfilePage_card .mx_Field label {
+    color: var(--cpd-color-text-primary);
+}
+
+.mx_SetkaProfilePage_card .mx_Field input,
+.mx_SetkaProfilePage_card .mx_Field textarea {
+    color: var(--cpd-color-text-primary);
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+.mx_SetkaContactsPanel_avatar {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    min-width: 28px;
+    min-height: 28px;
+}
+
+.mx_SetkaContactsPanel_avatar .mx_BaseAvatar {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 36px;
+    max-height: 36px;
+}
+
+@media (max-width: 360px) {
+    .mx_SetkaContactsPanel_avatar {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.mx_SetkaProfilePage_infoRow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-1x);
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaProfilePage_emojiRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--cpd-space-3x);
+}
+
+@media (max-width: 640px) {
+    .mx_SetkaProfilePage_emojiRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mx_SetkaContactsPanel {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.mx_SetkaContactsPanel_loading {
+    align-items: center;
+    justify-content: center;
+    padding: var(--cpd-space-8x);
+}
+
+.mx_SetkaContactsPanel_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--cpd-space-3x) var(--cpd-space-4x);
+    font: var(--cpd-font-body-md-semibold);
+}
+
+.mx_SetkaContactsPanel_empty {
+    padding: var(--cpd-space-8x) var(--cpd-space-4x);
+    text-align: center;
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaContactsPanel_list {
+    overflow-y: auto;
+    flex: 1 1 auto;
+}
+
+.mx_SetkaContactsPanel_rowWrap {
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-1x);
+}
+
+.mx_SetkaContactsPanel_rowWrap:hover {
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+.mx_SetkaContactsPanel_rowWrap .mx_SetkaContactsPanel_row:hover {
+    background: transparent;
+}
+
+.mx_SetkaContactsPanel_row {
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-3x);
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: var(--cpd-space-3x) var(--cpd-space-4x);
+    text-align: left;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.mx_SetkaContactsPanel_sub_onCover {
+    color: rgb(255 255 255 / 82%);
+}
+
+.mx_SetkaContactsPanel_row[style*="background-image"] .mx_SetkaContactsPanel_name {
+    color: #fff;
+}
+
+.mx_SetkaContactsPanel_actions {
+    display: flex;
+    gap: var(--cpd-space-1x);
+    padding-right: var(--cpd-space-3x);
+    opacity: 0;
+}
+
+.mx_SetkaContactsPanel_rowWrap:hover .mx_SetkaContactsPanel_actions,
+.mx_SetkaContactsPanel_rowWrap:focus-within .mx_SetkaContactsPanel_actions {
+    opacity: 1;
+}
+
+.mx_SetkaContactsPanel_actionBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    min-height: 28px;
+    color: var(--cpd-color-icon-secondary);
+}
+
+.mx_SetkaContactsPanel_actionBtn_danger {
+    color: var(--cpd-color-text-critical-primary);
+}
+
+.mx_SetkaContactEditDialog .mx_Dialog_content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-3x);
+}
+
+.mx_SetkaContactsPanel_rowText {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.mx_SetkaContactsPanel_name {
+    display: flex;
+    align-items: center;
+    gap: var(--cpd-space-1x);
+    font: var(--cpd-font-body-md-medium);
+}
+
+.mx_SetkaContactsPanel_sub {
+    font: var(--cpd-font-body-sm-regular);
+    color: var(--cpd-color-text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mx_SetkaContactsPanel_status {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}

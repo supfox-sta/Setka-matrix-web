@@ -1,0 +1,235 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+.mx_SetkaComposerPicker_menu {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mx_SetkaComposerPicker {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: min(360px, 42vh);
+    min-height: 280px;
+    max-height: min(360px, 42vh);
+    background: var(--cpd-color-bg-canvas-default);
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    border-radius: 16px 16px 12px 12px;
+    box-shadow: 0 -4px 32px rgb(0 0 0 / 18%);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.mx_SetkaComposerPicker_content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.mx_SetkaComposerPicker_loading,
+.mx_SetkaComposerPicker_empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: var(--cpd-space-4x);
+    color: var(--cpd-color-text-secondary);
+    text-align: center;
+    font: var(--cpd-font-body-sm-regular);
+}
+
+.mx_SetkaComposerPicker_emojiPicker {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding: var(--cpd-space-2x);
+}
+
+.mx_SetkaComposerPicker_grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    display: grid;
+    gap: 8px;
+    padding: var(--cpd-space-3x);
+    align-content: start;
+    box-sizing: border-box;
+}
+
+.mx_SetkaComposerPicker_grid_emoji {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-auto-rows: 44px;
+}
+
+.mx_SetkaComposerPicker_grid_stickers {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 80px;
+}
+
+.mx_SetkaComposerPicker_cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    border-radius: 10px;
+    background: transparent;
+    padding: 6px;
+    border: none;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mx_SetkaComposerPicker_grid_emoji .mx_SetkaComposerPicker_cell {
+    aspect-ratio: 1;
+    max-height: 44px;
+}
+
+.mx_SetkaComposerPicker_cell:hover {
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+.mx_SetkaComposerPicker_cell img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.mx_SetkaComposerPicker_cell_sticker {
+    height: 72px;
+    max-height: 72px;
+    aspect-ratio: unset;
+}
+
+.mx_SetkaComposerPicker_cell_sticker img {
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.mx_SetkaComposerPicker_gifPane {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.mx_SetkaComposerPicker_gifSearch {
+    flex: 0 0 auto;
+    margin: 10px 12px 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--cpd-color-border-interactive-secondary);
+    background: var(--cpd-color-bg-canvas-default);
+    color: var(--cpd-color-text-primary);
+    font: var(--cpd-font-body-sm-regular);
+    box-sizing: border-box;
+}
+
+.mx_SetkaComposerPicker_gifSearch:focus {
+    outline: 2px solid var(--cpd-color-border-accent);
+    outline-offset: 1px;
+}
+
+.mx_SetkaComposerPicker_grid_gifs {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.mx_SetkaComposerPicker_packRail {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 6px;
+    padding: 8px 12px;
+    overflow-x: auto;
+    border-top: 1px solid var(--cpd-color-border-interactive-secondary);
+    background: var(--cpd-color-bg-subtle-secondary);
+}
+
+.mx_SetkaComposerPicker_packIcon {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 4px;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+}
+
+.mx_SetkaComposerPicker_packIcon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: 6px;
+    display: block;
+}
+
+.mx_SetkaComposerPicker_packIcon_active {
+    background: var(--cpd-color-bg-canvas-default);
+    border-color: var(--cpd-color-border-accent);
+}
+
+.mx_SetkaComposerPicker_packIcon_action {
+    border: 1px dashed var(--cpd-color-border-interactive-secondary);
+    color: var(--cpd-color-text-secondary);
+}
+
+.mx_SetkaComposerPicker_packIcon_plus,
+.mx_SetkaComposerPicker_packIcon_edit {
+    font: var(--cpd-font-body-lg-semibold);
+    line-height: 1;
+}
+
+.mx_SetkaComposerPicker_tabBar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 0 0 auto;
+    border-top: 1px solid var(--cpd-color-border-interactive-secondary);
+    background: var(--cpd-color-bg-canvas-default);
+}
+
+.mx_SetkaComposerPicker_tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-height: 52px;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--cpd-color-text-secondary) !important;
+    font: var(--cpd-font-body-xs-regular);
+    box-shadow: none !important;
+}
+
+.mx_SetkaComposerPicker_tab_active {
+    color: var(--cpd-color-text-primary) !important;
+    background: var(--cpd-color-bg-subtle-secondary) !important;
+    box-shadow: inset 0 -2px 0 var(--cpd-color-border-accent) !important;
+}
+
+.mx_SetkaComposerPickerButton_highlight {
+    color: var(--cpd-color-text-primary);
+}
+
+.mx_SetkaInlineEmoji {
+    vertical-align: middle;
+}

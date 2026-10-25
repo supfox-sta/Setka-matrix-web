@@ -1,0 +1,102 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Shared Setka surfaces — work on wallpaper in any Compound theme */
+html[data-setka-client="true"] {
+    --setka-surface: linear-gradient(155deg, rgb(32 32 36 / 0.78), rgb(18 18 22 / 0.74));
+    --setka-surface-solid: rgb(28 28 32 / 0.9);
+    --setka-surface-text: rgb(255 255 255 / 94%);
+    --setka-surface-text-secondary: rgb(255 255 255 / 72%);
+    --setka-surface-border: rgb(255 255 255 / 14%);
+    --setka-surface-shadow: 0 10px 28px rgb(0 0 0 / 18%), 0 2px 8px rgb(0 0 0 / 10%);
+
+    --setka-bubble-accent-mix: 18%;
+    --setka-bubble-in-bg: linear-gradient(
+        155deg,
+        color-mix(in srgb, rgb(48 48 56) 74%, transparent),
+        color-mix(in srgb, rgb(30 30 36) 70%, transparent)
+    );
+    --setka-bubble-out-bg: linear-gradient(
+        155deg,
+        color-mix(
+            in srgb,
+            color-mix(in srgb, var(--setka-accent-user, #e53935) var(--setka-bubble-accent-mix), rgb(54 52 64)) 78%,
+            transparent
+        ),
+        color-mix(
+            in srgb,
+            color-mix(in srgb, var(--setka-accent-user, #e53935) var(--setka-bubble-accent-mix), rgb(34 32 42)) 74%,
+            transparent
+        )
+    );
+    --setka-bubble-border: rgb(255 255 255 / 14%);
+    --setka-bubble-out-border: color-mix(in srgb, var(--setka-accent-user, #e53935) 34%, rgb(255 255 255 / 14%));
+    --setka-bubble-text: rgb(255 255 255 / 95%);
+    --setka-bubble-text-secondary: rgb(255 255 255 / 64%);
+    --setka-bubble-shadow: 0 1px 0 rgb(255 255 255 / 8%) inset, 0 2px 10px rgb(0 0 0 / 16%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] {
+    --setka-surface: linear-gradient(155deg, rgb(255 255 255 / 0.88), rgb(248 248 250 / 0.84));
+    --setka-surface-solid: rgb(255 255 255 / 0.94);
+    --setka-surface-text: rgb(18 18 22 / 94%);
+    --setka-surface-text-secondary: rgb(18 18 22 / 68%);
+    --setka-surface-border: rgb(0 0 0 / 10%);
+    --setka-surface-shadow: 0 10px 28px rgb(0 0 0 / 10%), 0 2px 8px rgb(0 0 0 / 6%);
+
+    --setka-bubble-in-bg: linear-gradient(155deg, rgb(255 255 255 / 82%), rgb(246 246 250 / 76%));
+    --setka-bubble-out-bg: linear-gradient(
+        155deg,
+        color-mix(in srgb, color-mix(in srgb, var(--setka-accent-user, #e53935) 16%, #fff) 86%, transparent),
+        color-mix(in srgb, color-mix(in srgb, var(--setka-accent-user, #e53935) 22%, #f6f6fa) 80%, transparent)
+    );
+    --setka-bubble-border: rgb(0 0 0 / 10%);
+    --setka-bubble-out-border: color-mix(in srgb, var(--setka-accent-user, #e53935) 38%, rgb(0 0 0 / 6%));
+    --setka-bubble-text: rgb(20 20 26 / 94%);
+    --setka-bubble-text-secondary: rgb(20 20 26 / 60%);
+    --setka-bubble-shadow: 0 1px 0 rgb(255 255 255 / 60%) inset, 0 2px 10px rgb(0 0 0 / 8%);
+}
+
+/* Glass switched off in appearance settings → near-solid bubbles */
+html[data-setka-client="true"][data-setka-glass="off"] {
+    --setka-bubble-in-bg: rgb(40 40 48 / 96%);
+    --setka-bubble-out-bg: color-mix(in srgb, var(--setka-accent-user, #e53935) 16%, rgb(44 42 54));
+}
+
+/* Room chrome uses theme-aware glass */
+html[data-setka-client="true"] .mx_RoomHeader,
+html[data-setka-client="true"] .mx_PinnedMessageBanner,
+html[data-setka-client="true"] .mx_MessageComposer_wrapper {
+    background: var(--setka-surface) !important;
+    color: var(--setka-surface-text);
+    border-color: var(--setka-surface-border) !important;
+    box-shadow: var(--setka-surface-shadow);
+    backdrop-filter: blur(var(--setka-blur-strength, 10px));
+    -webkit-backdrop-filter: blur(var(--setka-blur-strength, 10px));
+}
+
+html[data-setka-client="true"] .mx_RoomHeader *,
+html[data-setka-client="true"] .mx_MessageComposer_wrapper * {
+    color: inherit;
+}
+
+html[data-setka-client="true"] .mx_SendWysiwygComposer .mx_WysiwygComposer_Editor {
+    background: color-mix(in srgb, var(--setka-surface-solid) 72%, transparent);
+    color: var(--setka-surface-text);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_LeftPanel_panel:first-of-type .mx_LeftPanel_outerWrapper {
+    --setka-leftpanel-glass-bg: var(--setka-leftpanel-glass-bg-light, var(--setka-panel-bubble-bg));
+    --cpd-color-text-primary: rgb(28 28 32 / 94%);
+    --cpd-color-text-secondary: rgb(28 28 32 / 68%);
+    --cpd-color-icon-primary: rgb(28 28 32 / 88%);
+    --cpd-color-icon-secondary: rgb(28 28 32 / 58%);
+    --cpd-color-bg-action-tertiary-hovered: rgb(0 0 0 / 6%);
+    --cpd-color-bg-action-tertiary-selected: rgb(0 0 0 / 10%);
+    --cpd-color-bg-subtle-primary: rgb(0 0 0 / 5%);
+    --cpd-color-bg-subtle-secondary: rgb(0 0 0 / 8%);
+    --cpd-color-border-subtle-primary: rgb(0 0 0 / 10%);
+    --cpd-color-border-interactive-secondary: rgb(0 0 0 / 14%);
+}

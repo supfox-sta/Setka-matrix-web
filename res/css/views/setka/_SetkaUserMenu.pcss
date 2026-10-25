@@ -1,0 +1,168 @@
+/*
+Copyright 2026 Setka Matrix
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+*/
+
+/* Match shared UserMenu.module.css layout inside SpacePanel */
+.mx_SetkaUserMenu {
+    display: flex;
+    align-items: center;
+    margin-top: var(--cpd-space-3x);
+    margin-bottom: var(--cpd-space-4x);
+    min-width: 0;
+    width: 100%;
+}
+
+.mx_SetkaUserMenu_trigger {
+    display: flex;
+    padding: 0;
+    padding-inline-start: var(--cpd-space-1-5x);
+    margin-left: var(--cpd-space-3x);
+    margin-right: var(--cpd-space-2x);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 999px;
+    color: var(--cpd-color-text-primary);
+    outline: none;
+    box-shadow: none;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--cpd-color-border-focus);
+        outline-offset: 2px;
+    }
+}
+
+.mx_SetkaUserMenu_container {
+    min-width: 240px;
+    max-width: 300px;
+    padding-block: 0 !important;
+
+    div[role="separator"] {
+        margin-inline: 0;
+    }
+}
+
+.mx_SetkaUserMenu_profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cpd-space-2x);
+    margin: var(--cpd-space-8x) var(--cpd-space-6x) var(--cpd-space-3x);
+    text-align: center;
+
+    > * {
+        margin: auto;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow-wrap: break-word;
+    }
+}
+
+.mx_SetkaUserMenu_displayName {
+    color: var(--cpd-color-text-primary);
+    text-wrap: balance;
+}
+
+.mx_SetkaUserMenu_userId {
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-md-regular);
+    word-break: break-all;
+}
+
+.mx_SetkaUserMenu_sideName {
+    color: var(--cpd-color-text-primary);
+    max-width: 175px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.mx_SetkaUserMenu_actions {
+    margin: var(--cpd-space-2x) 0 var(--cpd-space-3x);
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-1x);
+}
+
+.mx_SetkaUserMenu_actions [role="menuitem"]:last-child {
+    color: var(--cpd-color-text-critical-primary);
+}
+
+.mx_SetkaUserMenu_actions [role="menuitem"]:last-child [class*="icon"] {
+    color: var(--cpd-color-icon-critical-primary);
+}
+
+.mx_SpacePanel.collapsed .mx_SetkaUserMenu {
+    justify-content: center;
+}
+
+.mx_SpacePanel.collapsed .mx_SetkaUserMenu_trigger {
+    margin-left: 0;
+    margin-right: 0;
+    padding-inline-start: 0;
+}
+
+.mx_SetkaPlusDialog_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--cpd-space-4x);
+    text-align: center;
+}
+
+.mx_SetkaPlusDialog_icon {
+    color: var(--cpd-color-icon-accent-primary);
+}
+
+.mx_SetkaSKeySettingsTab_key {
+    display: block;
+    word-break: break-all;
+    padding: var(--cpd-space-3x);
+    border-radius: 8px;
+    background: var(--cpd-color-bg-subtle-secondary);
+    font: var(--cpd-font-body-sm-regular);
+}
+
+.mx_SetkaUserMenu_subItem {
+    padding-left: calc(var(--cpd-space-8x) + var(--cpd-space-2x));
+}
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_trigger {
+    border-radius: 999px;
+    transition: background 140ms ease, box-shadow 140ms ease;
+}
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_trigger:hover {
+    background: rgb(255 255 255 / 12%);
+}
+
+html[data-setka-client="true"] .mx_SetkaUserMenu_trigger:active,
+html[data-setka-client="true"] .mx_SetkaUserMenu_trigger[aria-expanded="true"] {
+    background: rgb(255 255 255 / 18%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 16%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaUserMenu_trigger:hover {
+    background: rgb(124 92 255 / 10%);
+}
+
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaUserMenu_trigger:active,
+html[data-setka-client="true"][data-setka-theme-tone="light"] .mx_SetkaUserMenu_trigger[aria-expanded="true"] {
+    background: rgb(124 92 255 / 16%);
+    box-shadow: inset 0 0 0 1px rgb(124 92 255 / 18%);
+}
+
+.mx_SetkaUserMenu_subHeader {
+    display: block;
+    padding: var(--cpd-space-2x) var(--cpd-space-4x) var(--cpd-space-1x);
+    color: var(--cpd-color-text-secondary);
+    font: var(--cpd-font-body-xs-semibold);
+}
